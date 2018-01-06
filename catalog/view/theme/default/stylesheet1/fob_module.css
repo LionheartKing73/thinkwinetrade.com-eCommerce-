@@ -1,0 +1,18 @@
+.product-thumb .price {
+  
+  color: #FFF !important;
+    background-color: rgba(221, 181, 47, 0.85);
+    padding: 5px 10px;
+    border-radius: 1px;
+    font-size: 13px;
+    /* line-height: 19px; */
+    font-style: italic;
+    /* font-family: -webkit-pictograph; */
+}
+.product-thumb .price span {
+    color: #444;
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    font-style: normal;
+}

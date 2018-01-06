@@ -1,0 +1,48 @@
+{
+    "codename": "d_bootstrap_switch",
+    "version": "3.3.3",
+    "name": "Riot",
+    "description": "Implementation of bootstrap-switch https://github.com/Bttstrp/bootstrap-switch",
+    "author": {
+        "name": "Shopunity",
+        "email": "info@shopunity.com",
+        "url": "https://github.com/Bttstrp/bootstrap-switch"
+    },
+    "opencart_version": [
+        "2.0.0.0",
+        "2.0.1.1",
+        "2.0.1.1",
+        "2.0.2.0",
+        "2.0.3.1",
+        "2.1.0.1",
+        "2.1.0.2",
+        "2.2.0.0",
+        "2.3.0.2"
+    ],
+    "type": "module",
+    "license": {
+        "type": "free",
+        "url": "https://shopunity.net/licenses/free"
+    },
+    "support": {
+        "email": "support@shopunity.com",
+        "url": "https://shopunity.net/"
+    },
+    "files": [
+        "system/mbooth/extension/d_bootstrap_switch.json"
+    ],
+    "dirs": [
+        "admin/view/javascript/d_bootstrap_switch",
+        "catalog/view/javascript/d_bootstrap_switch"
+    ],
+    "changelog": [
+        {
+            "varsion":"3.3.3",
+            "change": "Deprecate CoffeeScript"
+        },
+        {
+            "varsion":"3.3.2",
+            "change": "initial commit"
+        }
+    ]
+}

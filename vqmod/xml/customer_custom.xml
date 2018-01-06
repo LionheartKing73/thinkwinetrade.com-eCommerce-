@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+
+<modification>
+	<id>Order edit</id>
+	<author>anandan@orangelab.in</author>
+	
+	<file name="admin/controller/sale/customer.php">
+	<operation error="log">
+			<search position="before"><![CDATA[
+				if (!$result['approved']) {
+			]]></search>
+			<add><![CDATA[
+				$custom = $this->model_sale_customer->getAddressByCustom($result['customer_id']);
+			$ccc = unserialize($custom['custom_field']);
+			
+			if($ccc){
+				$cust_field = $ccc[1];
+			}else{
+				$cust_field = '';
+				}
+				]]></add>
+		</operation>
+		<operation error="log">
+			<search position="before"><![CDATA[
+				'customer_id'    => $result['customer_id'],
+			]]></search>
+			<add><![CDATA[
+				'hk' => $cust_field,
+				]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/model/sale/customer.php">
+	<operation error="log">
+			<search position="before"><![CDATA[
+				public function getTotalCustomers($data = array()) {
+			]]></search>
+			<add><![CDATA[
+				public function getAddressByCustom($customer_id) {
+	
+					$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$customer_id . "'");
+					return $query->row;
+				}
+				]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/sale/customer_list.tpl">
+		<operation error="log">
+			<search position="before"><![CDATA[
+				<td class="text-left"><?php if ($sort == 'c.email') { ?>
+			]]></search>
+			<add><![CDATA[
+				 <td class=""> <a href="javascript:void(0)" >HK CR n° (Registry Number)</a> </td>
+			]]></add>
+		</operation>
+		
+		<operation error="log">
+			<search position="after"><![CDATA[
+				<td class="text-left"><?php echo $customer['name'].$customer['companies']; ?></td>
+			]]></search>
+			<add><![CDATA[
+				 <td class="text-left"><?php echo $customer['hk']; ?></td>
+			]]></add>
+		</operation>
+	</file>
+	
+</modification>

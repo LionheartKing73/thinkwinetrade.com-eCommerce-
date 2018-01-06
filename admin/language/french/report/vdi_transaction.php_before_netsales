@@ -1,0 +1,57 @@
+<?php
+// Heading
+$_['heading_title']     		= 'Résultat des Ventes';
+
+// Text
+$_['text_year']         		= 'Années';
+$_['text_month']        		= 'Mois';
+$_['text_week']         		= 'Semaines';
+$_['text_day']          		= 'Jours';
+$_['text_all_status']   		= 'Tous les Statuts';
+$_['text_all_vendors']  		= 'Tous les Producteurs';
+$_['text_yes']          		= 'Payé';
+$_['text_no']          			= 'Non Payé';
+$_['text_gross_incomes']		= 'Revenue de la Boutique';
+$_['text_commission']    		= 'Commission de la Boutique';
+$_['text_shipping']    			= 'Transport';
+$_['text_coupon']    			= 'Coupon';
+$_['text_amount_pay_vendor']	= 'Montant Payé au Producteurs';
+$_['text_vendor_revenue']		= 'Chiffre d\'Affaire';
+$_['text_wait']             	= 'Veuillez Patientez!';
+$_['text_vendor_earning'] 		= 'Balance : ';
+$_['text_payment_history'] 		= 'Historique des 10 Derniers Paiements Reçus';
+$_['text_vendor_payment_history'] 	= 'Latest 10 Payout Received From Store';
+$_['text_success']              = 'Success: You have remove Payment History!';
+$_['text_paypal_standard']      = 'Paypal Standard';
+$_['text_subscription']    	 	= 'Abonnement';
+$_['text_list']    	 			= 'Résultat des Ventes';
+$_['date_format_short2']        = 'd/m/Y';
+$_['title_payment_type']        = 'Payment Type Manager';
+$_['title_gross_revenue']        = 'Gross Revenue + Shipping = ';
+
+// Column
+$_['column_date_added'] 		= 'Date de Création';
+$_['column_order_id']   		= 'ID Commande';
+$_['column_product_name']   	= 'Nom du Produit';
+$_['column_unit_price']   		= 'Prix par carton';
+$_['column_quantity']       	= 'Quantité';
+$_['column_commission']      	= 'Commission';
+$_['column_amount']      		= 'Montant Net';
+$_['column_total']      		= 'Total';
+$_['column_transaction_status'] = 'Statut';
+$_['column_paid_status']      	= 'Payé';
+$_['column_vendor_name'] 		= 'Nom du Producteur';
+$_['column_payment_amount'] 	= 'Montant';
+$_['column_payment_date'] 		= 'Date de Paiement';
+$_['column_payment_type'] 		= 'Mode de Paiement';
+$_['column_order_product'] 		= 'Produits Commandés [ID Commande - Nom du Produit]';
+$_['button_Paypal'] 			= 'Pay Vendor';
+$_['button_addPayment'] 		= 'Add Payment Record';
+
+// Entry
+$_['entry_date_start']   = 'Date de Début :';
+$_['entry_date_end']     = 'Date de Fin:';
+$_['entry_group']        = 'Producteur :';
+$_['entry_order_status'] = 'Statut Commande :';
+$_['entry_status']       = 'Etat du Paiement :';
+?>

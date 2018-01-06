@@ -1,0 +1,75 @@
+---------- Date: 2017-01-07 16:11:50 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=module/mega_filter&token=b53d46343cc7cca55fd49e28dad3ca72
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-07 16:11:57 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=module/mega_filter/ldv&token=b53d46343cc7cca55fd49e28dad3ca72&name=mega_filter_module%5Bbase_attribs%5D&type=base_attribs&idx=1
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/module/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-07 16:11:57 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=module/mega_filter/ldv&token=b53d46343cc7cca55fd49e28dad3ca72&name=mega_filter_module%5Battribs%5D&type=attribs&idx=1
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/module/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-07 16:11:57 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=module/mega_filter/ldv&token=b53d46343cc7cca55fd49e28dad3ca72&name=mega_filter_module%5Boptions%5D&type=options&idx=1
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/module/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-07 16:30:36 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=module/cr_translate_mate&token=b53d46343cc7cca55fd49e28dad3ca72&action=load&length=20&dirKey=catalog&notTranslated=false&singleFile=&keyFilter=&textFilter=
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/module/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+

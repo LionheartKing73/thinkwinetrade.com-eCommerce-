@@ -1,0 +1,74 @@
+OpenCart
+Sync Menu
+0
+Logout 
+Thinkwinetrade +
+Thinkwinetrade +
+Administrator
+ Dashboard
+ Catalog
+ Extensions
+ Sales
+ Vendors
+ Marketing
+ System
+ Tools
+ Reports
+ SEO
+SEO Module
+Orders Completed 0%
+0%
+Orders Processing 0%
+0%
+Other Statuses 0%
+0%
+   SEO MODULE 1.0.2 Home Modules SEO Module
+ Edit SEO Module settings
+ Settings
+ Custom Pages
+ Export & Import
+ Instructions
+Basic Settings
+.htaccess
+robots.txt
+robots.txt
+StatusYesEnabledNo
+Text
+
+
+Important!
+Robots.txt is a recomendation to the Search bot. You can start with the following default settings. Just copy paste into the textarea above:
+
+## Dreamvention * Seo module * robots.txt
+
+User-agent: *
+Disallow: /*route=account/
+Disallow: /*route=affiliate/
+Disallow: /*route=checkout/
+Disallow: /*route=product/search
+Disallow: /index.php?route=product/product*&manufacturer_id=
+Disallow: /admin
+Disallow: /catalog
+Disallow: /system
+Disallow: /*?sort=
+Disallow: /*&sort=
+Disallow: /*?order=
+Disallow: /*&order=
+Disallow: /*?limit=
+Disallow: /*&limit=
+Disallow: /*?tracking=
+Disallow: /*&tracking=
+Disallow: /*?page=
+Disallow: /*&page=
+Disallow: /*?filter=
+Disallow: /*&filter=
+Disallow: /*?filter_name=
+Disallow: /*&filter_name=
+Disallow: /*?filter_sub_category=
+Disallow: /*&filter_sub_category=
+Disallow: /*?filter_description=
+Disallow: /*&filter_description=
+
+Sitemap: https://thinkwinetrade.com/sitemap.xml
+Host: thinkwinetrade.com
+Thinkwinetrade.com 2015

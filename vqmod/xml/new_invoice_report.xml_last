@@ -1,0 +1,196 @@
+<modification>
+    <id>New Invoice Report</id>
+    <version>1.0</version>
+    <vqmver>2.5.1</vqmver>
+    <author>Guru Venkat</author>
+	<email>gvkv2010@gmail.com</email>
+	<website>http://thinkwinetrade.com</website>
+	 
+	<!--Edit Product page-->
+	<file name="admin/language/english/sale/order.php">
+		<operation error="skip">
+			<search position="bottom"  >
+			<![CDATA[]]>
+			</search>
+			<add><![CDATA[
+//GV
+$_['text_product_name']            = 'Product Name';
+$_['text_pallet_id']            = 'Pallet ID';
+$_['text_product_no']            = 'Prod#';
+$_['text_case_qty']            = 'Case<br>Quantity';
+$_['text_case_fmt']            = 'Case<br>Format';
+$_['text_bottles']            = 'Number<br>of Bottles<br>of 75cl';
+$_['text_unit_price']            = 'Unit Price<br>per Case';
+$_['text_payment_date'] = 'Confirmed Payment Date';
+$_['text_commercial_inv'] = 'Commercial Invoice No: ';
+//END]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/french/sale/order.php">
+		<operation error="skip">
+			<search position="replace"  >
+			<![CDATA[?>
+]]>
+			</search>
+			<add><![CDATA[
+//GV
+$_['text_product_name']            = 'Product Name';
+$_['text_pallet_id']            = 'Pallet ID';
+$_['text_product_no']            = 'Prod#';
+$_['text_case_qty']            = 'Case<br>Quantity';
+$_['text_case_fmt']            = 'Case<br>Format';
+$_['text_bottles']            = 'Number<br>of Bottles<br>of 75cl';
+$_['text_unit_price']            = 'Unit Price<br>per Case';
+$_['text_payment_date'] = 'Confirmed Payment Date';
+$_['text_commercial_inv'] = 'Commercial Invoice No: ';
+//END
+?>]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/sale/order.php" >
+		<operation error="skip">
+			<search position="before" offset="1" >
+			<![CDATA[$data['text_invoice'] = $this->language->get('text_invoice');
+]]>
+			</search>
+			<add><![CDATA[			$data['text_order_id'] = $this->language->get('text_order_id');
+			$data['text_invoice_no_comm'] = $this->language->get('text_invoice_no_comm');
+			$data['text_shipmentid'] = $this->language->get('text_shipmentid');
+			$data['text_containerid'] = $this->language->get('text_containerid');
+			$data['text_product_name'] = $this->language->get('text_product_name');
+			$data['text_pallet_id'] = $this->language->get('text_pallet_id');
+			$data['text_product_no'] = $this->language->get('text_product_no');
+			$data['text_case_qty']  = $this->language->get('text_case_qty');
+			$data['text_case_fmt']  = $this->language->get('text_case_fmt');
+			$data['text_bottles']    = $this->language->get('text_bottles');
+			$data['text_unit_price'] = $this->language->get('text_unit_price');
+			$data['text_payment_date'] = $this->language->get('text_payment_date');
+			$data['text_commercial_inv'] = $this->language->get('text_commercial_inv');
+]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="before" index="1" >
+			<![CDATA[$products = $this->model_sale_order->getOrderProducts($order_id);
+]]>
+			</search>
+			<add><![CDATA[			$hkd_sub_total = 0.0; $eur_sub_total = 0.0; $sub_total = 0.0;
+]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="before" index="1" >
+			<![CDATA[$product_data[] = array(
+]]>
+			</search>
+			<add><![CDATA[			$this->load->model('sale/vdi_order');
+			$fob = $this->model_sale_vdi_order->getFobPrice( $product['product_id'] );
+			if( $order_info['currency_code'] == 'HKD' ) {
+			    $hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']);
+				$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+				$hkd_total = $this->currency->format(  ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']);
+				$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR', 1.000000 );
+				$eur_sub_total += ( $product['price'] * $product['quantity'] );
+			} else {
+			    $hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'HKD' );
+				$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+				$hkd_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'HKD' );
+				$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR' );
+				$eur_sub_total += ( $product['price'] * $product['quantity'] );
+			}
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before" index="1" >
+			<![CDATA['option'   => $option_data,
+]]>
+			</search>
+			<add><![CDATA[
+			'product_no'   => $product['product_no'],
+			'pallet_no'    => $product['pallet_no'],
+			'product_format' => $fob['pf'],
+			'total_bottles'  => ( $fob['pf'] * $product['quantity'] ),
+			'eur_price'      => $eur_price,
+			'hkd_price'      => $hkd_price,
+			'hkd_total'      => $hkd_total,
+			'eur_total'      => $eur_total,
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace" offset="7" index="1" >
+			<![CDATA[$totals = $this->model_sale_order->getOrderTotals($order_id);
+]]>
+			</search>
+			<add><![CDATA[
+				//GV - START
+				$totals = $this->model_sale_order->getOrderTotals($order_id);
+
+				foreach ($totals as $total) {
+				    $text = '';
+					if ( $order_info['currency_code'] == 'HKD' ) {
+						 $text = $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value']);
+						 $text .= "<br>" . $this->currency->format($total['value'], 'EUR');
+					} else {
+						 $text = $this->currency->format($total['value'], 'HKD' );
+						 $text .= "<br>" . $this->currency->format($total['value'], 'EUR');
+					}
+					$total_data[] = array(
+						'title' => $total['title'],
+						'text'  => $text,
+					);
+				}
+				//GV - END
+]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="before" offset="1" index="1" >
+			<![CDATA[					'invoice_no'         => $invoice_no,
+]]>
+			</search>
+			<add><![CDATA[			'shipment_id' => $order_info['shipment_id'],
+			'container_id' => $order_info['container_id'],
+			'payment_date' => date($this->language->get('date_format_short'), strtotime( $this->model_sale_order->getOrderPaymentDate( $order_id ) )),
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"  >
+			<![CDATA[$this->response->setOutput($this->load->view('sale/order_invoice.tpl', $data));
+]]>
+			</search>
+			<add><![CDATA[		$this->response->setOutput($this->load->view('sale/order_invoice_new.tpl', $data));
+]]></add>
+		</operation>
+
+	</file>
+	<file name="admin/model/sale/order.php">
+		<operation error="skip">
+			<search position="after"><![CDATA['date_modified'           => $order_query->row['date_modified'],
+			]]></search>
+			<add><![CDATA[
+				'container_id'		=> $order_query->row['container_id'],
+				'shipment_id'		=> $order_query->row['shipment_id'],
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[
+			public function getTotalEmailsByProductsOrdered($products) {
+			]]></search>
+			<add><![CDATA[
+	//GV
+	public function getOrderPaymentDate($order_id) {
+
+		$query = $this->db->query("SELECT oh.date_added FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added DESC LIMIT 1 " );
+		
+		$payment_date = '';
+		if ( $query->num_rows ) {
+			$payment_date = $query->row['date_added'];
+		}
+		return $payment_date;
+	}
+	//END]]></add>
+		</operation>
+		
+	</file>
+</modification>

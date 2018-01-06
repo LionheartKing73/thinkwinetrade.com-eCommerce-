@@ -1,0 +1,60 @@
+{
+    "codename": "d_elfinder",
+    "version": "1.0.1",
+    "name": "Elfinder",
+    "description": "Elfinder provides a very large number of possibilities for web file manager.",
+   
+    "author": {
+        "name": "Dreamvention",
+        "email": "info@dreamvention.com",
+        "url": "https://dreamvention.com"
+    },
+    "opencart_version": [
+        "2.0.0.0",
+        "2.0.1.1",
+        "2.0.1.1",
+        "2.0.2.0",
+        "2.0.3.1",
+        "2.1.0.1",
+        "2.1.0.2",
+        "2.2.0.0",
+		"2.3.0.2"
+    ],
+    "mbooth_version": "^4.0.0",
+    "type": "module",
+    "license": {
+        "type": "free",
+        "url": "https://shopunity.net/licenses/free"
+    },
+    "support": {
+        "email": "support@dreamvention.com",
+        "url": "https:/dreamvention.com/support"
+    },
+    "required": {
+        "d_shopunity": ">= 3.0.0"
+    },
+    "files": [
+        "system/mbooth/extension/d_elfinder.json",
+		"system/mbooth/xml/mbooth_d_elfinder.xml",
+		
+		"admin/controller/common/d_elfinder.php",
+		"admin/view/template/common/d_elfinder.tpl"
+    ],
+	"dirs": [
+        "system/library/d_elfinder",
+		
+		"admin/view/image/d_elfinder",
+		"admin/view/stylesheet/d_elfinder",
+		"admin/view/javascript/d_elfinder"
+    ],
+    "changelog": [
+		{
+            "version": "1.0.1",
+            "change": "new folder structure, corrections in JSON file."
+        },
+        {
+            "version": "1.0.0",
+            "change": ""
+        }
+    ]
+}

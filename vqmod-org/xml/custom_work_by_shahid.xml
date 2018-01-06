@@ -1,0 +1,56 @@
+<modification>
+  <id>Add Custom Work By Shahid</id>
+  <version>1.1</version>
+  <vqmver>2.5.1</vqmver>
+  <author>shahid</author>
+  <email>scf8127@gmail.com</email>
+
+
+  <file name="catalog/controller/product/category.php">
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+     $vendor = $this->model_pallet_worksheet->getVendorName($result['product_id']);
+
+      $vendor_id = $this->model_pallet_worksheet->getVendor($result['product_id']);
+        $qry="SELECT * FROM  " . DB_PREFIX . "vendors WHERE " . DB_PREFIX . "vendors.vendor_id  = '" . (int)$this->db->escape($vendor_id) . "'";
+        $query = $this->db->query($qry);
+          $this->load->model('tool/image');
+          if(isset($query->row['vendor_image'])){
+			if (is_file(DIR_IMAGE . $query->row['vendor_image'])){
+				$image_vendor = $this->model_tool_image->resize($query->row['vendor_image'], 45, 45);
+			}else{
+               $image_vendor = $this->model_tool_image->resize('no_image.png', 45, 45);
+			}
+	      }			
+      //$data['vendor_in_pallet'] = $this->controller_pallet_worksheet->getVendorInPallet($vendor_id);
+      $vendor_in_pallet = $this->load->controller('pallet/worksheet/getVendorInPallet', $vendor_id);
+       $vendor_rating = $this->model_pallet_worksheet->getTotalRatingsVendorsByVendorId($vendor_id);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+'image_vendor'      => $image_vendor,
+'vendor_in_pallet'      => $vendor_in_pallet,
+'vendor_rating'      => $vendor_rating,
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/category.tpl">
+
+    <operation error="log">
+      <search position="replace"><![CDATA[<p><b><?php echo $product['vendor'] ?></b></p>]]></search>
+      <add><![CDATA[<p><img class="navbar-profile-avatar img-circle" style="border: 1px solid rgb(204, 204, 204); " src="<?php echo $product['image_vendor'] ?>" />&nbsp;&nbsp;&nbsp;<b><?php echo $product['vendor'] ?></b></p>]]></add>
+    </operation>
+    <operation error="log">
+      <search position="before"><![CDATA[<button type="button" id="grid-view" class="btn btn-default grid" data-toggle="tooltip" title="<?php echo $button_grid; ?>"><i class="fa fa-th"></i></button>]]></search>
+      <add><![CDATA[<button type="button" id="list-view" class="btn btn-default list" data-toggle="tooltip" title="<?php echo $button_list; ?>"><i class="fa fa-th"></i></button>]]></add>
+    </operation>
+  </file>  
+</modification> 

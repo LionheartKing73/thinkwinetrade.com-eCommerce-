@@ -1,0 +1,1 @@
+<label><?php echo $text_link; ?></label> <?php echo $setting['link']; ?>

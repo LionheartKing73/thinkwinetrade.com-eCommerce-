@@ -1,0 +1,835 @@
+<modification>
+    <id>Vendor Product images Uploader</id>
+    <version>1.0</version>
+    <vqmver>2.5.1</vqmver>
+    <author>Guru Venkat</author>
+	<email>gvkv2010@gmail.com</email>
+	<website>http://thinkwinetrade.com</website>
+
+	<!--Edit Product page-->
+	<file name="admin/language/englimsh/catalog/vdi_product.php">
+		<operation error="skip">
+			<search position="bottom">
+			<![CDATA[?>]]>
+			</search>
+			<add><![CDATA[
+        //tomzuu
+$_['button_addimage1']          = 'Add Image1';
+$_['button_addimage2']          = 'Add Image2';
+$_['button_addimage3']          = 'Add Image3';
+$_['button_addimage4']          = 'Add Image4';
+$_['button_delimage1']          = 'Remove Image1';
+$_['button_delimage2']          = 'Remove Image2';
+$_['button_delimage3']          = 'Remove Image3';
+$_['button_delimage4']          = 'Remove Image4';
+$_['upload_message']            = 'Allowed image types are JPG, PNG, and GIF. You can upload images upto 2MB.';
+$_['text_image1']            = 'Image1';
+$_['text_image2']            = 'Image2';
+$_['text_image3']            = 'Image3';
+$_['text_image4']            = 'Image4';
+]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/french/catalog/vdi_product.php">
+		<operation error="skip">
+			<search position="before">
+			<![CDATA[?>]]>
+			</search>
+			<add><![CDATA[
+        //tomzuu
+$_['button_addimage1']          = 'Ajouter une image1';
+$_['button_addimage2']          = 'Ajouter une image2';
+$_['button_addimage3']          = 'Ajouter une image3';
+$_['button_addimage4']          = 'Ajouter une image4';
+$_['button_delimage1']          = 'Remove Image1';
+$_['button_delimage2']          = 'Remove Image2';
+$_['button_delimage3']          = 'Remove Image3';
+$_['button_delimage4']          = 'Remove Image4';
+$_['upload_message']            = 'Format image autorisé JPG, PNG et GIF. Taille Fichier maximale est de 2MB';
+$_['text_image1']            = 'Image1';
+$_['text_image2']            = 'Image2';
+$_['text_image3']            = 'Image3';
+$_['text_image4']            = 'Image4';
+]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/catalog/vdi_product.php">
+		<!--<operation error="skip">
+			<search position="before" offset="1" >
+			<![CDATA[$data['button_copy'] = $this->language->get('button_copy');]]>
+			</search>
+			<add><![CDATA[
+		//GV
+$data['button_mainimage'] = $this->language->get('button_mainimage');
+		//END]]></add>
+		</operation>-->
+
+		<operation error="skip">
+			<search position="after" offset="1" >
+			<![CDATA[	protected function getForm() {
+]]>
+			</search>
+			<add><![CDATA[
+		//GV
+    //tomzuu
+		$data['button_addimage1'] = $this->language->get('button_addimage1');
+		$data['button_addimage2'] = $this->language->get('button_addimage2');
+		$data['button_addimage3'] = $this->language->get('button_addimage3');
+    $data['button_addimage4'] = $this->language->get('button_addimage4');
+		$data['button_delimage1'] = $this->language->get('button_delimage1');
+		$data['button_delimage2'] = $this->language->get('button_delimage2');
+		$data['button_delimage3'] = $this->language->get('button_delimage3');
+    $data['button_delimage4'] = $this->language->get('button_delimage4');
+		$data['upload_message']   = $this->language->get('upload_message');
+		$data['text_image1']      = $this->language->get('text_image1');
+		$data['text_image2']      = $this->language->get('text_image2');
+		$data['text_image3']      = $this->language->get('text_image3');
+    $data['text_image4']      = $this->language->get('text_image4');
+
+		$this->load->model('tool/image');
+
+		$data['main_product_id'] = isset($this->request->get['product_id']) ? $this->request->get['product_id'] : '';
+		if ( isset($this->request->get['product_id']) ) {
+			$img_info = array();
+			$img_info = $this->model_catalog_vdi_product->getVendorProductImages( $this->request->get['product_id'] );
+
+			$data['main_image_name'] = $img_info['main_image_name'] ;
+			$data['addl1_image_id'] = $img_info['product_image1_id'];
+			$data['addl2_image_id'] = $img_info['product_image2_id'];
+      $data['addl3_image_id'] = $img_info['product_image3_id'];
+			$data['addl_image1_name'] = trim( $img_info['image1_name'] ) ;
+			$data['addl_image2_name'] = trim( $img_info['image2_name'] );
+      $data['addl_image3_name'] = trim( $img_info['image3_name'] );
+			if (isset($data['addl_image1_name'])) {
+			if ( strlen( $data['addl_image1_name'] ) > 0 )
+				$data['addl_image1_name_thumb'] = $this->model_tool_image->resize($img_info['image1_name'], 100, 100);
+				}
+
+            if (isset($data['addl_image2_name'])) {
+			if ( strlen( $data['addl_image2_name'] ) > 0 )
+				$data['addl_image2_name_thumb'] = $this->model_tool_image->resize($img_info['image2_name'], 100, 100);
+				}
+
+        if (isset($data['addl_image3_name'])) {
+          if ( strlen( $data['addl_image3_name'] ) > 0 )
+            $data['addl_image3_name_thumb'] = $this->model_tool_image->resize($img_info['image3_name'], 100, 100);
+        }
+
+		} else {
+			$data['addl1_image_id'] = '';
+			$data['addl2_image_id'] = '';
+      $data['addl3_image_id'] = '';
+			$data['main_image_name'] = '';
+			$data['addl_image1_name'] = '' ;
+			$data['addl_image2_name'] = '' ;
+      $data['addl_image3_name'] = '' ;
+			$data['main_image_name'] = '' ;
+		}
+		//END]]></add>
+		</operation>
+
+	</file>
+
+	<file name="admin/model/catalog/vdi_product.php">
+		<operation error="skip">
+			<search position="after" offset="2" >
+			<![CDATA[		if (isset($data['image'])) {
+]]>
+			</search>
+			<add><![CDATA[
+		//GV
+		if (isset($data['main_image_name'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['main_image_name']) . "' WHERE product_id = '" . (int)$product_id . "'");
+		}
+	//END]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after" offset="4" >
+			<![CDATA[		if (isset($data['product_image'])) {
+]]>
+			</search>
+			<add><![CDATA[
+		//GV
+		if ( isset( $data['addl_image1_name'] ) && $data['addl_image1_name'] != '' ) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($data['addl_image1_name']) . "'  " );
+		}
+
+		if ( isset( $data['addl_image2_name'] ) && $data['addl_image2_name'] != '' ) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($data['addl_image2_name']) . "'  " );
+		}
+
+    //tomzuu
+    if ( isset( $data['addl_image3_name'] ) && $data['addl_image3_name'] != '' ) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape($data['addl_image3_name']) . "'  " );
+		}
+	//END]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="bottom" offset="1" >
+			<![CDATA[}]]>
+			</search>
+			<add><![CDATA[
+	//GV
+	public function getVendorProductImages($product_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_image WHERE product_id = '" . (int)$product_id . "' ORDER BY sort_order ASC LIMIT 3");
+
+		$query1 = $this->db->query("SELECT `image` FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'");
+
+		$product_images = array(
+				'product_image1_id' =>  '',
+				'image1_name'       => '',
+				'product_image2_id' => '',
+				'image2_name'       => '',
+        'product_image3_id' => '',
+				'image3_name'       => '',
+				'main_image_name'   => ''
+		);
+		if ( $query1->num_rows ) {
+			$product_images['main_image_name'] = $query1->row['image'];
+		}
+		if ( $query->num_rows ) {
+			$product_images['product_image1_id'] = isset($query->rows[0]['product_image_id']) ? $query->rows[0]['product_image_id'] : '';
+			$product_images['product_image2_id'] = isset($query->rows[1]['product_image_id']) ? $query->rows[1]['product_image_id'] : '';
+      $product_images['product_image3_id'] = isset($query->rows[2]['product_image_id']) ? $query->rows[2]['product_image_id'] : '';
+			$product_images['image1_name'] = isset( $query->rows[0]['image'] ) ? $query->rows[0]['image'] : '';
+			$product_images['image2_name'] = isset( $query->rows[1]['image'] ) ? $query->rows[1]['image'] : '';
+      $product_images['image3_name'] = isset( $query->rows[2]['image'] ) ? $query->rows[2]['image'] : '';
+		}
+		//$product_images[] = array(
+		//		'product_image1_id' => isset($query->rows[0]['product_image_id']) ? $query->rows[0]['product_image_id'] : '',
+		//		'image1_name'       => isset( $query->rows[0]['image'] ) ? $query->rows[0]['image'] : '',
+		//		'product_image2_id' => isset($query->rows[1]['product_image_id']) ? $query->rows[1]['product_image_id'] : '',
+		//		'image2_name'       => isset( $query->rows[1]['image'] ) ? $query->rows[1]['image'] : '',
+		//		'main_image_name'   => isset( $query1->row['image'] ) ? $query1->row['image'] : ''
+		//);
+
+		return $product_images;
+	}
+	//END]]></add>
+		</operation>
+
+	</file>
+	<file name="admin/view/template/catalog/vdi_product_form.tpl">
+		<operation error="skip">
+			<search position="bottom" offset="1" >
+			<![CDATA[<?php echo $footer; ?>]]>
+			</search>
+			<add><![CDATA[
+<script type="text/javascript"><!--
+// Setup the dnd listeners.
+  var dropZone = document.getElementById('box1');
+  dropZone.addEventListener('dragover', handleDragOver1, false);
+  dropZone.addEventListener('drop', handleFileSelect, false);
+  dropZone.addEventListener('dragenter', handleDragEnter1, false );
+  dropZone.addEventListener('dragstart', handleDragStart1, false );
+  dropZone.addEventListener('dragleave', handleDragLeave1, false );
+
+  var dropZone1 = document.getElementById('box2');
+  dropZone1.addEventListener('dragover', handleDragOver2, false);
+  dropZone1.addEventListener('drop', handleFileSelect1, false);
+  dropZone1.addEventListener('dragenter', handleDragEnter2, false );
+  dropZone1.addEventListener('dragstart', handleDragStart2, false );
+  dropZone1.addEventListener('dragleave', handleDragLeave2, false );
+
+  var dropZone2 = document.getElementById('box3');
+  dropZone2.addEventListener('dragover', handleDragOver3, false);
+  dropZone2.addEventListener('drop', handleFileSelect2, false);
+  dropZone2.addEventListener('dragenter', handleDragEnter3, false );
+  dropZone2.addEventListener('dragstart', handleDragStart3, false );
+  dropZone2.addEventListener('dragleave', handleDragLeave3, false );
+
+  var dropZone3 = document.getElementById('box4');
+  dropZone3.addEventListener('dragover', handleDragOver4, false);
+  dropZone3.addEventListener('drop', handleFileSelect3, false);
+  dropZone3.addEventListener('dragenter', handleDragEnter4, false );
+  dropZone3.addEventListener('dragstart', handleDragStart4, false );
+  dropZone3.addEventListener('dragleave', handleDragLeave4, false );
+
+  function handleDragOver1(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	$('#box1').css('borderWidth', '3px');
+  }
+
+  function handleDragEnter1( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box1').css('borderWidth', '3px');
+  }
+  function handleDragStart1( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box1').css('borderWidth', '3px');
+  }
+  function handleDragLeave1(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box1').css('borderWidth', '1px');
+  }
+
+  function handleDragEnter2( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+	$('#box2').css('borderWidth', '3px');
+  }
+  function handleDragStart2( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box2').css('borderWidth', '3px');
+  }
+  function handleDragLeave2(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box2').css('borderWidth', '1px');
+  }
+
+  function handleDragEnter3( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+	$('#box3').css('borderWidth', '3px');
+  }
+
+  function handleDragStart3( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box3').css('borderWidth', '3px');
+  }
+
+  function handleDragLeave3(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box3').css('borderWidth', '1px');
+  }
+
+  function handleDragEnter4( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+	$('#box4').css('borderWidth', '3px');
+  }
+
+  function handleDragStart4( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box4').css('borderWidth', '3px');
+  }
+
+  function handleDragLeave4(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+	$('#box4').css('borderWidth', '1px');
+  }
+
+ function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+
+   formData = new FormData();
+   formData.append( 'main_image', files[0] );
+   formData.append( 'vendor', $( '#vendor' ).val() );
+   if ( $('#main_product_id').val() != '' ) {
+   		formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+   }
+	uploadMainImage( formData );
+
+  }
+
+ function handleFileSelect1(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+	formData = new FormData();
+	formData.append( 'addl_image1', files[0] );
+	formData.append( 'vendor', $( '#vendor' ).val() );
+	if ( $('#main_product_id').val() != '' ) {
+			formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+	}
+	if ( $('#addl1_image_id').val() != '' ) {
+			formData.append( 'addl1_image_id', $( '#addl1_image_id' ).val() );
+	}
+
+	uploadAddlImage( formData, 'image1' );
+
+  }
+ function handleFileSelect2(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+	formData = new FormData();
+	formData.append( 'addl_image2', files[0] );
+	formData.append( 'vendor', $( '#vendor' ).val() );
+	if ( $('#main_product_id').val() != '' ) {
+			formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+	}
+	if ( $('#addl1_image_id').val() != '' ) {
+			formData.append( 'addl1_image_id', $( '#addl1_image_id' ).val() );
+	}
+
+	uploadAddlImage( formData, 'image2' );
+
+  }
+
+
+  function handleFileSelect3(evt) {
+     evt.stopPropagation();
+     evt.preventDefault();
+
+     var files = evt.dataTransfer.files; // FileList object.
+ 	formData = new FormData();
+ 	formData.append( 'addl_image3', files[0] );
+ 	formData.append( 'vendor', $( '#vendor' ).val() );
+ 	if ( $('#main_product_id').val() != '' ) {
+ 			formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+ 	}
+ 	if ( $('#addl1_image_id').val() != '' ) {
+ 			formData.append( 'addl1_image_id', $( '#addl1_image_id' ).val() );
+ 	}
+
+  if ( $('#addl2_image_id').val() != '' ) {
+ 			formData.append( 'addl2_image_id', $( '#addl2_image_id' ).val() );
+ 	}
+
+ 	uploadAddlImage( formData, 'image3' );
+
+   }
+
+
+  function handleDragOver2(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	$('#box2').css('borderWidth', '3px');
+  }
+  function handleDragOver3(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	$('#box3').css('borderWidth', '3px');
+  }
+
+  function handleDragOver4(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	$('#box4').css('borderWidth', '3px');
+  }
+
+function delMainImage() {
+	$('#upload1').show();
+	$('#mimage').hide();
+
+	/*$('#mimage')
+	.fadeOut(400, function() {
+		$('#mimage').attr('src', '<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' );
+	})
+	.fadeIn(400);*/
+
+	$('#main_image_name').val('');
+	$('#btn-add-main').show();
+	$('#btn-del-main').hide();
+	$('#mimage').attr('src', '' );
+
+	/*$('#mimage')
+	.fadeOut(100, function() {
+		$('#mimage').attr('src', '' );
+	})
+	.fadeIn(100);*/
+
+}
+
+function delProductImage( image_no ) {
+	if ( image_no == 'addl1' ) {
+		$('#upload2').show();
+		$('#image1').hide();
+		/*$('#image1')
+		.fadeOut(100, function() {
+			$('#image1').attr('src', '<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' );
+		})
+		.fadeIn(100);*/
+		$('#image1').attr('src', '' );
+		$('#addl_image1_name').val('');
+		$('#btn-del-addl1').hide();
+		$('#btn-add-addl1').show();
+
+		//$('#upload2').show();
+		//$('#image1').hide();
+
+		/*$('#image1')
+		.fadeOut(100, function() {
+			$('#image1').attr('src', '' );
+		})
+		.fadeIn(100);*/
+	}
+	if ( image_no == 'addl2' ) {
+		$('#upload3').show();
+		$('#image2').hide();
+		/*$('#image2')
+		.fadeOut(100, function() {
+			$('#image2').attr('src', '<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' );
+		})
+		.fadeIn(100);*/
+		$('#image2').attr('src', '' );
+		$('#addl_image2_name').val('');
+		$('#btn-del-addl2').hide();
+		$('#btn-add-addl2').show();
+		//$('#upload3').show();
+		//$('#image2').hide();
+		/*$('#image2')
+		.fadeOut(100, function() {
+			$('#image2').attr('src', '' );
+		})
+		.fadeIn(100);*/
+	}
+  if ( image_no == 'addl3' ) {
+		$('#upload4').show();
+		$('#image3').hide();
+		$('#image3').attr('src', '' );
+		$('#addl_image3_name').val('');
+		$('#btn-del-addl3').hide();
+		$('#btn-add-addl3').show();
+	}
+}
+
+function addAddlImage( image_no ) {
+
+   formData = new FormData();
+   if ( image_no == 'image1' ) {
+	   $('#upload2').hide();
+	   formData.append( 'addl_image1', $( '#addl_image1' )[0].files[0] );
+	   formData.append( 'vendor', $( '#vendor' ).val() );
+	   if ( $('#main_product_id').val() != '' ) {
+			formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+	   }
+	   if ( $('#addl1_image_id').val() != '' ) {
+			formData.append( 'addl1_image_id', $( '#addl1_image_id' ).val() );
+	   }
+   } else if ( image_no == 'image2' ) {
+	   $('#upload3').hide();
+	   formData.append( 'addl_image2', $( '#addl_image2' )[0].files[0] );
+	   formData.append( 'vendor', $( '#vendor' ).val() );
+	   if ( $('#main_product_id').val() != '' ) {
+			formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+	   }
+	   if ( $('#addl2_image_id').val() != '' ) {
+			formData.append( 'addl2_image_id', $( '#addl2_image_id' ).val() );
+	   }
+   } else {
+	   $('#upload4').hide();
+	   formData.append( 'addl_image3', $( '#addl_image3' )[0].files[0] );
+	   formData.append( 'vendor', $( '#vendor' ).val() );
+	   if ( $('#main_product_id').val() != '' ) {
+			formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+	   }
+	   if ( $('#addl3_image_id').val() != '' ) {
+			formData.append( 'addl3_image_id', $( '#addl3_image_id' ).val() );
+	   }
+   }
+
+   uploadAddlImage( formData, image_no );
+
+}
+
+function uploadAddlImage( formData, image_no ) {
+
+	if ( image_no == 'image1' ) {
+		$('#upload2').hide();
+		$('#image1').show();
+		$('#image1')
+        .fadeOut(400, function() {
+			$('#image1').addClass('ajaxloading');
+			$('#image1').css("margin-top", "35px");
+            $('#image1').attr('src', '<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' );
+        })
+        .fadeIn(400);
+	}
+	if ( image_no == 'image2' ) {
+		$('#upload3').hide();
+		$('#image2').show();
+		$('#image2').hide();
+		$('#loading3').show();
+		$('#image2')
+        .fadeOut(400, function() {
+			$('#image2').addClass('ajaxloading');
+			$('#image2').css("margin-top", "35px");
+            $('#image2').attr('src', '<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' );
+        })
+        .fadeIn(400);
+	}
+
+  if ( image_no == 'image3' ) {
+		$('#upload4').hide();
+		$('#image3').show();
+		$('#image3').hide();
+		$('#loading4').show();
+		$('#image3')
+        .fadeOut(400, function() {
+			$('#image3').addClass('ajaxloading');
+			$('#image3').css("margin-top", "35px");
+            $('#image3').attr('src', '<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' );
+        })
+        .fadeIn(400);
+	}
+
+	$.ajax({
+	  url: '<?php echo HTTP_CATALOG;?>upload_image.php',
+	  data: formData,
+	  processData: false,
+	  contentType: false,
+	  type: 'POST',
+	  success: function(data){
+		if ( data.indexOf("catalog") != -1 ) {
+			var file_name = data.split(";");
+			if ( image_no == 'image1' ) {
+				$('#upload2').hide();
+				//$('#image1').removeClass('ajaxloading').addClass('productimage');
+				$('#image1').removeClass('ajaxloading');
+				$('#image1').css("margin-top", "5px");
+				$('#image1').attr('src', file_name[0] );
+				$('#addl_image1_name').val( file_name[1] );
+				$('#btn-add-addl1').hide();
+				$('#btn-del-addl1').show();
+				if ( file_name.length == 3 ) {
+					$( '#addl1_image_id' ).val( file_name[2] );
+				}
+			}
+			if ( image_no == 'image2' ) {
+				$('#upload3').hide();
+				$('#image2').removeClass('ajaxloading');
+				$('#image2').css("margin-top", "5px");
+				$('#image2').attr('src', file_name[0] );
+				$('#addl_image2_name').val( file_name[1] );
+				$('#btn-add-addl2').hide();
+				$('#btn-del-addl2').show();
+				if ( file_name.length == 3 ) {
+					$( '#addl2_image_id' ).val( file_name[2] );
+				}
+			}
+      if ( image_no == 'image3' ) {
+				$('#upload4').hide();
+				$('#image3').removeClass('ajaxloading');
+				$('#image3').css("margin-top", "5px");
+				$('#image3').attr('src', file_name[0] );
+				$('#addl_image3_name').val( file_name[1] );
+				$('#btn-add-addl3').hide();
+				$('#btn-del-addl3').show();
+				if ( file_name.length == 3 ) {
+					$( '#addl3_image_id' ).val( file_name[2] );
+				}
+			}
+		} else {
+			if ( image_no == 'image2' ) {
+				//$('#image2').hide();
+				//$('#upload3').show();
+
+			}
+			if ( image_no == 'image1' ) {
+				//$('#image1').show();
+				//$('#box2text').hide();
+			}
+			alert( data );
+		}
+	  }
+	});
+}
+
+function uploadMainImage( formData ) {
+
+	$('#upload1').hide();
+	$('#mimage').show();
+	$('#mimage')
+	.fadeOut(400, function() {
+		$('#mimage').addClass('ajaxloading');
+		$('#mimage').css("margin-top", "35px");
+		$('#mimage').attr('src', '<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' );
+	})
+	.fadeIn(400);
+
+	$.ajax({
+	  url: '<?php echo HTTP_CATALOG;?>upload_image.php',
+	  data: formData,
+	  processData: false,
+	  contentType: false,
+	  type: 'POST',
+	  success: function(data){
+		if ( data.indexOf("catalog") != -1 ) {
+			var file_name = data.split(";");
+			$('#mimage').removeClass('ajaxloading');
+			$('#mimage').css("margin-top", "5px");
+			$('#mimage').attr('src', file_name[0] );
+			$('#main_image_name').val( file_name[1] );
+			$('#mimage').show();
+			$('#upload1').hide();
+			$('#btn-add-main').hide();
+			$('#btn-del-main').show();
+		} else {
+			$('#mimage').hide();
+			$('#mimage').attr('src', '' );
+			$('#upload1').show();
+			alert ( data );
+		}
+	  }
+	});
+
+}
+function addMainImage() {
+
+	formData = new FormData();
+	formData.append( 'main_image', $( '#main_image' )[0].files[0] );
+	formData.append( 'vendor', $( '#vendor' ).val() );
+	if ( $('#main_product_id').val() != '' ) {
+		formData.append( 'main_product_id', $( '#main_product_id' ).val() );
+	}
+	uploadMainImage( formData );
+
+
+}
+$( document ).ready(function() {
+	$( "#box1, #box2, #box3, #box4" )
+	  .mouseover(function() {
+		$( this ).css('borderWidth', '3px');
+	  })
+	  .mouseout(function() {
+		$( this ).css('borderWidth', '1px');
+	  });
+ });
+//--></script>
+<style>
+   .ajaxloading {
+	   width: 40px;
+	   margin-top: 35px;
+   }
+</style>
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace" offset="29" >
+			<![CDATA[<div class="tab-pane" id="tab-image">]]>
+			</search>
+			<add><![CDATA[
+            <div class="tab-pane" id="tab-image">
+              <!-- GV -->
+              <div class="table-responsive">
+                <table id="images" class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left" colspan="3">
+                                <?php echo $upload_message; ?><span data-toggle="tooltip" title="<?php echo $help_image; ?>"></span>
+                                <?php
+                                        if (isset($error_more_images) && $error_more_images!= '' ){
+                                          echo '<div class="alert alert-danger">
+                                                        <i class="fa fa-exclamation-circle"></i>  '.$error_more_images.'<button class="close" data-dismiss="alert" type="button">×</button></div>';
+                                        }
+                                ?>
+
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-left">
+                            <div id="box1" style="border:thin #666 solid; width:110px; height:115px;" >
+                            	<center><img id="mimage" src="<?php echo ( $main_image_name == '' ) ? '' : $thumb; ?>" style="max-width:100px; max-height:100px; margin-top:5px;display:<?php echo ( $main_image_name != '' ) ? 'block' : 'none' ?>" title="Image1"  />
+                                </center>
+                                <div id="upload1" align="center" style="display:<?php echo ( $main_image_name == '' ) ? 'block' : 'none' ?>;margin:25px 0px" ><center><i class="fa fa-upload fa-5x"></i></center></div>
+                            </div>
+                            <div style="width:110px; vertical-align:middle;" align="center" ><span style="margin-top:5px;"><?php echo $text_image1;?></div>
+                            <br />
+                            <input type="file" name="main_image" id="main_image" onchange="addMainImage();" style="display:none" />
+                            <input type="text" name="main_image_name" id="main_image_name" value="<?php echo $main_image_name; ?>" style="display:none" />
+                            <input type="text" name="main_product_id" id="main_product_id" value="<?php echo $main_product_id; ?>" style="display:none" readonly="readonly"  />
+                      <!--</td>
+                      <td class="text-center">-->
+                        <?php if ( $main_image_name != '' ) { ?>
+                      	<button id="btn-del-main" type="button" onclick="delMainImage(); return false;" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage1;  ?></button>
+							<button id="btn-add-main" type="button" onclick="$( '#main_image' ).trigger( 'click' );" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary" style="display:none"><i class="fa fa-plus-circle"></i>&nbsp;<?php echo $button_addimage1; ?></button>
+                        <?php } else { ?>
+                      		<button id="btn-del-main" type="button" onclick="delMainImage(); return false;" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger" style="display:none"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage1;  ?></button>
+							<button id="btn-add-main" type="button" onclick="$( '#main_image' ).trigger( 'click' );" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;<?php echo $button_addimage1;  ?></button>
+                        <?php } ?>
+                      </td>
+                    <!--</tr>
+                    <tr>-->
+                      <td class="text-left">
+                            <div id="box2" style="border:thin #666 solid; width:110px; height:115px;" >
+                            <center><img id="image1" src="<?php echo isset($addl_image1_name_thumb) ? $addl_image1_name_thumb : ''; ?>"  style="max-height: 100px; max-width: 100px;margin-top:5px; display:<?php echo isset($addl_image1_name_thumb) ? 'block' : 'none' ?>;" title="Image2"  />
+                                </center>
+                                <div id="upload2" align="center" style="display:<?php echo isset($addl_image1_name_thumb) ? 'none' : 'block' ?>;margin:25px 0px" ><center><i class="fa fa-upload fa-5x"></i></center></div>
+                            </div>
+                            <div style="width:110px; vertical-align:middle;" align="center" ><span style="margin-top:4px;"><?php echo $text_image2 ;?></div>
+                            <br />
+                            <input type="file" name="addl_image1" id="addl_image1" onchange="addAddlImage('image1');" style="display:none" />
+                            <input type="text" name="addl_image1_name" id="addl_image1_name" value="<?php echo $addl_image1_name; ?>" style="display:none" />
+							<input type="text" name="addl1_image_id" id="addl1_image_id" value="<?php echo $addl1_image_id; ?>" style="display:none"  />
+         			  <!--</td>
+					  <td class="text-center">-->
+                        <?php if ( $addl1_image_id != '' ) { ?>
+                      	<button id="btn-del-addl1" type="button" onclick="delProductImage('addl1')" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage2;  ?></button>
+							<button id="btn-add-addl1" type="button" onclick="$( '#addl_image1' ).trigger( 'click' );" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary" style="display:none"><i class="fa fa-plus-circle"></i>&nbsp;<?php echo $button_addimage2;  ?></button>
+                        <?php } else { ?>
+                      		<button id="btn-del-addl1" type="button" onclick="delProductImage('addl1')" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger" style="display:none"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage2;  ?></button>
+							<button id="btn-add-addl1" type="button" onclick="$( '#addl_image1' ).trigger( 'click' );" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;<?php echo $button_addimage2;  ?></button>
+                        <?php } ?>
+                      </td>
+                    <!--</tr>
+                    <tr>-->
+                      <td class="text-left">
+                            <div id="box3" style="border:thin #666 solid; width:110px; height:115px;"  >
+                            	<center><img id="image2" src="<?php echo isset($addl_image2_name_thumb) ? $addl_image2_name_thumb : ''; ?>" style=" max-width:100px; max-height:100px;margin-top:5px; display:<?php echo isset($addl_image2_name_thumb) ? 'block' : 'none' ?>;" title="Image3"  /></center>
+                            	<!--<center><img id="loading3" src="<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' ); ?>" width="30" height="30" style="display:none;" title="Image3"  /></center>-->
+                                <div id="upload3" align="center" style="display:<?php echo isset($addl_image2_name_thumb) ? 'none' : 'block' ?>;margin:25px 0px; vertical-align:middle;" ><center><i class="fa fa-upload fa-5x"></i></center></div>
+                            </div>
+                            <div style="width:110px; vertical-align:middle;" align="center" ><span style="margin-top:4px;"><?php echo $text_image3;?></div>
+                            <br />
+                            <input type="file" name="addl_image2" id="addl_image2" onchange="addAddlImage('image2');" style="display:none" />
+                            <input type="text" name="addl_image2_name" id="addl_image2_name" value="<?php echo $addl_image2_name; ?>" style="display:none" />
+                            <input type="text" name="addl2_image_id" id="addl2_image_id" value="<?php echo $addl2_image_id; ?>" style="display:none"  />
+                      <!--</td>
+                      <td class="text-center">-->
+                        <?php if ( $addl2_image_id != '' ) { ?>
+                      	<button id="btn-del-addl2" type="button" onclick="delProductImage('addl2');return false;" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage3;  ?></button>
+							<button id="btn-add-addl2" type="button" onclick="$( '#addl_image2' ).trigger( 'click' );return false;" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary" style="display:none"><i class="fa fa-plus-circle">&nbsp;<?php echo $button_addimage3;  ?></i></button>
+                        <?php } else { ?>
+                      		<button id="btn-del-addl2" type="button" onclick="delProductImage('addl2');return false;" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger" style="display:none"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage3;  ?></button>
+							<button id="btn-add-addl2" type="button" onclick="$( '#addl_image2' ).trigger( 'click' );" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;<?php echo $button_addimage3;  ?></button>
+                        <?php } ?>
+                      </td>
+                      <td class="text-left">
+                            <div id="box4" style="border:thin #666 solid; width:110px; height:115px;"  >
+                            	<center><img id="image3" src="<?php echo isset($addl_image3_name_thumb) ? $addl_image3_name_thumb : ''; ?>" style=" max-width:100px; max-height:100px;margin-top:5px; display:<?php echo isset($addl_image3_name_thumb) ? 'block' : 'none' ?>;" title="Image4"  /></center>
+                            	<!--<center><img id="loading4" src="<?php echo HTTP_CATALOG;?>/image/ajax-loader-large.gif' ); ?>" width="30" height="30" style="display:none;" title="Image4"  /></center>-->
+                                <div id="upload4" align="center" style="display:<?php echo isset($addl_image3_name_thumb) ? 'none' : 'block' ?>;margin:25px 0px; vertical-align:middle;" ><center><i class="fa fa-upload fa-5x"></i></center></div>
+                            </div>
+                            <div style="width:110px; vertical-align:middle;" align="center" ><span style="margin-top:4px;"><?php echo $text_image4;?></div>
+                            <br />
+                            <input type="file" name="addl_image3" id="addl_image3" onchange="addAddlImage('image3');" style="display:none" />
+                            <input type="text" name="addl_image3_name" id="addl_image3_name" value="<?php echo $addl_image3_name; ?>" style="display:none" />
+                            <input type="text" name="addl3_image_id" id="addl3_image_id" value="<?php echo $addl3_image_id; ?>" style="display:none"  />
+                      <!--</td>
+                      <td class="text-center">-->
+                        <?php if ( $addl3_image_id != '' ) { ?>
+                      	<button id="btn-del-addl3" type="button" onclick="delProductImage('addl3');return false;" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage4;  ?></button>
+							<button id="btn-add-addl3" type="button" onclick="$( '#addl_image3' ).trigger( 'click' );return false;" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary" style="display:none"><i class="fa fa-plus-circle">&nbsp;<?php echo $button_addimage4;  ?></i></button>
+                        <?php } else { ?>
+                      		<button id="btn-del-addl3" type="button" onclick="delProductImage('addl3');return false;" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger" style="display:none"><i class="fa fa-minus-circle"></i>&nbsp;<?php echo $button_delimage4;  ?></button>
+							<button id="btn-add-addl3" type="button" onclick="$( '#addl_image3' ).trigger( 'click' );" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;<?php echo $button_addimage4;  ?></button>
+                        <?php } ?>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+]]></add>
+		</operation>
+
+	</file>
+</modification>

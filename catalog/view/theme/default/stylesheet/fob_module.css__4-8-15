@@ -1,0 +1,7 @@
+.product-thumb .price {
+  color: #999 !important;
+}
+.product-thumb .price span {
+  color: #444;
+  font-weight: 700;
+}

@@ -1,0 +1,1868 @@
+---------- Date: 2017-01-04 13:51:53 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 13:53:24 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=sale/order&token=eb32ad49b463abffe249999810d825de
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 13:58:46 ~ IP : 66.249.79.82 ----------
+REQUEST URI : /Nuits-Saint-Georges-Aux-Saint-Julien-Red-2013
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:01:05 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=sale/order&token=eb32ad49b463abffe249999810d825de
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:05:17 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:08:30 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/dashboard&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:08:40 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /index.php?route=common/home
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:08:46 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /languedoc-roussillon
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:09:05 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:11:20 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /index.php?route=common/home
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:15:02 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /index.php?route=common/home
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:15:13 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /burgundy-wine
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:15:23 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:15:30 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/dashboard&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:15:40 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:16:06 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /languedoc-roussillon
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:18:05 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /index.php?route=account/order
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['column_order_id']       = 'Order ID';
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:18:39 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:18:47 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=catalog/vdi_vendor_profile&token=d89c44e2e6c6adbfd516035889a66bbf
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:18:58 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/vdi_order&token=d89c44e2e6c6adbfd516035889a66bbf&filter_order_status=19
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/language/english/sale/vdi_order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['column_weight']                           = 'Product weight';
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:19:02 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/vdi_order/history&token=d89c44e2e6c6adbfd516035889a66bbf&order_id=157
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/sale/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:22:16 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/order/info&token=c20a47bf0c00c27630705a5bdebeafae&order_id=158
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/view/template/sale/order_info.tpl(7)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <td colspan="4" class="text-right"><?php echo $total['title']; ?>:</td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:22:17 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/order/history&token=c20a47bf0c00c27630705a5bdebeafae&order_id=158
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/sale/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:22:18 ~ IP : 180.76.15.19 ----------
+REQUEST URI : /south-west/b.a.-ba-Ros%C3%A9-Merlot-Malbec-2015?sort=p.model&order=ASC
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 14:23:57 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/vdi_dashboard&token=d89c44e2e6c6adbfd516035889a66bbf
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:02:11 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/filemanager&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:21:38 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=sale/order&token=43a9b4c5db950baa299ea5637253a9c4
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:21:45 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=43a9b4c5db950baa299ea5637253a9c4
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:25:44 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:25:47 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:25:50 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /index.php?route=common/home
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:25:54 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /burgundy-wine
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:26:06 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /burgundy-wine/Bourgogne-Aligot%C3%A9-Baduel-White-2014
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:27:49 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/dashboard&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:39:06 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:39:40 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=sale/order&token=43a9b4c5db950baa299ea5637253a9c4
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:39:50 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=43a9b4c5db950baa299ea5637253a9c4
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:39:55 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:43:20 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:49:47 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:52:31 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=design/layout/edit&token=43a9b4c5db950baa299ea5637253a9c4&layout_id=3
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:53:56 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /burgundy-wine/Beaujolais-Village-White-
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:58:09 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 15:58:09 ~ IP : 180.76.15.149 ----------
+REQUEST URI : /burgundy-wine/Chablis-Vielles-Vignes-2014?limit=25
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:00:03 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:00:50 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=43a9b4c5db950baa299ea5637253a9c4
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:01:23 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=43a9b4c5db950baa299ea5637253a9c4
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:01:39 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:03:21 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:05:14 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:06:56 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:11:04 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:11:55 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c20a47bf0c00c27630705a5bdebeafae
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:12:00 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c5f6c02c5064ae7e2165a6e52a372bfb
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:12:04 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=c5f6c02c5064ae7e2165a6e52a372bfb
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:12:11 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /bordeaux/Ch%C3%A2teau-Caminade-Haut-Gu%C3%A9rin-Classic-2014-AOC-Bordeaux-Rouge
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:12:28 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /burgundy-wine
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:14:02 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/dashboard&token=c5f6c02c5064ae7e2165a6e52a372bfb
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:18:23 ~ IP : 14.169.122.80 ----------
+REQUEST URI : /index.php?route=common/home
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/eu_cookie_law_multilanguage_responsive_opc2x.xml
+   id        : EU Cookie Law Responsive MULTILANGUAGE OPC2
+   version   : 
+   vqmver    : 2.X
+   author    : admin@webmart.it
+VQModObject::parseMods - Could not resolve path for [catalog/language/italian/common/footer.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/fob_module.vqmod.xml
+   id        : FOB Module
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/mvd_product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/product.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/spanish/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/product_images.xml
+   id        : Vendor Product images Uploader
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Guru Venkat
+VQModObject::parseMods - Could not resolve path for [admin/language/englimsh/catalog/vdi_product.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_core_20150404_.xml
+   id        : Multi Vendor Drop Shipper 2.0.2.0 - Coded by waabay.com
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : waabay
+VQModObject::parseMods - Could not resolve path for [admin/language/english/common/profile.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/language/english/checkout.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/waabay_mvd_vendor_sms.xml
+   id        : Multi Vendor Drop Shipper - SMS Sender 2.0.1.1 - By ozwebapps.com.au
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : OzWebApps
+VQModObject::parseMods - Could not resolve path for [admin/language/english/default.php] (SKIPPED)
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/language/english/english.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['button_cart']           = 'Add to Cart';
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:19:10 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /our-sparkling-wines-champagne
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/module/latest.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+
+File Name    : catalog/model/account/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 16:46:33 ~ IP : 8.21.198.42 ----------
+REQUEST URI : /Pinot-Gris-2014-Tradition
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:35:29 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=module/html&token=2fee5555bd7f4aa333f3ef0ae6a82808&module_id=87
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:35:32 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=module/html&module_id=87&token=f976409768faeed1e3e50739aa7ee423
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/model/sale/order.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:35:58 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/dashboard&token=f976409768faeed1e3e50739aa7ee423
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:41:25 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=catalog/vdi_vendor_profile&token=6b05027704269c9db86d2e1f677e964d
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:45:24 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/vdi_order&token=6b05027704269c9db86d2e1f677e964d
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/language/english/sale/vdi_order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $_['column_weight']                           = 'Product weight';
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:46:25 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/vdi_order/history&token=6b05027704269c9db86d2e1f677e964d&order_id=157
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/sale/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:54:37 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/vdi_dashboard&token=6b05027704269c9db86d2e1f677e964d
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:54:54 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/order/info&token=f976409768faeed1e3e50739aa7ee423&order_id=155
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : admin/view/template/sale/order_info.tpl(7)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <td colspan="4" class="text-right"><?php echo $total['title']; ?>:</td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 21:55:01 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/order/history&token=f976409768faeed1e3e50739aa7ee423&order_id=155
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/sale/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-04 22:07:54 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=sale/vdi_order/shipping_pdf&token=6b05027704269c9db86d2e1f677e964d&order_id=156
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/view/template/sale/*.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+
+----------------------------------------------------------------------
+
+

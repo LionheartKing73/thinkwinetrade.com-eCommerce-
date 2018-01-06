@@ -1,0 +1,81 @@
+<?php
+// Heading 
+$_['heading_title']        = 'Création compte producteur';
+$_['heading_title_signup'] = 'Votre compte a bien été crée!';
+
+// Text
+$_['text_account']         = 'Création compte producteur';
+$_['text_register']        = 'Création de Compte';
+$_['text_signup_plan']     = 'Les Formules d\'Abonnment';
+$_['text_account_already'] = 'Si vous avez déja un compte avec nous, veuillez vous connecter ici <a href="%s">Page de Connexion</a>.';
+$_['text_your_details']    = 'Les Détails de Votre Compte ';
+$_['text_your_address']    = 'Votre Adresse';
+$_['text_your_password']   = 'Votre Mot de Passe';
+$_['text_agree']           = 'J\'accepte les conditions d\'utilisation et CGV <a href="%s" class="agree"><b>%s</b></a>';
+$_['text_approval_required'] = '<p>Nous vous remercions pour votre inscription sur %s!</p><p>Vous serez notifié par E-Mail dès que votre compte sera verifié et validé par notre service administratif.</p><p>Cependant vous pouvez déja ajouter vos produits en ligne. Si vous avez des questions n\'hésitez pas à nous contacter via cet adresse email <a href="%s">sales@thinkwintrade.com</a>.</p>';
+$_['text_approval'] 	   = '<p>Nous vous remercions pour votre inscription sur %s!</p><p>Your account has now been created and you can log in by using your username and password through following <a href="%s">login page</a></p>';
+$_['text_success']  	   = 'Bravo! merci pour votre inscription';
+$_['text_close_sign_up']   = 'Les Inscriptions aux Comptes Producteurs Sont Cloturés Pour le Moment!';
+$_['text_wait']  	   	   = 'Veuillez Patienter...';
+$_['text_bank_info']  	   = 'Infos Banque';
+$_['text_complete_payment']= 'Once payment completed. Please notify us by email together with registered username and  bank transaction number.';
+
+$_['button_sign_up']  	   = 'Créer Votre Compte!';
+
+// Entry
+$_['entry_username']       = 'Votre Identifiant pour la Connexion au Compte';
+$_['entry_firstname']      = 'Prénom';
+$_['entry_lastname']       = 'Nom';
+$_['entry_email']          = 'E-Mail';
+$_['entry_bank_name']      = 'Nom de Votre Banque';
+$_['entry_iban']           = 'IBAN';
+$_['entry_swift_bic']      = 'SWIFT/BIC';
+$_['entry_bank_address']   = 'Adresse de Votre Banque';
+$_['entry_company_id']     = 'Numéro Siret';
+$_['entry_tax_id']         = 'Numéro de TVA Intracommunautaire';
+$_['entry_plan']           = 'Votre Abonnement';
+$_['text_products']    	   = 'Produits';
+$_['text_paypal']    	   = 'PayPal';
+$_['text_bank']    	   	   = 'Banque';
+
+$_['entry_paypal']         = 'E-Mail Paypal';
+$_['entry_payment_method'] = 'Mode de Paiement';
+$_['entry_telephone']      = 'Téléphone';
+$_['entry_fax']            = 'Fax';
+$_['entry_company']        = 'Nom de l\'Entreprise/Société';
+$_['entry_address_1']      = 'Adresse 1';
+$_['entry_address_2']      = 'Adresse 2';
+$_['entry_postcode']       = 'Code Postal';
+$_['entry_city']           = 'Ville';
+$_['entry_country']        = 'France';
+$_['entry_zone']           = 'Departement';
+$_['entry_product_limit']  = 'Product Limit';
+$_['entry_store_url']      = 'Votre Site Web';
+$_['entry_store_description']  	= 'Parlez Nous de Votre Entreprise/Domaine';
+$_['entry_password']       		= 'Votre Mot de Passe';
+$_['entry_confirm']        		= 'Confirmer Votre Mot de Passe';
+
+$_['help_paypal']          = 'Make sure you use your PayPal email address otherwise you won\'t receive payments';
+$_['help_company']         = 'This is store front seller name';
+$_['help_product_limit']   = 'The number of products can add to account';
+
+// Error
+$_['error_exists']         = 'Attention! cet E-Mail est déja enregistré chez nous!';
+$_['error_username_exists']= 'Attention cet identifiant est déja enregistré chez nous!';
+$_['error_firstname']      = 'Prénom entre 1 à 32 charactères!';
+$_['error_lastname']       = 'Nom entre 1 à 32 charactères!';
+$_['error_email']          = 'Vote Adresse E-Mail ne parait pas valide!';
+$_['error_paypal']         = 'Vote Adresse Paypal ne parait pas valide!';
+$_['error_telephone']      = 'Téléphone entre 3 à 32 charactères!';
+$_['error_password']       = 'Mot de Passe entre 4 à 20 charactères!';
+$_['error_confirm']        = 'Erreur ce le mot de passe! ne correspondent pas';
+$_['error_address_1']      = 'Adresse1 entre 3 à 128 charactères!';
+$_['error_city']           = 'Ville entre 2 à 128 charactères!!';
+$_['error_company']        = 'Nom de l\'Entreprise/Société entre 2 à 128 charactères!!';
+$_['error_postcode']       = 'Code Postal entre 2 à 20 charactères!!';
+$_['error_country']        = 'Veuillez choisir votre Pays!';
+$_['error_zone']           = 'Veuillez choisir votre département!';
+$_['error_agree']          = 'Ooops! vous devez accepter les %s!';
+$_['welcome_vendor']        = 'Bienvenue sur Thinkwinetrade.com votre partenaire pour l\'export à Hongkong';
+$_['error_company_id']              = 'Veuillez nous indiquer votre num�ro siret';
+?>

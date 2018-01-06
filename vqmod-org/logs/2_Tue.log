@@ -1,0 +1,159 @@
+---------- Date: 2017-01-10 03:16:45 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=82ca6d982fe76d1e11c38f1765e12d24
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 03:16:51 ~ IP : 66.249.71.6 ----------
+REQUEST URI : /burgundy-wine
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 03:18:29 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=82ca6d982fe76d1e11c38f1765e12d24
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 03:18:38 ~ IP : 45.127.196.162 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=82ca6d982fe76d1e11c38f1765e12d24
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 03:18:39 ~ IP : 66.249.71.6 ----------
+REQUEST URI : /Ch%C3%A2teau-Mascard-Vent-d-Ange-2014
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 09:12:59 ~ IP : 180.76.15.24 ----------
+REQUEST URI : /south-west?sort=p.model&order=ASC&limit=50
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 09:26:37 ~ IP : 180.76.15.16 ----------
+REQUEST URI : /provence-corsica/Aubert-de-La-Castille-Red-2013?sort=pd.name&order=ASC
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 10:35:50 ~ IP : 66.249.71.10 ----------
+REQUEST URI : /robots.txt
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 10:41:33 ~ IP : 63.243.252.195 ----------
+REQUEST URI : /burgundy-wine/C%C3%B4teaux-Bourguignons-Red-?sort=rating&order=ASC&limit=75
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-10 21:24:24 ~ IP : 92.149.229.32 ----------
+REQUEST URI : /admin/index.php?route=module/html&module_id=87&token=1c7c660fde0a55dab6a001db5db343c1
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+

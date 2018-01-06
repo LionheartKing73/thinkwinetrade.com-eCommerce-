@@ -1,0 +1,62 @@
+<footer>
+  <div class="container">
+    <div class="row">
+	 <div class="col-sm-3">
+        <h5><?php echo 'The Community'; ?></h5>
+        <ul class="list-unstyled">
+          <li><a href="index.php?route=information/information&information_id=9"><?php echo 'Pubs and Bars'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=10"><?php echo 'Hotels'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=11"><?php echo 'Boutiques & Merchants'; ?></a></li>
+		  <li><a href="index.php?route=information/information&information_id=12"><?php echo 'Catering and Company Events'; ?></a></li>
+		  <li><a href="index.php?route=information/information&information_id=13"><?php echo 'Rare Stuffs'; ?></a></li>
+		  <li><a href="index.php?route=information/information&information_id=14"><?php echo 'Tours'; ?></a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <h5><?php echo 'The Process'; ?></h5>
+        <ul class="list-unstyled">
+          <li><a href="index.php?route=information/information&information_id=15"><?php echo 'Preordering'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=16"><?php echo 'Shipping Partners'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=17"><?php echo 'Customs'; ?></a></li>
+		  <li><a href="index.php?route=information/information&information_id=18"><?php echo 'Delivery'; ?></a></li>
+		  <li><a href="index.php?route=information/information&information_id=19"><?php echo 'B/L Tracking'; ?></a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <h5><?php echo 'Contact Us'; ?></h5>
+        <ul class="list-unstyled">
+          <li><a href="index.php?route=information/information&information_id=20"><?php echo 'Customer Service'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=21"><?php echo 'FAQs'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=3"><?php echo 'Privacy Policy'; ?></a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <h5><?php echo 'Terms & Conditions'; ?></h5>
+        <ul class="list-unstyled">
+          <li><a href="index.php?route=information/information&information_id=5"><?php echo 'Terms of Sales'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=18"><?php echo 'Delivery'; ?></a></li>
+          <li><a href="index.php?route=information/information&information_id=6"><?php echo 'Insurance'; ?></a></li>
+        </ul>
+      </div>
+	  <div class="col-sm-2">
+			<?php if (empty($_SESSION['customer_id'])) { ?>
+			<ul class="list-unstyled">
+				<li><a href="index.php?route=account/signup" class="btn btn-primary" style="margin-top: 3px;">Créer votre compte producteur</a></li>
+				<li><a href="admin" class="btn btn-success" style="margin-top: 10px;">Se connecter</a></li>
+			</ul>
+			<?php } ?>
+		</div>
+    </div>
+    <hr>
+    <p><?php echo $powered; ?></p>
+  </div>
+</footer>
+
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+
+<!-- Theme created by Welford Media for OpenCart 2.0 www.welfordmedia.co.uk -->
+
+</body></html>

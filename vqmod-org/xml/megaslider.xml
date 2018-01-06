@@ -1,0 +1,43 @@
+<modification>
+	
+	<id>Mega Slider 2.0</id>
+	<version>1.0.0</version>
+	<vqmver>2.1</vqmver>
+	<author>erk17.com</author>
+
+
+<!-- Add multilanguage support on the Slideshow -->
+
+	<file name="catalog/controller/common/home.php">
+		<operation>
+			<search position="after"><![CDATA[
+			$this->document->setTitle($this->config->get('config_meta_title'));
+			]]></search>
+			<add><![CDATA[
+			$this->load->model('localisation/language');
+
+			$languages = $this->model_localisation_language->getLanguages();
+			foreach ($languages as $language) {
+				if ($language['code'] == $this->session->data['language']) {
+					$data['language_id'] = $language['language_id'];
+				}
+			}
+				]]></add>
+		</operation>
+	</file>
+	
+<!-- Add css and javascript on header.tpl -->	
+<file name="catalog/view/theme/default/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[
+			<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
+			]]></search>
+			<add><![CDATA[
+			<link rel="stylesheet" type="text/css" href="catalog/view/theme/default/js/megaslider/css/settings.css" media="screen"/>
+			<script type="text/javascript" src="catalog/view/theme/default/js/megaslider/js/jquery.themepunch.tools.min.js"></script>
+			<script type="text/javascript" src="catalog/view/theme/default/js/megaslider/js/jquery.themepunch.revolution.min.js"></script>
+				]]></add>
+		</operation>
+	</file>
+	
+</modification>

@@ -1,0 +1,15 @@
+---------- Date: 2017-01-06 20:07:39 ~ IP : 92.149.223.133 ----------
+REQUEST URI : /admin/index.php?route=common/filemanager&token=ac975dfc59d00cce46596886721fc56f&target=sdstest_target&thumb=sdstest_thumb&directory=revslider_media_folder
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+

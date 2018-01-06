@@ -1,0 +1,179 @@
+<modification>
+	<id><![CDATA[Complete Invoice Pro]]></id>
+	<version><![CDATA[1.0]]></version> 
+	<vqmver><![CDATA[2.1.7]]></vqmver>
+	<author><![CDATA[crojo]]></author>
+	<file name="admin/model/sale/order.php">
+		<operation>
+			<search position="replace"><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");]]></search>
+			<add><![CDATA[$query = $this->db->query("SELECT a.*, b.sku, b.location FROM " . DB_PREFIX . "order_product a LEFT JOIN " . DB_PREFIX . "product b ON a.product_id = b.product_id WHERE order_id = '" . (int)$order_id . "'");]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/sale/order.php">
+			
+	<operation>
+			<search position="after"><![CDATA[public function invoice() {]]></search>
+			<add><![CDATA[
+			if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+         $server = HTTPS_CATALOG."image/";
+      } else {
+         $server = HTTP_CATALOG."image/";
+      }   
+      
+      if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+         $data['logo'] = $server . $this->config->get('config_logo');
+      } else {
+         $data['logo'] = '';
+      }
+
+]]></add>
+		</operation>
+
+<operation>
+			<search position="after"><![CDATA[$data['column_model'] = $this->language->get('column_model');]]></search>
+			<add><![CDATA[$data['column_sku'] = $this->language->get('column_sku');
+						 ]]></add>
+		</operation>
+				<operation>
+			<search position="after"><![CDATA[$product_data[] = array(]]></search>
+			<add><![CDATA['sku'      => $product['sku'],
+'image'    => $productimage,]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$product_data[] = array(]]></search>
+			<add><![CDATA[            $this->load->model('catalog/product');
+
+			$product_info = $this->model_catalog_product->getProduct($product['product_id']);
+			$this->load->model('tool/image');
+			if ($product_info['image']) {
+			$productimage = $this->model_tool_image->resize($product_info['image'], 50, 50);
+			} else {
+			$productimage = false;
+			}]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$order_info['payment_method'],]]></search>
+			<add><![CDATA[ 
+			        'show_inv_sku'       => $show_inv_sku,
+      				'invskubar'  	     => $invskubar,	
+					'show_inv_number'  	 => $show_inv_number,
+					'invbar'  	         => $invbar,
+					'show_inv_model'  	 => $show_inv_model,
+					'invmodelbar'  	     => $invmodelbar,
+					]]></add>
+		</operation>	
+		
+		<operation>
+			<search position="before"><![CDATA[$this->load->model('sale/order');]]></search>
+			<add><![CDATA[include 'controller/bar/switch.php';
+					]]></add>
+		</operation>	
+	</file>
+	<file name="admin/language/english/sale/order.php">
+		<operation>
+			<search position="after"><![CDATA[= 'Orders';]]></search>
+			<add><![CDATA[
+$_['heading_title3']                        = 'Invoice';
+$_['column_sku']                            = 'SKU';
+$_['column_pextax']                         = 'Unit Price</br >ex. VAT';
+$_['column_tax']							= 'VAT rate';
+$_['column_textax']                         = 'Total</br >ex. VAT';
+
+
+
+]]></add>
+		</operation>
+	</file>
+<file name="admin/view/template/sale/order_invoice.tpl"> 
+				<operation>
+			<search position="replace"><![CDATA[<title><?php echo $title; ?></title>]]></search>
+			<add><![CDATA[<title><?php echo $title; 
+require_once 'Zend/Loader/Autoloader.php';
+Zend_Loader_Autoloader::getInstance()->setFallbackAutoloader(true);?></title>]]></add>
+		</operation>
+				<operation>
+			<search position="before"><![CDATA[<strong><?php echo $order['store_name']; ?></strong><br />]]></search>
+			<add><![CDATA[<img src="<?php echo $logo;?>" /><br />]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<?php echo $order['invoice_no']; ?>]]></search>
+			<add><![CDATA[<?php if ($order['show_inv_number']) { ?>
+     		<?php 
+			include 'controller/bar/invbar.php';
+
+?>
+
+	  <?php } else { ?>
+			
+			
+			<?php echo $order['invoice_no']; ?>
+			
+          <?php } ?>]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<td><b><?php echo $column_model; ?></b></td>]]></search>
+			<add><![CDATA[
+<td><b><?php echo $column_sku; ?></b></td>
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="after"><![CDATA[<td><?php echo $product['model']; ?></td>]]></search>
+			<add><![CDATA[<?php if ($order['show_inv_sku']) { ?>
+     		<?php 
+			if (empty($product['sku'])) { ?><td align="left"><?php echo $product['sku']; ?></td> <?php }
+			else{
+			include 'controller/bar/invskubar.php';
+}
+?>
+
+	  <?php } else { ?>
+	  <td align="left"><?php echo $product['sku']; ?></td>
+	  <?php } ?>	</td>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<td><?php echo $product['model']; ?></td>]]></search>
+			<add><![CDATA[<?php if ($order['show_inv_model']) { ?>
+     		<?php 
+			include 'controller/bar/invmodelbar.php';
+
+?>
+
+	  <?php } else { ?>
+	  <td align="left"><?php echo $product['model']; ?></td>
+	  <?php } ?>	</td>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<td><?php echo $product['name']; ?>]]></search>
+			<add><![CDATA[<td width="50"><img src="<?php echo $product['image']; ?>"></td>]]></add>
+		</operation>
+		
+				<operation>
+			<search position="replace"><![CDATA[<td class="text-right" colspan="4">]]></search>
+			<add><![CDATA[<td class="text-right" colspan="6">]]></add>
+		</operation>
+		
+		<operation>
+			<search position="replace"><![CDATA[<td><b><?php echo $column_product; ?></b></td>]]></search>
+			<add><![CDATA[<td colspan="2"><b><?php echo $column_product; ?></b></td>]]></add>
+		</operation>
+        
+		<operation>
+			<search position="replace"><![CDATA[<?php foreach ($orders as $order) { ?>]]></search>
+			<add><![CDATA[<?php
+
+$orders_total = count($orders);
+$orders_current = 0;
+?>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div style="page-break-after: always;">]]></search>
+			<add><![CDATA[<?php foreach ($orders as $order) {
+   $orders_current++; 
+?>
+
+<div<?php if ($orders_current != $orders_total ) { echo ' style="page-break-after: always;"';} ?>>]]></add>
+		</operation>
+</file>
+	
+</modification>

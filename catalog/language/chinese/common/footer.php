@@ -1,0 +1,38 @@
+<?php
+$_['text_information'] = '关于我们';
+$_['text_service'] = '客户服务';
+$_['text_extra'] = '其他';
+$_['text_contact'] = '联系我们';
+$_['text_return'] = '退换服务';
+$_['text_sitemap'] = '网站地图';
+$_['text_manufacturer'] = '品牌专区';
+$_['text_voucher'] = '礼&nbsp;品&nbsp;券';
+$_['text_affiliate'] = '联盟会员';
+$_['text_special'] = '特别优惠';
+$_['text_account'] = '会员中心';
+$_['text_order'] = '订单记录';
+$_['text_wishlist'] = '收藏列表';
+$_['text_newsletter'] = '订阅资讯';
+$_['text_pubs'] = '餐馆和酒吧';
+$_['text_hotels'] = '酒店';
+$_['text_boutiques'] = '专卖店和招商';
+$_['text_catering'] = '餐饮和公司活动';
+$_['text_rare'] = '珍品酒';
+$_['text_tours'] = '旅游';
+$_['text_the_process'] = '流程';
+$_['text_preordering'] = '订购前';
+$_['text_shipping'] = '航运合作伙伴';
+$_['text_delivery'] = '货物';
+$_['text_the_community'] = '社区';
+$_['text_tracking'] = '早/午跟踪';
+$_['text_customerService'] = '客戶服务';
+$_['text_faqs'] = '常见问题解答';
+$_['text_privacy'] = '隐私政策';
+$_['text_termsConditions'] = '条款和细则';
+$_['text_termsofSales'] = '销售条款';
+$_['text_insurance'] = '保险';
+$_['text_customs'] = '海关';
+$_['text_create_your_winery_account'] = 'Créer votre compte producteur';
+$_['text_log_on'] = 'se connecter';
+$_['text_powered'] = '技术支持 <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s';
+?>

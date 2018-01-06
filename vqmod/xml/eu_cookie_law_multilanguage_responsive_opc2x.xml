@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>EU Cookie Law Responsive MULTILANGUAGE OPC2</id>
+    <vqmver>3.0.1</vqmver>
+    <vqmver>2.X</vqmver>
+    <author>admin@webmart.it</author>
+    <file name="catalog/view/theme/*/template/common/footer.tpl">
+        <operation>
+            <search position="before" error="skip"><![CDATA[</body>]]></search>
+            <add><![CDATA[
+            <style>
+            #cookie-space {
+                display:none;
+                height: 51px;
+            }    
+            #cookie-consent {
+                width: 100%;
+    position: fixed;
+    left: 0px;
+    z-index: 99999;
+    background: rgb(53, 53, 53);
+    border-bottom: 0px solid #66a401;
+    display: none;
+    padding: 10px 0px;
+    top: 0px;
+    color: #f7f7f7;
+    font-weight: normal;
+    font-size: 16px;
+            }
+            #cookie-consent #accept {
+                float: right;
+                margin-top: 1px;
+                margin-left: 10px;
+                background: none repeat scroll 0% 0% rgb(68, 171, 52);
+                padding: 5px 10px;
+                border: medium none;
+                color: #FFF;
+                cursor: pointer;
+            }
+            #cookie-inner {
+                display: block;
+                max-width: 1280px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0px 0px;
+                min-width: 300px;
+            }      
+            </style>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                var myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)accepted\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                    if (myCookie != "yes") {
+                        $('#cookie-consent').show();
+                        $('#cookie-space').show();
+                        $('#accept').click(function() {
+                            document.cookie = "accepted=yes; expires=Thu, 18 Dec 2025 12:00:00 GMT; path=/";
+                            $('#cookie-space').hide();
+                            $('#cookie-consent').hide();
+                        });
+                    }
+                });        
+            </script>
+            <div id="cookie-space"></div>                
+            <div id="cookie-consent">
+                <div id="cookie-inner">
+                    <div id="cookie-text"><button id="accept"><?php echo $text_cookie_close; ?></button><?php echo $text_cookie; ?></div>   
+                </div>
+             </div>
+            ]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/english/common/footer.php">
+		<operation>
+			<search position="before"><![CDATA[$_['text_information']]]></search>
+			<add><![CDATA[
+                    $_['text_cookie_close']      = 'Ok I Agree!';
+                    $_['text_cookie']            = 'We are using cookies to provide statistics that help us give you the best experience of our site. You can find out more or switch them off if you prefer. However, by continuing to use the site without changing settings, you are agreeing to our use of cookies.
+<br />For more informations please <a href="http://www.aboutcookies.org">Click here</a>';
+            ]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/italian/common/footer.php">
+		<operation>
+			<search position="before"><![CDATA[$_['text_information']]]></search>
+			<add><![CDATA[
+                    $_['text_cookie_close']      = 'Chiudi';
+                    $_['text_cookie']            = 'Utilizziamo i cookie per offrirvi la miglior esperienza sul nostro sito. Continuando a navigare sul sito, l\'utente accetta di utilizzare i cookie.<br />Per ottenere maggiori informazioni <a href="http://www.aboutcookies.org">Clicca qui</a>';
+           ]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/common/footer.php">
+		<operation>
+			<search position="after"><![CDATA[$data['text_newsletter'] = $this->language->get('text_newsletter');]]></search>
+			<add><![CDATA[
+                    $data['text_cookie_close'] = $this->language->get('text_cookie_close');
+		                $data['text_cookie'] = $this->language->get('text_cookie');
+           ]]></add>
+        </operation>
+    </file>
+</modification>	
+
+
+

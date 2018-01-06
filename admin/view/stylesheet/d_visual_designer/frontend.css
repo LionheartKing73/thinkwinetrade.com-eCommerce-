@@ -1,0 +1,147 @@
+@import url(loader.css);
+html, body {
+  overflow: hidden;
+  min-height: 100%; }
+
+span.notify {
+  position: absolute;
+  z-index: 123;
+  top: 60px;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  text-align: center;
+  color: #8E9D84;
+  background: #D8EDC7;
+  line-height: 30px; }
+  span.notify.error {
+    background: #f2dede;
+    color: #333; }
+
+.vd-navbar-container {
+  position: relative;
+  height: 60px;
+  background-color: #1F7DC7;
+  box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2);
+  z-index: 3; }
+
+[id=visual-designer-preloader] {
+  background: #000;
+  bottom: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1; }
+
+[id=visual-designer-preloader-icon] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -32px 0 0 -32px;
+  z-index: 2; }
+
+.vd-navbar.left-bar {
+  float: left;
+  border-radius: 3px; }
+  .vd-navbar.left-bar > a {
+    margin-right: 1px; }
+    .vd-navbar.left-bar > a:first-child {
+      background-color: #F5C000; }
+      .vd-navbar.left-bar > a:first-child:hover {
+        background-color: #f7cd32; }
+  .vd-navbar.left-bar .vd-dropdown > a {
+    border-top-right-radius: 3px; }
+  .vd-navbar.left-bar .vd-dropdown:not(:hover) > a {
+    border-bottom-right-radius: 3px; }
+  .vd-navbar.left-bar .vd-dropdown > .vd-dropdown-list > li:last-child > a {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px; }
+  .vd-navbar.left-bar .vd-btn {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: #308cd6;
+    float: left; }
+    .vd-navbar.left-bar .vd-btn:hover {
+      background-color: #56a6e6; }
+.vd-navbar.right-bar {
+  float: right;
+  background-color: white;
+  box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 3px; }
+  .vd-navbar.right-bar > a {
+    display: block;
+    float: left;
+    height: 60px;
+    cursor: pointer;
+    color: #fff;
+    line-height: 50px;
+    padding: 5px 13px;
+    font-size: 13px;
+    font-weight: bold; }
+    .vd-navbar.right-bar > a#button-backend {
+      background-color: #308cd6;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px; }
+      .vd-navbar.right-bar > a#button-backend:hover {
+        background-color: #56a6e6; }
+    .vd-navbar.right-bar > a#button-save {
+      background-color: #72b338; }
+      .vd-navbar.right-bar > a#button-save:hover {
+        background-color: #84c24d; }
+    .vd-navbar.right-bar > a#button-close {
+      background-color: #b33838;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px; }
+      .vd-navbar.right-bar > a#button-close:hover {
+        background-color: #c34a4a; }
+.vd-navbar .vd-dropdown {
+  position: relative;
+  float: left; }
+  .vd-navbar .vd-dropdown .vd-dropdown-list {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    padding: 0;
+    list-style: none;
+    visibility: hidden;
+    transition: 1ms; }
+.vd-navbar .vd-btn-add-block {
+  background-image: url("../../image/d_visual_designer/add-block.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
+.vd-navbar .vd-btn-add-template {
+  background-image: url("../../image/d_visual_designer/template-add.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
+.vd-navbar .vd-btn-mobile {
+  background-image: url("../../image/d_visual_designer/phone.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
+.vd-navbar .vd-btn-tablet {
+  background-image: url("../../image/d_visual_designer/tablet.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
+.vd-navbar .vd-btn-desktop {
+  background-image: url("../../image/d_visual_designer/desktop.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
+.vd-navbar .vd-btn-save-template {
+  background-image: url("../../image/d_visual_designer/template-save.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+iframe {
+  display: block !important;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto; }
+
+/*# sourceMappingURL=frontend.css.map */

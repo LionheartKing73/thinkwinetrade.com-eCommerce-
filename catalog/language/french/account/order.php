@@ -1,0 +1,31 @@
+<?php
+$_['heading_title'] = 'Historique de commande';
+$_['text_account'] = 'Compte';
+$_['text_order'] = 'Information commande';
+$_['text_order_detail'] = 'Détails de la commande';
+$_['text_invoice_no'] = 'Facture n° :';
+$_['text_order_id'] = 'Commande n° :';
+$_['text_date_added'] = 'Date de création :';
+$_['text_shipping_address'] = 'Adresse de livraison';
+$_['text_shipping_method'] = 'Méthode de livraison :';
+$_['text_payment_address'] = 'Adresse de paiement';
+$_['text_payment_method'] = 'Mode de paiement :';
+$_['text_comment'] = 'Commentaires de commande';
+$_['text_history'] = 'Historique de commande';
+$_['text_success'] = 'Félicitations, vous avez ajouté avec succès <a href="%s">%s</a> à votre <a href="%s">panier</a> !';
+$_['text_empty'] = 'Vous n\'avez effectué antérieurement aucune commande !';
+$_['text_error'] = 'La commande que vous avez demandé n\'a pu être trouvée !';
+$_['column_order_id'] = 'Commande N°';
+$_['column_product'] = 'Nb. de Produits';
+$_['column_customer'] = 'Client';
+$_['column_name'] = 'Nom Produit';
+$_['column_model'] = 'Modèle';
+$_['column_quantity'] = 'Quantité';
+$_['column_price'] = 'Prix';
+$_['column_total'] = 'Total';
+$_['column_action'] = 'Action';
+$_['column_date_added'] = 'Date Création';
+$_['column_status'] = 'État';
+$_['column_comment'] = 'Commentaire';
+$_['error_reorder'] = '%s est actuellement indisponible pour être commandé à nouveau.';
+?>

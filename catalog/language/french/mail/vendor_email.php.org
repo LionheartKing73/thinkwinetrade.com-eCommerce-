@@ -1,0 +1,27 @@
+<?php
+// Text
+$_['text_vendor_email']  		= 'Thinkwinetrade.com Votre Bon de Commande/Purchase Order (PO) ';
+$_['text_vendor_email_subject'] = 'Vous Avez une Nouvelle Commande - ';
+$_['text_vendor_order_id'] 		= "ID Commande: ';
+$_['text_vendor_order'] 		= 'Commande ';
+$_['text_title']     			= 'Mr/Mme. ';
+$_['text_vendor_contact'] 		= 'Contact Producteur';
+$_['text_shipping_address'] 	= 'Adresse Livraison Entrepot';
+$_['text_order_details'] 		= 'Détails de la Commande';
+$_['text_date_ordered'] 		= 'Date de Création:';
+$_['text_email']  				= 'Email: ';
+$_['text_telephone']  			= 'Téléphone: ';
+$_['text_order_status']     	= 'Statut de la Commande: ';
+$_['text_payment_method']   	= 'Mode de Payment:';
+$_['text_vendor_auto_msg']      = 'Ceci est un message généré automatiquement, veuillez ne pas répondre directement! vous pouvez cependant nous contacter a cet adresse mail sales@thinkwinetrade.com en nous indiquant l'ID Commande en titre du message, Bien Cordialement';
+
+// Column
+$_['column_product']        = 'Produit';
+$_['column_model']          = 'Modèle';
+$_['column_quantity']       = 'Quantité';
+$_['column_unit_price']     = 'Prix par Carton';
+$_['column_total']          = 'Total';
+$_['column_shipping']       = 'Weight Based Shipping';
+$_['column_flat_shipping']  = 'Flat Rate Shipping';
+$_['column_subtotal']       = 'Sous-Total';
+?>

@@ -1,0 +1,31 @@
+<?php
+$_['text_home'] = '首页';
+$_['text_wishlist'] = '收藏列表（%s）';
+$_['text_shopping_cart'] = '购物车';
+$_['text_category'] = '分类';
+$_['text_account'] = '会员中心';
+$_['text_register'] = '注册';
+$_['text_login'] = '登录';
+$_['text_order'] = '订单记录';
+$_['text_transaction'] = '我的交易';
+$_['text_download'] = '下载商品';
+$_['text_logout'] = '退出账户';
+$_['text_checkout'] = '结账';
+$_['text_search'] = '搜索';
+$_['text_all'] = '显示所有';
+$_['text_language'] = '语言';
+$_['text_currency'] = '货币';
+$_['text_items'] = '%s 个商品 - %s';
+$_['text_welcome'] = '欢迎光临，您可以<a href="%s">登录</a> 或 <a href="%s">注册新帐户</a>。';
+$_['text_logged'] = '您登录为<a href="%s">%s</a> <b>(</b> <a href="%s">退出</a> <b>)</b>';
+$_['text_triangle'] = '欢迎来到您的购物页面，您可以建立您自己的托盘。但,请记得！每个托盘，只能容纳50箱。最多5个出产商，每个出产商的订单不少于10箱。';
+$_['text_popup_title'] = '建立您的托盘';
+$_['text_popup_qty'] = '请输入您所需要的箱数';
+$_['button_addtopallet'] = '添加到我的托盘';
+$_['text_popup_details'] = '当前托盘细节';
+$_['text_popup_column_sellers'] = '卖家';
+$_['text_popup_column_name'] = '产品名称';
+$_['text_popup_column_qty'] = '数量';
+$_['text_popup_column_total'] = '总计';
+$_['text_pallet_worksheet'] = '我的托盘表';
+?>

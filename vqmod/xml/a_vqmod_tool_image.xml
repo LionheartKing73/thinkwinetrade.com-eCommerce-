@@ -1,0 +1,51 @@
+<modification>
+    <id>FILE MANAGER BY DREAMVENTION</id>
+    <version>1.5.x</version>
+    <vqmver>2.2.1</vqmver>
+    <author>dreamvention.com</author>
+       
+    <file name="admin/model/tool/image.php">
+        <operation error="skip">
+            <search position="before"><![CDATA[if (!is_file(DIR_IMAGE . $filename)) {]]></search>
+            <add><![CDATA[
+            if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+                $server = HTTPS_CATALOG;
+            } else {
+                $server = HTTP_CATALOG;
+            }
+            
+            if ($filename) {
+                $image_info = @getimagesize(DIR_IMAGE . $filename);
+                if (!$image_info) {
+                    return $server . 'image/' . $filename;
+                }
+            } else {
+                $filename = "no_image.png";
+            }
+            ]]></add>
+        </operation>
+    </file> 
+    
+    <file name="catalog/model/tool/image.php">
+        <operation error="skip">
+            <search position="before"><![CDATA[if (!is_file(DIR_IMAGE . $filename)) {]]></search>
+            <add><![CDATA[
+            if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+                $server = $this->config->get('config_ssl');
+            } else {
+                $server = $this->config->get('config_url');
+            }
+            
+            if ($filename) {
+                $image_info = @getimagesize(DIR_IMAGE . $filename);
+                if (!$image_info) {
+                    return $server . 'image/' . $filename;
+                }
+            } else {
+                $filename = "no_image.png";
+            }
+            ]]></add>
+        </operation>
+    </file> 
+
+</modification>

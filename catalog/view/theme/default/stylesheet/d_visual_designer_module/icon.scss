@@ -1,0 +1,88 @@
+    .vd-icon-container {
+        flex-direction: row;
+        align-items: center;
+        display: flex;
+        &.vd-icon-align-flex-start {
+            justify-content: flex-start;
+        }
+        &.vd-icon-align-center {
+            justify-content: center;
+        }
+        &.vd-icon-align-flex-end {
+            justify-content: flex-end;
+        }
+        .vd-icon {
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            &.vd-icon-xs {
+                width: 2.5em!important;
+                height: 2.5em!important;
+                line-height: 2.5em!important;
+                span {
+                    font-size: 1.2em!important;
+                }
+            }
+            &.vd-icon-sm {
+                width: 3.15em!important;
+                height: 3.15em!important;
+                line-height: 3.15em!important;
+                span {
+                    font-size: 1.6em!important;
+                }
+            }
+            &.vd-icon-md {
+                width: 3em!important;
+                height: 3em!important;
+                line-height: 3em!important;
+                span {
+                    font-size: 2.15em!important;
+                }
+            }
+            &.vd-icon-lg {
+                width: 5em!important;
+                height: 5em!important;
+                line-height: 5em!important;
+                span {
+                    font-size: 2.85em!important;
+                }
+            }
+            &.vd-icon-xl {
+                width: 7.15em!important;
+                height: 7.15em!important;
+                line-height: 7.15em!important;
+                span {
+                    font-size: 5em!important;
+                }
+            }
+            >span {
+                display: flex!important;
+                justify-content: center;
+                align-items: center;
+                 ::before {
+                    vertical-align: middle;
+                }
+            }
+            &.vd-icon-style-rounded {
+                border-radius: 50%;
+            }
+            &.vd-icon-style-rounded-less {
+                border-radius: 5px;
+            }
+            &.vd-icon-style-rounded-outline {
+                border-radius: 50%;
+                border-width: 1px;
+                border-style: solid;
+            }
+            &.vd-icon-style-rounded-less-outline {
+                border-radius: 5px;
+                border-width: 1px;
+                border-style: solid;
+            }
+            &.vd-icon-style-boxed-outline {
+                border-width: 1px;
+                border-style: solid;
+            }
+        }
+    }

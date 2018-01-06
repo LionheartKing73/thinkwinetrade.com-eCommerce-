@@ -1,0 +1,62 @@
+.cartlink button {
+  color: #fff !important;
+    margin-right: 0;
+    /* margin-left: -4px; */
+    background: transparent;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    max-width: 60em;
+    padding-top: 6px;
+}
+
+.progress-bar-disabled {
+  background-color: gray !important;
+}
+
+.valid {
+    font-weight: bold;
+    color: #444;
+    /*background-color: #E3EBD5 !important;*/
+    padding: 20px 80px 19px 20px;
+    border: 0px solid #CCCCCC;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: right;
+    border-radius: 0px;
+
+}
+
+.text-center {
+  text-align: center;
+}
+
+.nav-tabs>li.active>a {
+  font-weight: bold;
+}
+
+.nav-tabs>li.unlocked>a {
+  color: green;
+}
+
+.fa-exclamation-triangle {
+  color: #c9302c;
+}
+
+.fa-check {
+  color: #449d44;
+}
+
+.foofoo tr>td, .foofoo tr {
+  border:0 !important;
+}
+
+.pallet-tab-label {
+  background-color: #64af19;
+}
+
+.pallet-tab-label a.active {
+  color: #64af19;
+  background-color: #fff;
+}

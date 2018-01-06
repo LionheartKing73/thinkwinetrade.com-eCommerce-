@@ -1,0 +1,518 @@
+<modification>
+  <id>FOB Module</id>
+  <version>1.1</version>
+  <vqmver>2.5.1</vqmver>
+  <author>tomzu</author>
+	<email>toms@buu.lv</email>
+	<website>http://www.ocdev.xyz</website>
+
+  <file path="admin/language/english/catalog/" name="mvd_product.php,product.php,vdi_product.php">
+    <operation error="skip">
+      <search position="replace" ><![CDATA[
+$_['entry_price']            = 'Price';
+      ]]></search>
+      <add><![CDATA[$_['entry_pf']               = 'Packaging Format';
+$_['entry_fob_price']        = 'Your Selling Price to us (FOB)';
+$_['error_fob_price'] = 'Veuillez insérer votre prix FOB!';
+$_['entry_sp_price']         = 'Selling Price per Bottle';
+$_['entry_price']            = 'Selling Price per Case';]]></add>
+    </operation>
+  </file>
+    <file path="admin/language/spanish/catalog/" name="mvd_product.php,product.php,vdi_product.php">
+    <operation error="skip">
+      <search position="replace" ><![CDATA[
+$_['entry_price']            = 'Price';
+      ]]></search>
+      <add><![CDATA[
+$_['error_fob_price'] = 'Please enter FOB Price';
+]]></add>
+    </operation>
+  </file>
+
+  <file path="admin/controller/catalog/" name="mvd_product.php,product.php,vdi_product.php">
+    <operation error="skip">
+      <search position="before"><![CDATA[
+$data['entry_price'] = $this->language->get('entry_price');
+      ]]></search>
+      <add><![CDATA[$data['entry_pf'] = $this->language->get('entry_pf');
+	  if (isset($this->error['fob_price'])) {
+			$data['error_fob_price'] = $this->error['fob_price'];
+		} else {
+			$data['error_fob_price'] = '';
+		}
+    $data['entry_fob_price'] = $this->language->get('entry_fob_price');
+    $data['entry_sp_price'] = $this->language->get('entry_sp_price');]]></add>
+    </operation>
+  </file>
+
+  <file path="admin/model/catalog/" name="mvd_product.php,product.php,vdi_product.php">
+    <operation error="skip">
+      <search position="after" offset="1"><![CDATA[public function addProduct($data) {]]></search>
+      <add><![CDATA[
+	 
+	  if($data['fob_price']>0) { $fob_price = $data['fob_price']; } else { $fob_price=0; }
+    $sp_price = $fob_price;
+    foreach($this->config->get('fob_margins') as $margin) {
+      if($margin['fob'] == 1) {
+        eval('$sp_price = '."$sp_price + ($fob_price $margin[sign] $margin[value])".';');
+      } else {
+        eval('$sp_price = '."$sp_price $margin[sign] $margin[value]".';');
+      }
+    }
+    
+    $data['price'] = $data['pf'] * $sp_price;
+    $data['sp_price'] = $sp_price;
+	]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="after" offset="2"><![CDATA[public function editProduct(]]></search>
+      <add><![CDATA[
+	  if($data['fob_price']>0) { $fob_price = $data['fob_price']; } else { $fob_price=0; }
+    $sp_price = $fob_price;
+    foreach($this->config->get('fob_margins') as $margin) {
+      if($margin['fob'] == 1) {
+        eval('$sp_price = '."$sp_price + ($fob_price $margin[sign] $margin[value])".';');
+      } else {
+        eval('$sp_price = '."$sp_price $margin[sign] $margin[value]".';');
+      }
+    }
+    
+    $data['price'] = $data['pf'] * $sp_price;
+    $data['sp_price'] = $sp_price;
+ 
+    ]]>
+   
+    </add>
+    </operation>
+  </file>
+
+  <file name="admin/model/catalog/product.php">
+    <operation error="skip">
+      <search position="after"><![CDATA[class ModelCatalogProduct extends Model {]]></search>
+      <add><![CDATA[public function updatePrice($data) {
+    $productRows = $this->db->query("SELECT * from " . DB_PREFIX . "product");
+   
+
+    foreach($productRows->rows as $product) {
+      $fob_price = $product['fob_price'];
+      $sp_price = $fob_price;
+      foreach($data['fob_margins'] as $margin) {
+        if($margin['fob'] == 1) {
+          eval('$sp_price = '."$sp_price + ($fob_price $margin[sign] $margin[value])".';');
+        } else {
+          eval('$sp_price = '."$sp_price $margin[sign] $margin[value]".';');
+        }
+      }
+      $price = $product['pf'] * $sp_price;
+      $this->db->query("UPDATE " . DB_PREFIX . "product SET sp_price = '" . $this->db->escape($sp_price) . "', price = '" . $this->db->escape($price) . "' WHERE product_id = '" . (int)$product['product_id'] . "'");
+      
+    }
+    
+     $productSpecials =  $this->db->query("SELECT product_id, price, fob_price, sp_price from " . DB_PREFIX . "product_special group by product_id");
+    
+     foreach ($productSpecials->rows as $product){
+         
+            $fob_price = $product['fob_price'];
+            $sp_price = $fob_price;
+            $case = $product['price']/$product['sp_price'];
+            
+            foreach($data['fob_margins'] as $margin) {
+                    if($margin['fob'] == 1) {
+                      eval('$sp_price = '."$sp_price + ($fob_price $margin[sign] $margin[value])".';');
+                    } else {
+                      eval('$sp_price = '."$sp_price $margin[sign] $margin[value]".';');
+                    }
+          }
+          $price = $case * $sp_price;
+          $this->db->query("UPDATE " . DB_PREFIX . "product_special SET sp_price = '" . $this->db->escape($sp_price) . "', price = '" . $this->db->escape($price) . "' WHERE product_id = '" . (int)$product['product_id'] . "'");
+     }
+   
+  }]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></search>
+      <add><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></search>
+      <add><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/model/catalog/mvd_product.php">
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></search>
+      <add><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></search>
+      <add><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/model/catalog/vdi_product.php">
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></search>
+      <add><![CDATA[
+	  $this->db->query("INSERT INTO " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></search>
+      <add><![CDATA[
+	  $this->db->query("INSERT INTO " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></search>
+      <add><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></search>
+      <add><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "product SET pf = '" . $this->db->escape($data['pf']) . "', fob_price = '" . $this->db->escape($data['fob_price']) . "', sp_price = '" . $this->db->escape($data['sp_price']) . "', model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");]]></add>
+    </operation>
+	<operation error="skip">
+      <search position="replace"><![CDATA[foreach ($data['product_special'] as $product_special) {]]></search>
+      <add><![CDATA[
+ 		$this->load->model('sale/customer_group');
+
+		$customer_groups = $this->model_sale_customer_group->getCustomerGroups();
+		$all_groups = array();
+		foreach ($customer_groups as $i=>$customer_group){
+		   $all_groups[$i] = $data['product_special'][0];
+		   $all_groups[$i]['customer_group_id'] = $customer_group["customer_group_id"];
+		}
+
+ 		foreach ($all_groups as $product_special) {
+ ;]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="replace"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_special SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_special['customer_group_id'] . "', priority = '" . (int)$product_special['priority'] . "', price = '" . (float)$product_special['price'] . "', date_start = '" . $this->db->escape($product_special['date_start']) . "', date_end = '" . $this->db->escape($product_special['date_end']) . "'");]]></search>
+      <add><![CDATA[
+	
+      if($data['fob_price']>0) { $fob_price = $product_special['price']; } else { $fob_price=0; }
+      $sp_price = $fob_price;
+   
+     foreach($this->config->get('fob_margins') as $margin) {
+      if($margin['fob'] == 1) {
+        eval('$sp_price = '."$sp_price + ($fob_price $margin[sign] $margin[value])".';');
+      } else {
+        eval('$sp_price = '."$sp_price $margin[sign] $margin[value]".';');
+      }
+    }
+	$price = $data['pf'] * $sp_price;
+    
+ 
+      $this->db->query("INSERT INTO " . DB_PREFIX . "product_special SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_special['customer_group_id'] . "', priority = '" . (int)$product_special['priority'] . "', fob_price = '" . $fob_price . "', sp_price = '" . $sp_price. "', price = '" . $price . "', date_start = '" . $this->db->escape($product_special['date_start']) . "', date_end = '" . $this->db->escape($product_special['date_end']) . "'");]]></add>
+    </operation>
+  </file>
+
+  <file path="admin/view/template/catalog/" name="product_form.tpl,mvd_product_form.tpl,vdi_product_form.tpl">
+    <operation error="skip">
+      <search position="replace" offset="4"><![CDATA[<label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>]]></search>
+      <add><![CDATA[]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="before" offset="1"><![CDATA[<label class="col-sm-2 control-label" for="input-tax-class"><?php echo $entry_tax_class; ?></label>]]></search>
+      <add><![CDATA[<label class="col-sm-2 control-label" for="input-pf"><?php echo $entry_pf; ?></label>
+                <div class="col-sm-10">
+                  <select name="pf_disabled" id="input-pf" class="form-control" onchange="getWeight(this.value);" disabled>
+                    <?php if ($pf == 12) { ?>
+                    <option value="6">6</option>
+                    <!--<option value="12" selected="selected">12</option>-->
+                    <?php } else { ?>
+                    <option value="6" selected="selected">6</option>
+                    <!--<option value="12">12</option>-->
+                    <?php } ?>
+                  </select>
+                  <input type="hidden" name="pf" value="<?isset($pf)?$pf:6;?>" />
+                  <input type="hidden" name="sku" value="<?=$sku?>" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-fob_price"><?php echo $entry_fob_price; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="fob_price" value="<?php echo $fob_price; ?>" placeholder="<?php echo $entry_fob_price; ?>" id="input-fob_price" class="form-control" />
+                 <?php if ($error_fob_price) { ?>
+                    <div class="text-danger"><?php echo $error_fob_price; ?></div>
+                    <?php } ?>
+			   </div>
+              <?php if($sp_price && $price) { ?>
+              <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-3 col-md-3 col-xs-12 text-center">
+                  <label><?php echo $entry_sp_price; ?></label><br>
+                  <button class="btn btn-default btn-price" disabled><?php echo $sp_price; ?></button>
+                </div>
+                <div class="col-sm-3 col-md-3 col-xs-12 text-center">
+                  <input type="hidden" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" disabled/>
+                  <label><?php echo $entry_price; ?></label><br>
+                  <button class="btn btn-default btn-price" disabled><?php echo $price; ?></button>
+                </div>
+              </div>
+              <?php } ?>]]></add>
+    </operation>
+  </file>
+
+  <file path="catalog/controller/product/" name="category.php,search.php">
+    <operation error="skip">
+      <search position="before"><![CDATA['price'       => $price,]]></search>
+      <add><![CDATA['sp_price'    => $sp_price,
+                    'pf'          => $pf,]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="after"><![CDATA[$data['text_limit'] = $this->language->get('text_limit');]]></search>
+      <add><![CDATA[$data['text_bottle'] = $this->language->get('text_bottle');
+      $data['text_percases'] = $this->language->get('text_percases');]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="before"><![CDATA[if ((float)$result['special']) {]]></search>
+      <add><![CDATA[$pf = $result['pf'];
+        $sp_price = $this->currency->format($this->tax->calculate($result['sp_price'], $result['tax_class_id'], $this->config->get('config_tax')));]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/module/featured.php">
+    <operation error="skip">
+      <search position="before"><![CDATA['price'       => $price,]]></search>
+      <add><![CDATA['sp_price'    => $sp_price,
+          'pf'          => $pf,]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="after"><![CDATA[$data['text_tax'] = $this->language->get('text_tax');]]></search>
+      <add><![CDATA[$data['text_bottle'] = $this->language->get('text_bottle');
+      $data['text_percases'] = $this->language->get('text_percases');]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="before"><![CDATA[if ((float)$product_info['special']) {]]></search>
+      <add><![CDATA[$pf = $product_info['pf'];
+        $sp_price = $this->currency->format($this->tax->calculate($product_info['sp_price'], $product_info['tax_class_id'], $this->config->get('config_tax')));]]></add>
+    </operation>
+  </file>
+
+  <file path="catalog/controller/module/" name="bestseller.php,latest.php">
+    <operation error="skip">
+      <search position="before"><![CDATA['price'       => $price,]]></search>
+      <add><![CDATA['sp_price'    => $sp_price,
+          'pf'          => $pf,]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="after"><![CDATA[$data['text_tax'] = $this->language->get('text_tax');]]></search>
+      <add><![CDATA[$data['text_bottle'] = $this->language->get('text_bottle');
+      $data['text_percases'] = $this->language->get('text_percases');
+
+	  ]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="before"><![CDATA[if ((float)$result['special']) {]]></search>
+      <add><![CDATA[$pf = $result['pf'];
+        $sp_price = $this->currency->format($this->tax->calculate($result['sp_price'], $result['tax_class_id'], $this->config->get('config_tax')));]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/product/product.php">
+    <operation error="skip">
+      <search position="before"><![CDATA[$data['entry_qty'] = $this->language->get('entry_qty');]]></search>
+      <add><![CDATA[$data['text_bottle'] = $this->language->get('text_bottle');
+      $data['text_percases'] = $this->language->get('text_percases');]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="before"><![CDATA[if ((float)$product_info['special']) {]]></search>
+      <add><![CDATA[$data['pf'] = $product_info['pf'];
+      $data['sp_price'] = $this->currency->format($this->tax->calculate($product_info['sp_price'], $product_info['tax_class_id'], $this->config->get('config_tax')));]]></add>
+    </operation>
+  </file>
+
+  <file path="catalog/language/english/product/" name="product.php,category.php,search.php">
+    <operation error="skip">
+      <search position="after"><![CDATA[// Text]]></search>
+      <add><![CDATA[$_['text_bottle']       = 'Per bottle';
+$_['text_percases']     = 'per case of';]]></add>
+    </operation>
+  </file>
+
+  <file path="catalog/language/english/module/" name="bestseller.php,featured.php,latest.php">
+    <operation error="skip">
+      <search position="after"><![CDATA[// Text]]></search>
+      <add><![CDATA[$_['text_bottle']       = '75 cl';
+$_['text_percases']     = 'case of';]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/model/catalog/product.php">
+    <operation error="skip">
+      <search position="after"><![CDATA['manufacturer'     => $query->row['manufacturer'],]]></search>
+      <add><![CDATA['pf'               => $query->row['pf'],
+        'sp_price'         => $query->row['sp_price'],]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/product/product.tpl">
+    <operation error="skip">
+      <search position="replace"><![CDATA[<h2><?php echo $price; ?></h2>]]></search>
+      <add><![CDATA[
+	  		<span style="float: left;">
+					<img class="img-responsive" src="catalog/view/theme/default/image/bottle.png" >
+            </span>
+					<h2>
+						 <?php echo $sp_price; ?>
+						 <span class="h2h"><?php echo $text_bottle; ?></span>
+				   </h2><br>
+				   <span class="mega-octicon octicon-package">
+				   		<img style="height: 30px;margin-right: 10px;" src="catalog/view/theme/default/image/packge.png" >
+				   </span><b><?php echo $price; ?></b>
+				   <?php echo $text_percases; ?> <?php echo $pf; ?>]]>
+	</add>
+    </operation>
+	<operation error="skip">
+      <search position="replace" index="1"><![CDATA[<span class="old-price" style="text-decoration: line-through;"><?php echo $price; ?></span><h2 class="special-price"><?php echo $special; ?></h2> ]]></search>
+      <add><![CDATA[ 
+             <div class="row">
+     	        <div class="col-sm-4 col-xs-4">
+					<img class="img-responsive" src="catalog/view/theme/default/image/bottle.png">
+                 </div>
+				<div class="col-sm-8 col-xs-8">
+                    <del><?php echo $sp_price; ?></del>aaa<h2><?php echo $special_by_bottle; ?></h2>
+                     <div class="h2h"><?php echo $text_bottle; ?></div>
+                </div>
+             </div>
+             <div class="row voffset15">
+     	        <div class="col-sm-4 col-xs-4">
+					<img class="img-responsive" src="catalog/view/theme/default/image/packge.png" >
+                 </div>
+				<div class="col-sm-8 col-xs-8">
+                    <del><?php echo $price; ?></del> <h2><?php echo $special; ?></h2>
+                     <div class="h2h"><?php echo $text_percases; ?> <?php echo $pf; ?></div>
+                </div>
+             </div>
+           
+              ]]>
+	  </add>
+    </operation>
+  </file>
+
+  <file path="catalog/view/theme/*/template/product/" name="category.tpl,search.tpl">
+    <operation error="skip">
+      <search position="replace" index="1"><![CDATA[<?php echo $product['price']; ?>]]></search>
+      <add><![CDATA[
+
+	  <span><img style="height: 20px;" src="catalog/view/theme/default/image/bottle.png"></span><span><?php echo $product['sp_price']; ?></span> <?php echo $text_bottle; ?><br>
+
+	  <span><img style="height: 20px;" src="catalog/view/theme/default/image/packge.png" ></span>
+                  <span><?php echo $product['price']; ?></span> <?php echo $text_percases; ?> <?php echo $product['pf']; ?>]]></add>
+    </operation>
+	<operation error="skip">
+      <search position="replace" index="1"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span><span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+      <add><![CDATA[
+			  <span><img style="height: 20px;" src="catalog/view/theme/default/image/bottle.png"></span>
+			  <span class="price-old"><?php echo $product['sp_price']; ?></span>
+			  <span class="price-new"><?php echo $product['special_by_bottle']; ?></span><br>
+			  <span><img style="height: 20px;" src="catalog/view/theme/default/image/packge.png" >
+			  <span class="price-old"><?php echo $product['price']; ?></span>
+			  <span class="price-new"><?php echo $product['special']; ?></span>]]>
+	  </add>
+    </operation>
+	
+  </file>
+
+  <file path="catalog/view/theme/*/template/module/" name="latest.tpl,featured.tpl,bestseller.tpl">
+    <operation error="skip">
+      <search position="replace" index="1"><![CDATA[<?php echo $product['price']; ?>]]></search>
+      <add><![CDATA[
+	  <span><img style="height: 20px;" src="catalog/view/theme/default/image/bottle.png"></span><span><?php echo $product['sp_price']; ?></span> <?php echo $text_bottle; ?><br>
+	  <span><img style="height: 20px;" src="catalog/view/theme/default/image/packge.png" ></span>
+      <span><?php echo $product['price']; ?></span> <?php echo $text_percases; ?> <?php echo $product['pf']; ?>]]></add>
+    </operation>
+	<operation error="skip">
+      <search position="replace" index="1"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span><span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+      <add><![CDATA[
+			  <span><img style="height: 20px;" src="catalog/view/theme/default/image/bottle.png"></span>
+			  <span class="price-old"><?php echo $product['sp_price']; ?></span>
+			  <span class="price-new"><?php echo $product['special_by_bottle']; ?></span><br>
+			  <span><img style="height: 20px;" src="catalog/view/theme/default/image/packge.png" >
+			  <span class="price-old"><?php echo $product['price']; ?></span>
+			  <span class="price-new"><?php echo $product['special']; ?></span>]]>
+	  </add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/default/template/common/header.tpl">
+  <operation error="log">
+    <search position="after"><![CDATA[<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">]]></search>
+    <add><![CDATA[<link href="catalog/view/theme/default/stylesheet/fob_module.css" rel="stylesheet">]]></add>
+  </operation>
+  </file>
+
+  <file name="admin/view/template/common/header.tpl">
+  <operation error="log">
+    <search position="after"><![CDATA[<link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="screen" />]]></search>
+    <add><![CDATA[<link type="text/css" href="view/stylesheet/fob_module.css" rel="stylesheet" media="screen" />]]></add>
+  </operation>
+  </file>
+  <!-- Ilya Fesyuk -->
+<file name="admin/view/template/sale/order_list.tpl">
+    <operation error="skip">
+      <search position="before" offset="1" >
+      <![CDATA[<td class="text-right"><?php if ($sort == 'o.total') { ?>
+]]>
+      </search>
+      <add><![CDATA[
+                  <td class="text-left"><?php echo "FOB Total"; ?></td>
+]]></add>
+    </operation>
+
+    <operation error="skip">
+        <search position="before" >
+      <![CDATA[<td class="text-right"><?php echo $order['total']; ?></td>]]>
+      </search>
+      <add><![CDATA[<td>
+        <?php foreach($order['fob_total'] as $fob):?>
+          <a href="<?php echo $fob['vendor_url']?>"><?php echo $fob['vendor_name']?></a><br/>
+          <?php echo $fob['fob_total'];?><br/>
+        <?php endforeach;?>
+        </td>
+]]></add>
+    </operation>
+</file>
+<file name="admin/controller/sale/order.php">
+    <operation error="skip">
+      <search position="after" offset="1" >
+      <![CDATA[$data['column_action'] = $this->language->get('column_action');
+]]>
+      </search>
+      <add><![CDATA[
+                  $data['column_fob_total'] = $this->language->get('column_fob_total');
+]]></add>
+    </operation>
+    <operation error="skip">
+      <search position="before" offset='1' >
+      <![CDATA[$data['heading_title'] = $this->language->get('heading_title');
+      ]]>
+      </search>
+      <add><![CDATA[
+    foreach ($data['orders'] as &$order) {
+      $vendors_fob_totals = $this->model_sale_order->getVendorsFobTotals($order['order_id']);
+      foreach ($vendors_fob_totals as &$product_fob_total) {
+        $product_fob_total['fob_total'] = $this->currency->format($product_fob_total['fob_total'], $product_fob_total['currency_code'], $product_fob_total['currency_value']);
+        $product_fob_total['vendor_url'] = $this->url->link('catalog/vendor/update', 'token='.$this->session->data['token']. '&vendor_id='.$product_fob_total['vendor_id'], 'SSL');
+      }
+      $order['fob_total'] = $vendors_fob_totals;
+    }
+]]></add>
+    </operation>
+</file>
+
+  <file name="admin/model/sale/order.php">
+    <operation error="skip">
+      <search position="before" offset="1">
+        <![CDATA[public function getOrders($data = array()) {
+]]>
+      </search>
+      <add><![CDATA[
+  public function getVendorsFobTotals($order_id){
+    $sql = "SELECT SUM(op.fob_bottle*op.fob_case*op.quantity) as fob_total, op.vendor_id, ov.vendor_name, o.currency_code, o.currency_value FROM ". DB_PREFIX ."order_product op LEFT JOIN ".DB_PREFIX."vendors ov ON op.vendor_id=ov.vendor_id LEFT JOIN ".DB_PREFIX."order o ON op.order_id=o.order_id WHERE op.order_id=".$order_id." GROUP BY op.vendor_id";
+    $query = $this->db->query($sql);
+    return $query->rows;
+  }
+]]></add>
+    </operation>
+  </file>
+</modification>

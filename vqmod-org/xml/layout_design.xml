@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Layout Design</id>
+	<version>2.0.x</version>
+	<vqmver required="true">2.4.0</vqmver>
+	<author>scf8127@gmail.com</author>
+	
+	<file  name="admin/controller/design/layout.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[ $data['text_column_right'] = $this->language->get('text_column_right'); ]]></search>
+			<add><![CDATA[
+				
+			]]></add>
+		</operation>
+	</file>
+	
+	<file  name="admin/controller/design/layout.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[ $data['text_column_right'] = $this->language->get('text_column_right'); ]]></search>
+			<add><![CDATA[
+			/* STRAT*/
+				$data['text_above_header'] = $this->language->get('text_above_header'); 
+				$data['text_above_header_left'] = $this->language->get('text_above_header_left'); 			 
+				$data['text_above_header_right'] = $this->language->get('text_above_header_right'); 
+				$data['text_above_header_promo_left'] = $this->language->get('text_above_header_promo_left'); 			 
+				$data['text_above_header_promo_middle'] = $this->language->get('text_above_header_promo_middle'); 
+				$data['text_above_header_promo_right'] = $this->language->get('text_above_header_promo_right'); 	
+				$data['text_above_header_bottom'] = $this->language->get('text_above_header_bottom'); 	
+				
+				$data['text_below_header'] = $this->language->get('text_below_header'); 
+				$data['text_below_header_left'] = $this->language->get('text_below_header_left'); 			 
+				$data['text_below_header_right'] = $this->language->get('text_below_header_right'); 
+				$data['text_below_header_promo_left'] = $this->language->get('text_below_header_promo_left'); 			 
+				$data['text_below_header_promo_middle'] = $this->language->get('text_below_header_promo_middle'); 
+				$data['text_below_header_promo_right'] = $this->language->get('text_below_header_promo_right'); 	
+				$data['text_below_header_bottom'] = $this->language->get('text_below_header_bottom'); 	
+
+				$data['text_above_product_image'] = $this->language->get('text_above_product_image'); 
+				$data['text_below_product_image'] = $this->language->get('text_below_product_image'); 
+				$data['text_above_product_detail'] = $this->language->get('text_above_product_detail'); 
+				$data['text_center_product_detail'] = $this->language->get('text_center_product_detail'); 
+				$data['text_below_product_detail'] = $this->language->get('text_below_product_detail'); 
+ 
+				
+				$data['text_above_footer'] = $this->language->get('text_above_footer'); 
+				$data['text_above_footer_left'] = $this->language->get('text_above_footer_left'); 			 
+				$data['text_above_footer_right'] = $this->language->get('text_above_footer_right'); 
+				$data['text_above_footer_promo_left'] = $this->language->get('text_above_footer_promo_left'); 			 
+				$data['text_above_footer_promo_middle'] = $this->language->get('text_above_footer_promo_middle'); 
+				$data['text_above_footer_promo_right'] = $this->language->get('text_above_footer_promo_right');
+				$data['text_above_footer_bottom'] = $this->language->get('text_above_footer_bottom');
+
+				
+				$data['text_below_footer'] = $this->language->get('text_below_footer'); 
+				$data['text_below_footer_left'] = $this->language->get('text_below_footer_left'); 			 
+				$data['text_below_footer_right'] = $this->language->get('text_below_footer_right'); 
+				$data['text_below_footer_promo_left'] = $this->language->get('text_below_footer_promo_left'); 			 
+				$data['text_below_footer_promo_middle'] = $this->language->get('text_below_footer_promo_middle'); 
+				$data['text_below_footer_promo_right'] = $this->language->get('text_below_footer_promo_right');
+				$data['text_below_footer_bottom'] = $this->language->get('text_below_footer_bottom');
+			
+			/* END */
+			]]></add>
+		</operation>
+	</file>
+
+	<file  name="admin/language/*/design/layout.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$_['text_column_right']   = 'Column Right';
+]]></search>
+			<add><![CDATA[
+			/* SATRT */
+
+			$_['text_above_header']   				= 'Above Header';
+			$_['text_above_header_left']   			= 'Above Header Left';
+			$_['text_above_header_right']   		= 'Above Header Right';
+			$_['text_above_header_promo_left']   	= 'Above Header Promo Left';
+			$_['text_above_header_promo_middle']   	= 'Above Header Promo Middle';
+			$_['text_above_header_promo_right']   	= 'Above Header Promo Right';
+			$_['text_above_header_bottom']   		= 'Above Header Bottom';
+
+			$_['text_below_header']   				= 'Below Header';
+			$_['text_below_header_left']   			= 'Below Header Left';
+			$_['text_below_header_right']   		= 'Below Header Right';
+			$_['text_below_header_promo_left']   	= 'Below Header Promo Left';
+			$_['text_below_header_promo_middle']   	= 'Below Header Promo Middle';
+			$_['text_below_header_promo_right']   	= 'Below Header Promo Right';
+			$_['text_below_header_bottom']   		= 'Below Header Bottom';
+
+			$_['text_above_content'] 				= 'Above Content';
+			$_['text_above_content_left'] 			= 'Above Content Left';	 
+			$_['text_above_content_right'] 			= 'Above Content Right';
+			$_['text_above_content_promo_left'] 	= 'Above Content Promo Left';	 
+			$_['text_above_content_promo_middle'] 	= 'Above Content Promo Middle';
+			$_['text_above_content_promo_right'] 	= 'Above Content Promo Right';
+			$_['text_above_content_bottom'] 		= 'Above Content Bottom';
+
+			$_['text_below_content'] 				= 'Below Content';
+			$_['text_below_content_left'] 			= 'Below Content Left'; 			 
+			$_['text_below_content_right'] 			= 'Below Content Right';
+			$_['text_below_content_promo_left'] 	= 'Below Content Promo Left';	 
+			$_['text_below_content_promo_middle'] 	= 'Below Content Promo Middle';
+			$_['text_below_content_bottom'] 		= 'Below Content bottom';
+			
+			$_['text_above_product_image'] 			= 'Product Above Image';
+			$_['text_below_product_image'] 			= 'Product Below Image';	 
+			$_['text_above_product_detail'] 		= 'Product Above Details';
+			$_['text_center_product_detail'] 		= 'Product Center Details';
+			$_['text_below_product_detail'] 		= 'Product Below Details';
+			
+			$_['text_above_footer'] 				= 'Above Footer';
+			$_['text_above_footer_left'] 			= 'Above Footer Left';	 
+			$_['text_above_footer_right'] 			= 'Above Footer Right';
+			$_['text_above_footer_promo_left'] 		= 'Above Footer Promo Left';			 
+			$_['text_above_footer_promo_middle'] 	= 'Above Footer Promo Middle';
+			$_['text_above_footer_promo_right'] 	= 'Above Footer Promo Right';
+			$_['text_above_footer_bottom'] 			= 'Above Footer Bottom';
+
+			$_['text_below_footer'] 				= 'Below Footer';
+			$_['text_below_footer_left'] 			= 'Below Footer Left';	 
+			$_['text_below_footer_right'] 			= 'Below Footer Right';
+			$_['text_below_footer_promo_left'] 		= 'Below Footer Promo Left';		 
+			$_['text_below_footer_promo_middle'] 	= 'Below Footer Promo Middle';
+			$_['text_below_footer_promo_right'] 	= 'Below Footer Promo Right';
+			$_['text_below_footer_bottom'] 			= 'Below Footer bottom';
+				
+			/* END */
+			]]></add>
+		</operation>
+	</file>
+	
+	<file  name="admin/view/template/design/layout_form.tpl">
+		<operation error="skip">
+			<search position="after" offset="1"><![CDATA[<option value="column_right"><?php echo $text_column_right; ?></option>]]></search>
+			<add><![CDATA[
+			
+				<!-- START -->
+                    <?php 
+					if ($layout_module['position'] == 'above_header') { ?>
+                    <option value="above_header" selected="selected"><?php echo $text_above_header; ?></option>
+                    <?php } else { ?>
+                    <option value="above_header"><?php echo $text_above_header; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_hd_lt') { ?>
+                    <option value="above_hd_lt" selected="selected"><?php echo $text_above_header_left; ?></option>
+                    <?php } else { ?>
+                    <option value="above_hd_lt"><?php echo $text_above_header_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_hd_rt') { ?>
+                    <option value="above_hd_rt" selected="selected"><?php echo $text_above_header_right; ?></option>
+                    <?php } else { ?>
+                    <option value="above_hd_rt"><?php echo $text_above_header_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_hd_pm_lt') { ?>
+                    <option value="above_hd_pm_lt" selected="selected"><?php echo $text_above_header_promo_left; ?></option>
+                    <?php } else { ?>
+                    <option value="above_hd_pm_lt"><?php echo $text_above_header_promo_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_hd_pm_md') { ?>
+                    <option value="above_hd_pm_md" selected="selected"><?php echo $text_above_header_promo_middle; ?></option>
+                    <?php } else { ?>
+                    <option value="above_hd_pm_md"><?php echo $text_above_header_promo_middle; ?></option>
+                    <?php } ?>	
+					<?php if ($layout_module['position'] == 'above_hd_pm_rt') { ?>
+                    <option value="above_hd_pm_rt" selected="selected"><?php echo $text_above_header_promo_right; ?></option>
+                    <?php } else { ?>
+                    <option value="above_hd_pm_rt"><?php echo $text_above_header_promo_right; ?></option>
+                    <?php } ?>
+                    <?php if ($layout_module['position'] == 'above_hd_btm') { ?>
+                    <option value="above_hd_btm" selected="selected"><?php echo $text_above_header_bottom; ?></option>
+                    <?php } else { ?>
+                    <option value="above_hd_btm"><?php echo $text_above_header_bottom; ?></option>
+                    <?php } ?>	
+					
+				
+                    <?php if ($layout_module['position'] == 'below_header') { ?>
+                    <option value="below_header" selected="selected"><?php echo $text_below_header; ?></option>
+                    <?php } else { ?>
+                    <option value="below_header"><?php echo $text_below_header; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_hd_lt') { ?>
+                    <option value="below_hd_lt" selected="selected"><?php echo $text_below_header_left; ?></option>
+                    <?php } else { ?>
+                    <option value="below_hd_lt"><?php echo $text_below_header_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_hd_rt') { ?>
+                    <option value="below_hd_rt" selected="selected"><?php echo $text_below_header_right; ?></option>
+                    <?php } else { ?>
+                    <option value="below_hd_rt"><?php echo $text_below_header_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_hd_pm_lt') { ?>
+                    <option value="below_hd_pm_lt" selected="selected"><?php echo $text_below_header_promo_left; ?></option>
+                    <?php } else { ?>
+                    <option value="below_hd_pm_lt"><?php echo $text_below_header_promo_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_hd_pm_md') { ?>
+                    <option value="below_hd_pm_md" selected="selected"><?php echo $text_below_header_promo_middle; ?></option>
+                    <?php } else { ?>
+                    <option value="below_hd_pm_md"><?php echo $text_below_header_promo_middle; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_hd_pm_rt') { ?>
+                    <option value="below_hd_pm_rt" selected="selected"><?php echo $text_below_header_promo_right; ?></option>
+                    <?php } else { ?>
+                    <option value="below_hd_pm_rt"><?php echo $text_below_header_promo_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_hd_btm') { ?>
+                    <option value="below_hd_btm" selected="selected"><?php echo $text_below_header_bottom; ?></option>
+                    <?php } else { ?>
+                    <option value="below_hd_btm"><?php echo $text_below_header_bottom; ?></option>
+                    <?php } ?>						
+
+					
+                    <?php /*if ($layout_module['position'] == 'above_content') { ?>
+                    <option value="above_content" selected="selected"><?php echo $text_above_content; ?></option>
+                    <?php } else { ?>
+                    <option value="above_content"><?php echo $text_above_content; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_cnt_lt') { ?>
+                    <option value="above_cnt_lt" selected="selected"><?php echo $text_above_content_left; ?></option>
+                    <?php } else { ?>
+                    <option value="above_cnt_lt"><?php echo $text_above_content_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_cnt_rt') { ?>
+                    <option value="above_cnt_rt" selected="selected"><?php echo $text_above_content_right; ?></option>
+                    <?php } else { ?>
+                    <option value="above_cnt_rt"><?php echo $text_above_content_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'abv_cnt_pt_lt') { ?>
+                    <option value="abv_cnt_pt_lt" selected="selected"><?php echo $text_above_content_promo_left; ?></option>
+                    <?php } else { ?>
+                    <option value="abv_cnt_pt_lt"><?php echo $text_above_content_promo_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'abv_cnt_pt_md') { ?>
+                    <option value="abv_cnt_pt_md" selected="selected"><?php echo $text_above_content_promo_middle; ?></option>
+                    <?php } else { ?>
+                    <option value="abv_cnt_pt_md"><?php echo $text_above_content_promo_middle; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'abv_cnt_pt_rt') { ?>
+                    <option value="abv_cnt_pt_rt" selected="selected"><?php echo $text_above_content_promo_right; ?></option>
+                    <?php } else { ?>
+                    <option value="abv_cnt_pt_rt"><?php echo $text_above_content_promo_right; ?></option>
+                    <?php } ?>	
+					
+					
+                    <?php if ($layout_module['position'] == 'below_content') { ?>
+                    <option value="below_content" selected="selected"><?php echo $text_below_content; ?></option>
+                    <?php } else { ?>
+                    <option value="below_content"><?php echo $text_below_content; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_cnt_lt') { ?>
+                    <option value="below_cnt_lt" selected="selected"><?php echo $text_below_content_left; ?></option>
+                    <?php } else { ?>
+                    <option value="below_cnt_lt"><?php echo $text_below_content_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_cnt_rt') { ?>
+                    <option value="below_cnt_rt" selected="selected"><?php echo $text_below_content_right; ?></option>
+                    <?php } else { ?>
+                    <option value="below_cnt_rt"><?php echo $text_below_content_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_cnt_pm_lt') { ?>
+                    <option value="blw_cnt_pm_lt" selected="selected"><?php echo $text_below_content_promo_left; ?></option>
+                    <?php } else { ?>
+                    <option value="blw_cnt_pm_lt"><?php echo $text_below_content_promo_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'blw_cnt_pm_md') { ?>
+                    <option value="blw_cnt_pm_md" selected="selected"><?php echo $text_below_content_promo_middle; ?></option>
+                    <?php } else { ?>
+                    <option value="blw_cnt_pm_md"><?php echo $text_below_content_promo_middle; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'blw_cnt_pm_rt') { ?>
+                    <option value="blw_cnt_pm_rt" selected="selected"><?php echo $text_below_content_promo_right; ?></option>
+                    <?php } else { ?>
+                    <option value="blw_cnt_pm_rt"><?php echo $text_below_content_promo_right; ?></option>
+                    <?php }*/ ?>	
+					
+
+                    <?php if ($layout_module['position'] == 'abv_prd_img') { ?>
+                    <option value="abv_prd_img" selected="selected"><?php echo $text_above_product_image; ?></option>
+                    <?php } else { ?>
+                    <option value="abv_prd_img"><?php echo $text_above_product_image; ?></option>
+                    <?php } ?>		
+                    <?php if ($layout_module['position'] == 'blw_prd_img') { ?>
+                    <option value="blw_prd_img" selected="selected"><?php echo $text_below_product_image; ?></option>
+                    <?php } else { ?>
+                    <option value="blw_prd_img"><?php echo $text_below_product_image; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'abv_prd_dtl') { ?>
+                    <option value="abv_prd_dtl" selected="selected"><?php echo $text_above_product_detail; ?></option>
+                    <?php } else { ?>
+                    <option value="abv_prd_dtl"><?php echo $text_above_product_detail; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'cntr_prd_dtl') { ?>
+                    <option value="cntr_prd_dtl" selected="selected"><?php echo $text_center_product_detail; ?></option>
+                    <?php } else { ?>
+                    <option value="cntr_prd_dtl"><?php echo $text_center_product_detail; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'blw_prd_dtl') { ?>
+                    <option value="blw_prd_dtl" selected="selected"><?php echo $text_below_product_detail; ?></option>
+                    <?php } else { ?>
+                    <option value="blw_prd_dtl"><?php echo $text_below_product_detail; ?></option>
+                    <?php } ?>						
+					
+					
+                    <?php if ($layout_module['position'] == 'above_footer') { ?>
+                    <option value="above_footer" selected="selected"><?php echo $text_above_footer; ?></option>
+                    <?php } else { ?>
+                    <option value="above_footer"><?php echo $text_above_footer; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_ft_lt') { ?>
+                    <option value="above_ft_lt" selected="selected"><?php echo $text_above_footer_left; ?></option>
+                    <?php } else { ?>
+                    <option value="above_ft_lt"><?php echo $text_above_footer_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_ft_rt') { ?>
+                    <option value="above_ft_rt" selected="selected"><?php echo $text_above_footer_right; ?></option>
+                    <?php } else { ?>
+                    <option value="above_ft_rt"><?php echo $text_above_footer_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_ft_pm_lt') { ?>
+                    <option value="above_ft_pm_lt" selected="selected"><?php echo $text_above_footer_promo_left; ?></option>
+                    <?php } else { ?>
+                    <option value="above_ft_pm_lt"><?php echo $text_above_footer_promo_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_ft_pm_md') { ?>
+                    <option value="above_ft_pm_md" selected="selected"><?php echo $text_above_footer_promo_middle; ?></option>
+                    <?php } else { ?>
+                    <option value="above_ft_pm_md"><?php echo $text_above_footer_promo_middle; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_ft_pm_rt') { ?>
+                    <option value="above_ft_pm_rt" selected="selected"><?php echo $text_above_footer_promo_right; ?></option>
+                    <?php } else { ?>
+                    <option value="above_ft_pm_rt"><?php echo $text_above_footer_promo_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'above_ft_btm') { ?>
+                    <option value="above_ft_btm" selected="selected"><?php echo $text_above_footer_bottom; ?></option>
+                    <?php } else { ?>
+                    <option value="above_ft_btm"><?php echo $text_above_footer_bottom; ?></option>
+                    <?php } ?>						
+					
+                    <?php if ($layout_module['position'] == 'below_footer') { ?>
+                    <option value="below_footer" selected="selected"><?php echo $text_below_footer; ?></option>
+                    <?php } else { ?>
+                    <option value="below_footer"><?php echo $text_below_footer; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_ft_lt') { ?>
+                    <option value="below_ft_lt" selected="selected"><?php echo $text_below_footer_left; ?></option>
+                    <?php } else { ?>
+                    <option value="below_ft_lt"><?php echo $text_below_footer_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_ft_rt') { ?>
+                    <option value="below_ft_rt" selected="selected"><?php echo $text_below_footer_right; ?></option>
+                    <?php } else { ?>
+                    <option value="below_ft_rt"><?php echo $text_below_footer_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_ft_pm_lt') { ?>
+                    <option value="below_ft_pm_lt" selected="selected"><?php echo $text_below_footer_promo_left; ?></option>
+                    <?php } else { ?>
+                    <option value="below_ft_pm_lt"><?php echo $text_below_footer_promo_left; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_ft_pm_md') { ?>
+                    <option value="below_ft_pm_md" selected="selected"><?php echo $text_below_footer_promo_middle; ?></option>
+                    <?php } else { ?>
+                    <option value="below_ft_pm_md"><?php echo $text_below_footer_promo_middle; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_ft_pm_rt') { ?>
+                    <option value="below_ft_pm_rt" selected="selected"><?php echo $text_below_footer_promo_right; ?></option>
+                    <?php } else { ?>
+                    <option value="below_ft_pm_rt"><?php echo $text_below_footer_promo_right; ?></option>
+                    <?php } ?>	
+                    <?php if ($layout_module['position'] == 'below_ft_btm') { ?>
+                    <option value="below_ft_btm" selected="selected"><?php echo $text_below_footer_bottom; ?></option>
+                    <?php } else { ?>
+                    <option value="below_ft_btm"><?php echo $text_below_footer_bottom; ?></option>
+                    <?php } ?>	
+					
+				<!-- END -->
+			]]></add>
+		</operation>
+		
+		<operation error="skip">
+			<search position="after"><![CDATA[    html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+]]></search>
+			<add><![CDATA[
+			
+				/* START */
+				    html += '    <option value="above_header"><?php echo $text_above_header; ?></option>';
+				    html += '    <option value="above_hd_lt"><?php echo $text_above_header_left; ?></option>';
+				    html += '    <option value="above_hd_rt"><?php echo $text_above_header_right; ?></option>';
+				    html += '    <option value="above_hd_pm_lt"><?php echo $text_above_header_promo_left; ?></option>';
+				    html += '    <option value="above_hd_pm_md"><?php echo $text_above_header_promo_middle; ?></option>';
+				    html += '    <option value="above_hd_pm_rt"><?php echo $text_above_header_promo_right; ?></option>';
+				    html += '    <option value="above_hd_btm"><?php echo $text_above_header_bottom; ?></option>';
+					
+
+                    html += '    <option value="below_header"><?php echo $text_below_header; ?></option>';
+                    html += '    <option value="below_hd_lt"><?php echo $text_below_header_left; ?></option>';
+                    html += '    <option value="below_hd_rt"><?php echo $text_below_header_right; ?></option>';
+                    html += '    <option value="below_hd_pm_lt"><?php echo $text_below_header_promo_left; ?></option>';
+                    html += '    <option value="below_hd_pm_md"><?php echo $text_below_header_promo_middle; ?></option>';
+                    html += '    <option value="below_hd_pm_rt"><?php echo $text_below_header_promo_right; ?></option>';
+                    html += '    <option value="below_hd_btm"><?php echo $text_below_header_bottom; ?></option>';
+
+					
+                    /*html += '    <option value="above_content"><?php echo $text_above_content; ?></option>';
+                    html += '    <option value="above_cnt_lt"><?php echo $text_above_content_left; ?></option>';
+                    html += '    <option value="above_cnt_rt"><?php echo $text_above_content_right; ?></option>';
+                    html += '    <option value="abv_cnt_pm_lt"><?php echo $text_above_content_promo_left; ?></option>';
+                    html += '    <option value="abv_cnt_pm_md"><?php echo $text_above_content_promo_middle; ?></option>';
+                    html += '    <option value="abv_cnt_pm_rt"><?php echo $text_above_content_promo_right; ?></option>';
+                    html += '    <option value="abv_cnt_btm"><?php echo $text_above_content_bottom; ?></option>';
+
+					
+                    html += '    <option value="below_content"><?php echo $text_below_content; ?></option>';
+                    html += '    <option value="below_cnt_lt"><?php echo $text_below_content_left; ?></option>';
+                    html += '    <option value="below_cnt_rt"><?php echo $text_below_content_right; ?></option>';
+                    html += '    <option value="blw_cnt_pm_lt"><?php echo $text_below_content_promo_left; ?></option>';
+                    html += '    <option value="blw_cnt_pm_md"><?php echo $text_below_content_promo_middle; ?></option>';
+                    html += '    <option value="blw_cnt_pm_rt"><?php echo $text_below_content_promo_right; ?></option>';
+                    html += '    <option value="blw_cnt_btm"><?php echo $text_below_content_bottom; ?></option>';*/
+
+                    html += '    <option value="abv_prd_img"><?php echo $text_above_product_image; ?></option>';
+                    html += '    <option value="blw_prd_img"><?php echo $text_below_product_image; ?></option>';
+                    html += '    <option value="abv_prd_dtl"><?php echo $text_above_product_detail; ?></option>';
+                    html += '    <option value="cntr_prd_dtl"><?php echo $text_center_product_detail; ?></option>';
+                    html += '    <option value="blw_prd_dtl"><?php echo $text_below_product_detail; ?></option>';
+
+					
+                    html += '    <option value="above_footer"><?php echo $text_above_footer; ?></option>';
+                    html += '    <option value="above_ft_lt"><?php echo $text_above_footer_left; ?></option>';
+                    html += '    <option value="above_ft_rt"><?php echo $text_above_footer_right; ?></option>';
+                    html += '    <option value="above_ft_pm_lt"><?php echo $text_above_footer_promo_left; ?></option>';
+                    html += '    <option value="above_ft_pm_md"><?php echo $text_above_footer_promo_middle; ?></option>';
+                    html += '    <option value="above_ft_pm_rt"><?php echo $text_above_footer_promo_right; ?></option>';
+                    html += '    <option value="above_ft_btm"><?php echo $text_above_footer_bottom; ?></option>';
+
+
+					
+                    html += '    <option value="below_footer"><?php echo $text_below_footer; ?></option>';
+                    html += '    <option value="below_ft_lt"><?php echo $text_below_footer_left; ?></option>';
+                    html += '    <option value="below_ft_rt"><?php echo $text_below_footer_right; ?></option>';
+                    html += '    <option value="below_ft_pm_lt"><?php echo $text_below_footer_promo_left; ?></option>';
+                    html += '    <option value="below_ft_pm_md"><?php echo $text_below_footer_promo_middle; ?></option>';
+                    html += '    <option value="below_ft_pm_rt"><?php echo $text_below_footer_promo_right; ?></option>';
+                    html += '    <option value="below_ft_btm"><?php echo $text_below_footer_bottom; ?></option>';
+
+				/* END */
+			]]></add>
+		</operation>		
+	</file>	
+	
+	<file  name="catalog/controller/common/header.php">
+		<operation error="skip">
+			<search position="after" offset="1"><![CDATA[		$data['cart'] = $this->load->controller('common/cart');
+]]></search>
+			<add><![CDATA[		
+		
+			/* START */
+			$layout_positions = $this->load->controller('common/layout_header/layoutPositions');
+
+			foreach($layout_positions as $position){
+				$data[$position] = $this->load->controller('common/layout_header/index', $position);
+			}
+			/* END */
+			
+			
+			]]></add>
+		</operation>
+	</file>	
+	
+	<file  name="catalog/view/theme/*/template/common/header.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[<body class="<?php echo $class; ?>">]]></search>
+			<add><![CDATA[
+				<?php echo $above_header; ?>
+				<div class="container"><div class="row"><?php echo $above_hd_lt; ?><?php echo $above_hd_rt; ?></div></div>
+				<div class="container"><div class="row"><?php echo $above_hd_pm_lt; ?><?php echo $above_hd_pm_md; ?><?php echo $above_hd_pm_rt; ?></div></div>
+				<?php echo $above_hd_btm; ?>
+				
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after" offset="31"><![CDATA[<?php if ($categories) { ?>]]></search>
+			<add><![CDATA[
+				<?php echo $below_header; ?>
+				<div class="container"><div class="row"><?php echo $below_hd_lt; ?><?php echo $below_hd_rt; ?></div></div>
+				<div class="container"><div class="row"><?php echo $below_hd_pm_lt; ?><?php echo $below_hd_pm_md; ?><?php echo $below_hd_pm_rt; ?></div></div>
+				<?php echo $below_hd_btm; ?>
+			]]></add>
+		</operation>		
+	</file>
+
+	<file  name="catalog/controller/*/*.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['footer'] = $this->load->controller('common/footer');]]></search>
+			<add><![CDATA[		
+
+			/* START */
+			$layout_positions = $this->load->controller('common/layout_footer/layoutPositions');
+
+			foreach($layout_positions as $position){
+				$data[$position] = $this->load->controller('common/layout_footer/index', $position);
+			}
+			/* END */
+			
+			
+			]]></add>
+		</operation>
+	</file>
+	<file  name="catalog/controller/common/footer.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['contact'] = $this->url->link('information/contact');]]></search>
+			<add><![CDATA[		
+
+			/* START */
+			$layout_positions = $this->load->controller('common/layout_footer/layoutPositions');
+
+			foreach($layout_positions as $position){
+				$data[$position] = $this->load->controller('common/layout_footer/index', $position);
+			}
+			/* END */
+			
+			
+			]]></add>
+		</operation>
+	</file>	
+	
+	<file name="catalog/view/theme/*/template/product/category.tpl">
+		<operation error="skip">
+			<search position="before" offset="1"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[
+				<?php echo $above_footer; ?>
+				<div class="container" style="padding-left:15px; padding-right:15px;"><div class="row"><?php echo $above_ft_lt; ?><?php echo $above_ft_rt; ?></div></div>
+				<div class="container" style="padding-left:15px; padding-right:15px;"><div class="row"><?php echo $above_ft_pm_lt; ?><?php echo $above_ft_pm_md; ?><?php echo $above_ft_pm_rt; ?></div></div>
+				<?php echo $above_ft_btm; ?>
+			]]></add>
+		</operation>
+	</file>
+	<file  name="catalog/view/theme/*/template/common/footer.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[</body>]]></search>
+			<add><![CDATA[
+				<?php echo $below_footer; ?>
+				<div class="container"><div class="row"><?php echo $below_ft_lt; ?><?php echo $below_ft_rt; ?></div></div>
+				<div class="container"><div class="row"><?php echo $below_ft_pm_lt; ?><?php echo $below_ft_pm_md; ?><?php echo $below_ft_pm_rt; ?></div></div>
+				<?php echo $below_ft_btm; ?>
+			]]></add>
+		</operation>		
+	</file>	
+
+	<file  name="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+			<add><![CDATA[
+			
+			/* START */
+			$layout_positions = $this->load->controller('common/layout_product/layoutPositions');
+
+			foreach($layout_positions as $position){
+				$data[$position] = $this->load->controller('common/layout_product/index', $position);
+			}
+			/* END */
+			
+			
+			]]></add>
+		</operation>
+	</file>		
+	
+	<file  name="catalog/view/theme/*/template/product/product.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<?php if ($thumb || $images) { ?>]]></search>
+			<add><![CDATA[		
+				<?php echo $abv_prd_img;?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after" offset="5"><![CDATA[<?php echo $text_login; ?>]]></search>
+			<add><![CDATA[		
+				<?php echo $blw_prd_img;?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before" offset="2"><![CDATA[<button type="button" data-toggle="tooltip" class="btn btn-default" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="fa fa-heart"></i></button>]]></search>
+			<add><![CDATA[		
+				<?php echo $abv_prd_dtl;?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[ <?php if ($price) { ?>]]></search>
+			<add><![CDATA[		
+				<?php echo $cntr_prd_dtl;?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after"><![CDATA[<!-- AddThis Button END -->]]></search>
+			<add><![CDATA[		
+				<?php echo $blw_prd_dtl;?>
+			]]></add>
+		</operation>		
+	</file>			
+</modification>

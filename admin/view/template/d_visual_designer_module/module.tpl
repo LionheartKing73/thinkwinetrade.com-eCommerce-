@@ -1,0 +1,1 @@
+<div><label><?php echo $entry_module; ?></label> -  <?php echo $name; ?></div>

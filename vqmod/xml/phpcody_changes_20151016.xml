@@ -1,0 +1,40 @@
+<modification>
+    <id>Vendor / Admin Customization</id>
+    <version>1.0</version>
+    <vqmver>2.5.1</vqmver>
+    <author>Saumil Bhatt ( PHPCody )</author>
+    <email>info@phpcody.net</email>
+    <website>http://thinkwinetrade.com</website> 
+    
+    <!--Edit Vendor creation-->
+    <file name="admin/controller/catalog/vendor.php">
+        <operation error="log">
+            <search position="after">
+                <![CDATA['status'            => $status,]]>
+            </search>
+            <add>
+                <![CDATA['company_id'         => $result['company_id'],]]>
+            </add>
+        </operation>
+        
+    </file>
+    <file name="admin/view/template/catalog/vendor_list.tpl">
+        <operation error="log">
+            <search position="before">
+                <![CDATA[<td class="text-left"><?php echo $vendor['commission']; ?></td>]]>
+            </search>
+            <add>
+                <![CDATA[<td class="text-left"><?php echo $vendor['company_id']; ?></td>]]>
+            </add>
+        </operation>
+        <operation error="log">
+            <search position="before">
+                <![CDATA[<td class="text-left"><?php if ($sort == 'commission') { ?>]]>
+            </search>
+            <add>
+                <![CDATA[<td class="text-left"><?php echo $column_company_id; ?></td>]]>
+            </add>
+        </operation>
+        
+    </file>
+</modification>

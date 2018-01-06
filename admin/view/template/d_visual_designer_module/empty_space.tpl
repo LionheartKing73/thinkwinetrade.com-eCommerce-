@@ -1,0 +1,1 @@
+<div><label><?php echo $entry_height; ?></label> - <?php echo $setting['height']; ?></div>

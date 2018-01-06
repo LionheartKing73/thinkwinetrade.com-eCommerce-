@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <code>modal_position</code>
+    <name>Easy and simple Modal position</name>
+    <version>1.0</version>
+    <author>Luis Fernando Sacchi Ribeiro</author>
+    <file path="admin/controller/design/layout.php">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+				$data['text_column_right'] = $this->language->get('text_column_right');
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+				$data['text_modal'] = $this->language->get('text_modal');
+            ]]></add>
+        </operation>
+    </file>
+	
+	<file path="admin/language/*/design/layout.php">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+				$_['text_column_right']   = 'Column Right';
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+				$_['text_modal']   		  = 'Modal';
+            ]]></add>
+        </operation>
+    </file>
+	
+    <file path="admin/view/template/design/layout_form.tpl">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+                    <option value="column_right"><?php echo $text_column_right; ?></option>
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+                    <?php } ?>
+                    <?php if ($layout_module['position'] == 'modal') { ?>
+                    <option value="modal" selected="selected"><?php echo $text_modal; ?></option>
+                    <?php } else { ?>
+                    <option value="modal"><?php echo $text_modal; ?></option>
+            ]]></add>
+        </operation>
+    </file>
+	
+    <file path="admin/view/template/design/layout_form.tpl">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+				html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+				html += '    <option value="modal"><?php echo $text_modal; ?></option>';
+            ]]></add>
+        </operation>
+    </file>
+	
+    <file path="catalog/controller/common/footer.php">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+				$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+				$data['modal'] = $this->load->controller('common/modal');
+            ]]></add>
+        </operation>
+    </file>
+	
+    <file path="catalog/view/theme/*/template/common/footer.tpl">
+        <operation>
+            <search trim="true" index="0"><![CDATA[
+				</footer>
+            ]]></search>
+            <add position="after" trim="false" offset="0"><![CDATA[
+				<?php echo $modal; ?>
+            ]]></add>
+        </operation>
+    </file>
+	
+</modification>

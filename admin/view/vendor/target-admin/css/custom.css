@@ -1,0 +1,73 @@
+.account-logo{padding-top: 16px;background-color: transparent;}
+.account-logo::after{border-top-color: #D4D4D4;}
+.account-bg .form-control{font-size:14px;}
+.account-bg .account-body-title {
+    font-size: 24px;
+}
+
+body.account-bg{font-size:14px;}
+
+.account-bg .checkbox-inline  input[type="checkbox"]{position: absolute;}
+
+select.form-control, textarea.form-control, input[type="text"].form-control, input[type="password"].form-control, input[type="datetime"].form-control, input[type="datetime-local"].form-control, input[type="date"].form-control, input[type="month"].form-control, input[type="time"].form-control, input[type="week"].form-control, input[type="number"].form-control, input[type="email"].form-control, input[type="url"].form-control, input[type="search"].form-control, input[type="tel"].form-control, input[type="color"].form-control{font-size: 14px;}
+.account-bg .form-control, h5 {
+    font-size: 14px;
+}
+
+.form-group.required {
+    position: relative;
+}
+.note-required{
+    color:#f00;
+    position: absolute;
+    top: 0;
+    left: -10px;
+}
+.td a {color:inherit important;}
+.signup footer#footer {
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+    color: #666;
+    height: 100px;
+    position: initial;
+}
+
+.account-bg .navbar-header{width:100%}
+
+.welcome-title{padding: 0;    width: 90%;}
+.welcome-title>li{width:100%;}
+.header-title {
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+}
+#cual_admin_language_id {
+    margin-top: 12px;
+}
+
+ul.nav.navbar-nav.select-lang {
+    position: absolute;
+    right: 0;
+    top: 0px;
+}
+.account-bg.signup ul.nav.navbar-nav.select-lang{right: 75px;    top: 10px;}
+@media (max-width: 767px) {
+    ul.nav.navbar-nav.select-lang {
+        position: initial;
+    }
+}
+@media (max-width: 500px) {
+    .header-title {font-size: 16px;}
+    .welcome-title{width: 100%;}
+    #cual_admin_language_id{width: 50%;
+    margin: 0 auto;}
+    .select-lang{text-align:center;}
+    .select-lang .pull-right{float: none!important;}
+    .account-bg.signup .select-lang .open .dropdown-menu.language-menu{
+        position: absolute;
+        background-color: #fff;
+        color: #666;
+    }
+    .account-bg.signup .select-lang .open .dropdown-menu.language-menu>li>a{color:#333;}
+}

@@ -1,0 +1,58 @@
+.navbar .navbar-nav > li > a ,.navbar .navbar-nav > li > form{padding: 10px 15px;}
+.navbar-header>a{padding-top: 10px;}
+ul.nav.navbar-nav.noticebar > li >a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+        color: white;
+}
+
+.mainbar .mainbar-nav #stats{display: block;margin: 0}
+#content.vdi_dashboard{background-color: #FDFDFD;}
+h3,.row-stat-value {
+    font-size: 24px;
+}
+.btn-primary.blue{
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+
+.navbar-profile-avatar{
+    width: 45px;
+    border-radius: 50%;
+}
+
+.mainbar .welcome-info{    margin: 0!important; padding: 10px;}
+.mainbar  .navbar-nav.welcome-info li {
+    float: none;
+    text-align: right;
+    font-size: 12px;
+    color: #5394CD;
+}
+#tab-history fieldset form.form-horizontal{
+    display: inline-block;
+    width: 100%;
+}
+@media (min-width: 768px){
+    .mainbar .mainbar-nav{float:left;}
+    .navbar>.container .navbar-brand.navbar-brand-image{margin-left: 0;}
+    .navbar .navbar-nav > .navbar-profile > a{padding-right: 0}
+}
+
+@media (max-width: 768px){
+    .navbar-profile .dropdown-menu > li > a{
+        color: #333;
+    }
+}
+
+
+@media (max-width: 500px) {
+    ul.nav.navbar-nav.noticebar > li >a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+ul.noticebar-menu li:nth-child(2)
+{
+display:none;
+}

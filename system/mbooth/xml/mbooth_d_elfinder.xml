@@ -1,0 +1,30 @@
+<extension>
+    <id>d_elfinder</id>
+    <name>Elfinder</name>
+    <description>Elfinder</description>
+    <type>module</type>
+    <version>1.0.0</version>
+	<opencart_version>2.0.0.0,2.0.1.0,2.0.1.1,2.0.2.0</opencart_version>
+    <mbooth_version>3.2</mbooth_version>
+    <author>Dreamvention</author>
+    <files>
+		<file>system/mbooth/xml/mbooth_d_elfinder.xml</file>
+		<file>system/mbooth/extension/d_elfinder.json</file>
+				
+		<file>admin/controller/common/d_elfinder.php</file>
+		<file>admin/view/template/common/d_elfinder.tpl</file>
+	</files>
+	<dirs>
+		<dir>system/library/d_elfinder</dir>
+		
+		<dir>admin/view/image/d_elfinder</dir>
+		<dir>admin/view/stylesheet/d_elfinder</dir>
+		<dir>admin/view/javascript/d_elfinder</dir>
+	</dirs>
+	<required>
+        <require version="2.1.0">shopunity</require>
+    </required>
+	<updates>
+        <update version="2.0"></update>
+    </updates>
+</extension>

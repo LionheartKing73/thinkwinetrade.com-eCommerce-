@@ -1,0 +1,84 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      <?php if ($informations) { ?>
+      <div class="col-sm-3">
+        <h5>Infos Viticulteurs</h5>
+        <ul class="list-unstyled">
+         
+          <li><a href="https://www.thinkwinetrade.com/index.php?route=account/signup/popup" target="_blank"">Connexion Partenaires</a> </li>
+          <li> <a href="https://www.thinkwinetrade.com/le-march%C3%A9-de-hong-kong" target="">Le Marché de Hong Kong</a></li>
+           <li> <a href="https://www.thinkwinetrade.com/blog/category/info-viticulteurs/" target="_blank">Documentation</a></li>
+            <li> <a href="https://www.thinkwinetrade.com/Questions-Fr%C3%A9quentes-FAQs" target="_blank">Questions Fréquentes FAQs</a> </li>
+             <li> <a href="https://www.thinkwinetrade.com/admin/" target="_blank">Connexion Viticulteurs</a></li>
+              <li> <a href="https://www.thinkwinetrade.com/index.php?route=account/signup/popup" target="_blank">Inscription Viticulteurs</a></li>
+               
+         
+        </ul>
+      </div>
+      <?php } ?>
+      <div class="col-sm-3">
+        <h5>Hong Kong Buyers</h5>
+        <ul class="list-unstyled">
+          <li><a href="https://www.thinkwinetrade.com/about-us" target="" style="outline: 0px;">About Us</a></li>
+          <li><a href="https://www.thinkwinetrade.com/Our-Concept" target="">Understand Our Concept</a></li>
+          <li><a href="https://www.thinkwinetrade.com/pallet-shipping-pricing" target="">See Our Pallet Pricing</a></li>
+           <li><a href="https://www.thinkwinetrade.com/faqs-delivery-information" target="">FAQs &amp; Delivery</a> </li>
+           <li> <a href="https://www.thinkwinetrade.com/index.php?route=account/newsletter" target="_blank">Newsletter</a></li>
+           <li> <a href="https://www.thinkwinetrade.com/index.php?route=account/account" target="_blank">My Account</a></li>
+           <li><a href="https://www.thinkwinetrade.com/index.php?route=account/order" target="_blank">Order History</a> </li>
+           <li> <a href="https://www.searates.com/logistic-maps/" target="_blank">Tracking via Searates.com      </a></li>
+          
+          
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h5>Sitemap</h5>
+        <ul class="list-unstyled">
+          <li><a href="https://www.searates.com/logistic-maps/" target="_blank" style="outline: 0px;">Invest Thinkwinetrade.com</a> </li>
+          <li> <a href="https://www.thinkwinetrade.com/blog/rating-reviews/" target="_blank">Rating &amp; Reviews</a> </li>
+           <li> <a href="https://www.searates.com/logistic-maps/" target="_blank">Meet Our Winemakers</a> </li>
+            <li> <a href="https://www.searates.com/logistic-maps/" target="_blank">By The Glass</a> </li>
+             <li> <a href="https://www.thinkwinetrade.com/blog/terms-of-sales/" target="_blank">Terms of Sales</a> </li>
+              <li> <a href="https://www.thinkwinetrade.com/blog/privacy-policy/" target="_blank">Privacy Policy</a></li>
+               
+                  
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h5>Reach Us</h5>
+        <p><span style="background-color: transparent; color: rgb(156, 156, 148);">Mon-Sat 9AM-8PM, UTC+1</span><br></p>
+        <p><span style="color: rgb(156, 156, 148);">sales@thinkwinetrade.com</span></p>
+        <p><span style="color: rgb(156, 156, 148);">Skype: Thinkwinetrade</span></p>
+        <p><span style="color: rgb(156, 156, 148);">Tel/Whatsapp/Line</span></p>
+        <p><span style="color: rgb(156, 156, 148);">+33 6 58 12 70 06</span></p>
+        
+        <ul class="social-icons list-inline">
+        <li> <a href="#"><img src="https://www.thinkwinetrade.com/image/catalog/0Admin/Banner/Footer%20social%20icons/instagram-24grey.png" style="color: rgb(102, 102, 102);"> </a> </li>
+          <li> <a href="#"><img src="https://www.thinkwinetrade.com/image/catalog/0Admin/Banner/Footer%20social%20icons/facebook-24grey.png" style="color: rgb(102, 102, 102);"> </a> </li>
+            <li> <a href="#"> <img src="https://www.thinkwinetrade.com/image/catalog/0Admin/Banner/Footer%20social%20icons/linkedin-32grey.png" style="color: rgb(102, 102, 102);"></a> </li>
+              <li> <a href="#"> <img src="https://www.thinkwinetrade.com/image/catalog/0Admin/Banner/Footer%20social%20icons/twitter-24grey.png" style="color: rgb(102, 102, 102);"> <img src="https://www.thinkwinetrade.com/image/catalog/0Admin/Banner/Footer%20social%20icons/youtube-clear.png" style="color: rgb(102, 102, 102); width: 39.4089px; height: 40px;"></a> </li>
+               
+        
+        </ul>
+      </div>
+    </div>
+    <hr>
+      <div class="container">
+    <div class="row">
+     <div class="bottom-footer">
+     <img src="./image/demo-img/copyright.png">
+     </div>
+    </div> </div>
+    <p><?php echo $powered; ?></p> 
+  </div>
+</footer>
+
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+
+<!-- Theme created by Welford Media for OpenCart 2.0 www.welfordmedia.co.uk -->
+
+</body></html>

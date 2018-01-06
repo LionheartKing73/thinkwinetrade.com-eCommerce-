@@ -1,0 +1,140 @@
+---------- Date: 2017-01-12 12:18:30 ~ IP : 92.149.100.202 ----------
+REQUEST URI : /index.php?route=common/home
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 12:20:10 ~ IP : 92.149.100.202 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=21b9121132de4fb009f717c0a1fd00a3
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 12:20:14 ~ IP : 92.149.100.202 ----------
+REQUEST URI : /index.php?route=account/account
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 12:21:12 ~ IP : 163.172.65.31 ----------
+REQUEST URI : /IGP-Var-Ros%C3%A9
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 16:48:34 ~ IP : 146.52.191.131 ----------
+REQUEST URI : /Clamens-Caract%C3%A8res-2014
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 16:49:28 ~ IP : 92.149.233.69 ----------
+REQUEST URI : /admin/index.php?route=extension/modification&token=d1eae553af7b8620ad0e2e650e36f19d
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/admin_buttons.xml
+   id        : Admin shortcut buttons
+   version   : 2.0
+   vqmver    : 2.5.1
+   author    : ----
+
+File Name    : admin/controller/*/*.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['footer'] = $this->load->controller('common/footer');
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 16:49:29 ~ IP : 146.52.191.131 ----------
+REQUEST URI : /Grand-Vin-du-Ch%C3%A2teau-Lesparre-2012-BIO
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 header-logo">
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): <div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 16:49:36 ~ IP : 146.52.191.131 ----------
+REQUEST URI : /Hautes-C%C3%B4tes-de-Beaune-Red-2013
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/pallet_worksheet.vqmod.xml
+   id        : Pallet Worksheet
+   version   : 1.1
+   vqmver    : 2.5.1
+   author    : tomzu
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(5)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-01-12 16:51:07 ~ IP : 92.149.233.69 ----------
+REQUEST URI : /admin/index.php?route=catalog/vendor&token=d1eae553af7b8620ad0e2e650e36f19d
+MOD DETAILS:
+   modFile   : /srv/www/thinkwinetrade.com/vqmod/xml/phpcody_changes_20151016.xml
+   id        : Vendor / Admin Customization
+   version   : 1.0
+   vqmver    : 2.5.1
+   author    : Saumil Bhatt ( PHPCody )
+
+File Name    : admin/controller/catalog/vendor.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): 'status'            => $status,
+----------------------------------------------------------------------
+
+

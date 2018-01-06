@@ -1,0 +1,24 @@
+.vd-button-container.vd-button-align-left {
+  display: flex;
+  justify-content: flex-start; }
+.vd-button-container.vd-button-align-center {
+  display: flex;
+  justify-content: center; }
+.vd-button-container.vd-button-align-right {
+  display: flex;
+  justify-content: flex-end; }
+.vd-button-container > .vd-button {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .vd-button-container > .vd-button:hover {
+    text-decoration: none; }
+  .vd-button-container > .vd-button.vd-button-icon.vd-button-icon-hover:hover > span:not(.title) {
+    display: block; }
+  .vd-button-container > .vd-button.vd-button-icon:not(.vd-button-icon-hover) > span:not(.title) {
+    display: block; }
+  .vd-button-container > .vd-button > span:not(.title) {
+    display: none; }
+
+/*# sourceMappingURL=button.css.map */

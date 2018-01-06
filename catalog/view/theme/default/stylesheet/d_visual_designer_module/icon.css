@@ -1,0 +1,68 @@
+.vd-icon-container {
+  flex-direction: row;
+  align-items: center;
+  display: flex; }
+  .vd-icon-container.vd-icon-align-flex-start {
+    justify-content: flex-start; }
+  .vd-icon-container.vd-icon-align-center {
+    justify-content: center; }
+  .vd-icon-container.vd-icon-align-flex-end {
+    justify-content: flex-end; }
+  .vd-icon-container .vd-icon {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: flex; }
+    .vd-icon-container .vd-icon.vd-icon-xs {
+      width: 2.5em !important;
+      height: 2.5em !important;
+      line-height: 2.5em !important; }
+      .vd-icon-container .vd-icon.vd-icon-xs span {
+        font-size: 1.2em !important; }
+    .vd-icon-container .vd-icon.vd-icon-sm {
+      width: 3.15em !important;
+      height: 3.15em !important;
+      line-height: 3.15em !important; }
+      .vd-icon-container .vd-icon.vd-icon-sm span {
+        font-size: 1.6em !important; }
+    .vd-icon-container .vd-icon.vd-icon-md {
+      width: 3em !important;
+      height: 3em !important;
+      line-height: 3em !important; }
+      .vd-icon-container .vd-icon.vd-icon-md span {
+        font-size: 2.15em !important; }
+    .vd-icon-container .vd-icon.vd-icon-lg {
+      width: 5em !important;
+      height: 5em !important;
+      line-height: 5em !important; }
+      .vd-icon-container .vd-icon.vd-icon-lg span {
+        font-size: 2.85em !important; }
+    .vd-icon-container .vd-icon.vd-icon-xl {
+      width: 7.15em !important;
+      height: 7.15em !important;
+      line-height: 7.15em !important; }
+      .vd-icon-container .vd-icon.vd-icon-xl span {
+        font-size: 5em !important; }
+    .vd-icon-container .vd-icon > span {
+      display: flex !important;
+      justify-content: center;
+      align-items: center; }
+      .vd-icon-container .vd-icon > span ::before {
+        vertical-align: middle; }
+    .vd-icon-container .vd-icon.vd-icon-style-rounded {
+      border-radius: 50%; }
+    .vd-icon-container .vd-icon.vd-icon-style-rounded-less {
+      border-radius: 5px; }
+    .vd-icon-container .vd-icon.vd-icon-style-rounded-outline {
+      border-radius: 50%;
+      border-width: 1px;
+      border-style: solid; }
+    .vd-icon-container .vd-icon.vd-icon-style-rounded-less-outline {
+      border-radius: 5px;
+      border-width: 1px;
+      border-style: solid; }
+    .vd-icon-container .vd-icon.vd-icon-style-boxed-outline {
+      border-width: 1px;
+      border-style: solid; }
+
+/*# sourceMappingURL=icon.css.map */

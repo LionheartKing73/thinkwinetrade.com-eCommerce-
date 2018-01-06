@@ -1,0 +1,22 @@
+<modification>
+    <id>Vendor Image folder creation</id>
+    <version>1.0</version>
+    <vqmver>2.5.1</vqmver>
+    <author>Guru Venkat</author>
+	<email>gvkv2010@gmail.com</email>
+	<website>http://thinkwinetrade.com</website> 
+	
+	<!--Edit Vendor creation-->
+	<file name="admin/view/template/catalog/vendor_form.tpl">
+		<operation error="skip">
+			<search position="replace" offset="6" >
+			<![CDATA[				<?php if (!$folder_path) { ?>
+]]>
+			</search>
+			<add><![CDATA[		<input type="checkbox" name="generate_path" value="1" id="input-generate_path" checked="checked" disabled="disabled" />
+			  </label>]]></add>
+		</operation>
+		
+	</file>
+	
+</modification>

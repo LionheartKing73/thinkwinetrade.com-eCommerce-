@@ -1,0 +1,2215 @@
+<modification>
+    <id>Container Packing</id>
+    <version>1.0</version>
+    <vqmver>2.5.1</vqmver>
+    <author>Guru Venkat</author>
+	<email>gvkv2010@gmail.com</email>
+	<website>http://thinkwinetrade.com</website>
+	 
+	<file name="admin/language/english/sale/order.php">
+		<operation error="skip">
+			<search position="bottom"  >
+			<![CDATA[]]>
+			</search>
+			<add><![CDATA[
+//GV - container_packing.xml
+$_['button_cont_packing']     = 'Container Packing';
+$_['button_variety']     = 'Print Appendix';
+$_['text_packing']            = 'Container Packing List';
+$_['button_packing_list_print_pdf'] = 'CP';
+$_['button_packing_list_print_xls'] = 'CP';
+$_['button_appendix_print_pdf'] 	= 'APP';
+$_['button_appendix_print_xls'] 	= 'APP';
+$_['button_shipping_print_pdf'] 	= 'SL';
+$_['button_shipping_print_xls'] 	= 'SL';
+$_['button_invoice_print_pdf'] 		= 'INV';
+$_['button_invoice_print_xls'] 		= 'INV';
+$_['text_variety_list']            = 'General Variety List';
+$_['column_order_date']       = 'Order Date';
+$_['text_super_total']        = 'SUPER TOTAL (Includes All Freight/Shipping/Insurrance/DDP delivery Costs)';
+$_['column_color']        = 'Color';
+$_['column_vintage']        = 'Vintage';
+$_['column_grape_variety']        = 'Grape Varieties';
+$_['column_alchogol_volume']        = 'Alcohol Volume';
+$_['column_appellation']        = 'Appellation';
+$_['column_origins']        = "Origins";
+$_['column_head_store']       = "Expeditor";
+$_['column_head_wh']       = "Freight Forwarder";
+$_['column_head_agent']       = "Local Agent/Notify";
+$_['text_order_total']       = "Order Total";
+$_['text_total_pallet']       = "Total Pallet";
+$_['text_total_volume']       = "Total Volume (m3)";
+
+//END]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/french/sale/order.php">
+		<operation error="skip">
+			<search position="replace"  >
+			<![CDATA[?>
+]]>
+			</search>
+			<add><![CDATA[
+//GV
+$_['text_packing']            = 'Container Packing List';
+$_['text_variety_list']            = 'General Variety List';
+$_['button_variety']     = 'Print Appendice';
+$_['button_cont_packing']            = 'Container Packing';
+$_['button_packing_list_print_pdf'] = 'CP';
+$_['button_packing_list_print_xls'] = 'CP';
+$_['button_appendix_print_pdf'] 	= 'APP';
+$_['button_appendix_print_xls'] 	= 'APP';
+$_['button_shipping_print_pdf'] 	= 'SL';
+$_['button_shipping_print_xls'] 	= 'SL';
+$_['button_invoice_print_pdf'] 		= 'INV';
+$_['button_invoice_print_xls'] 		= 'INV';
+$_['column_order_date']       = 'Order Date';
+$_['text_super_total']        = 'SUPER TOTAL';
+$_['column_color']        = 'Color';
+$_['column_vintage']        = 'Vintage';
+$_['column_grape_variety']        = 'Grape Varieties';
+$_['column_alchogol_volume']        = 'Alcohol Volume';
+$_['column_appellation']        = 'Appellation';
+$_['column_origins']        = "Origins";
+$_['column_head_store']       = "Expeditor";
+$_['column_head_wh']       = "Freight Forwarder";
+$_['column_head_agent']       = "Local Agent/Notify";
+$_['text_order_total']       = "Order Total";
+$_['text_total_pallet']       = "Total Pallet";
+$_['text_total_volume']       = "Total Volume";
+//END
+?>]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/sale/order_list.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<button type="submit" id="button-shipping" form="form-order" formaction="<?php echo $shipping; ?>" data-toggle="tooltip" title="<?php echo $button_shipping_print; ?>" class="btn btn-info"><i class="fa fa-truck"></i></button>
+			]]></search>
+			<add><![CDATA[        
+			<button type="submit" id="button-packing-list-pdf" form="form-order" formaction="<?php echo $packing_list_pdf; ?>" data-toggle="tooltip" title="<?php echo $button_packing_list_print_pdf; ?>" class="btn btn-danger"><?php echo $button_packing_list_print_pdf; ?></button>
+			<button type="submit" id="button-packing-list-xls" form="form-order" formaction="<?php echo $packing_list_xls; ?>" data-toggle="tooltip" title="<?php echo $button_packing_list_print_xls; ?>" class="btn btn-success"><?php echo $button_packing_list_print_xls; ?></button>
+			<button type="submit" id="button-appendix-pdf" form="form-order" formaction="<?php echo $appendix_pdf; ?>" data-toggle="tooltip" title="<?php echo $button_appendix_print_pdf; ?>" class="btn btn-danger"><?php echo $button_appendix_print_pdf; ?></button>
+			<button type="submit" id="button-appendix-xls" form="form-order" formaction="<?php echo $appendix_xls; ?>" data-toggle="tooltip" title="<?php echo $button_appendix_print_xls; ?>" class="btn btn-success"><?php echo $button_appendix_print_xls; ?></button>
+			<button type="submit" id="button-shipping-pdf" form="form-order" formaction="<?php echo $shipping_pdf; ?>" data-toggle="tooltip" title="<?php echo $button_shipping_print_pdf; ?>" class="btn btn-danger"><?php echo $button_shipping_print_pdf; ?></button>
+			<button type="submit" id="button-shipping-xls" form="form-order" formaction="<?php echo $shipping_xls; ?>" data-toggle="tooltip" title="<?php echo $button_shipping_print_xls; ?>" class="btn btn-success"><?php echo $button_shipping_print_xls; ?></button>
+			<button type="submit" id="button-invoice-pdf" form="form-order" formaction="<?php echo $invoice_pdf; ?>" data-toggle="tooltip" title="<?php echo $button_invoice_print_pdf; ?>" class="btn btn-danger"><?php echo $button_invoice_print_pdf; ?></button>
+			<button type="submit" id="button-invoice-xls" form="form-order" formaction="<?php echo $invoice_xls; ?>" data-toggle="tooltip" title="<?php echo $button_invoice_print_xls; ?>" class="btn btn-success"><?php echo $button_invoice_print_xls; ?></button>
+				
+			<button type="submit" id="button-packing" form="form-order" formaction="<?php echo $packing; ?>" data-toggle="tooltip" title="<?php echo $button_cont_packing; ?>" class="btn btn-info"><?php echo $button_cont_packing; ?></button>
+        <button type="submit" id="button-variety" form="form-order" formaction="<?php echo $variety_list; ?>" data-toggle="tooltip" title="<?php echo $button_variety; ?>" class="btn btn-info"><?php echo $button_variety; ?></button>
+
+]]></add>
+		</operation>
+		
+	</file>
+
+	<file name="admin/controller/sale/order.php" >
+		<operation error="skip">
+			<search position="before" >
+			<![CDATA[$data['button_shipping_print'] = $this->language->get('button_shipping_print');
+]]>
+			</search>
+			<add><![CDATA[		$data['button_cont_packing'] = $this->language->get('button_cont_packing');
+			$data['button_variety']  = $this->language->get('button_variety');
+			$data['button_packing_list_print_pdf']  = $this->language->get('button_packing_list_print_pdf');
+			$data['button_packing_list_print_xls']  = $this->language->get('button_packing_list_print_xls');
+			$data['button_appendix_print_pdf']  = $this->language->get('button_appendix_print_pdf');
+			$data['button_appendix_print_xls']  = $this->language->get('button_appendix_print_xls');
+			$data['button_shipping_print_pdf']  = $this->language->get('button_shipping_print_pdf');
+			$data['button_shipping_print_xls']  = $this->language->get('button_shipping_print_xls');
+			$data['button_invoice_print_pdf']  = $this->language->get('button_invoice_print_pdf');
+			$data['button_invoice_print_xls']  = $this->language->get('button_invoice_print_xls');
+
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before" >
+			<![CDATA[$data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+]]>
+			</search>
+			<add><![CDATA[			$data['packing'] = $this->url->link('sale/order/packing', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+			$data['variety_list'] = $this->url->link('sale/order/variety_list', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after" >
+			<![CDATA[$data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'], 'SSL');
+]]>
+			</search>
+			<add><![CDATA[			$data['packing'] = $this->url->link('sale/order/packing', 'token=' . $this->session->data['token'], 'SSL');
+			$data['variety_list'] = $this->url->link('sale/order/variety_list', 'token=' . $this->session->data['token'], 'SSL');
+			$data['packing_list_pdf'] = $this->url->link('sale/order/packinglistpdf', 'token=' . $this->session->data['token'], 'SSL');
+			$data['packing_list_xls'] = $this->url->link('sale/order/packinglistxls', 'token=' . $this->session->data['token'], 'SSL');
+			$data['appendix_pdf'] = $this->url->link('sale/order/appendixpdf', 'token=' . $this->session->data['token'], 'SSL');
+			$data['appendix_xls'] = $this->url->link('sale/order/appendixxls', 'token=' . $this->session->data['token'], 'SSL');
+			$data['shipping_pdf'] = $this->url->link('sale/order/shippingpdf', 'token=' . $this->session->data['token'], 'SSL');
+			$data['shipping_xls'] = $this->url->link('sale/order/shippingxls', 'token=' . $this->session->data['token'], 'SSL');
+			$data['invoice_pdf'] = $this->url->link('sale/order/invoicepdf', 'token=' . $this->session->data['token'], 'SSL');
+			$data['invoice_xls'] = $this->url->link('sale/order/invoicexls', 'token=' . $this->session->data['token'], 'SSL');	
+]]></add>
+		</operation>
+		
+		<operation error="skip">
+			<search position="before" >
+			<![CDATA[public function confirmDocumentsReceived() {
+]]>
+			</search>
+			<add><![CDATA[
+	public function packing() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_packing');
+
+		if ($this->request->server['HTTPS'])
+		{
+			$data['base'] = HTTPS_SERVER;
+		}
+		else
+		{
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_invoice'] = $this->language->get('text_invoice');
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_invoice_no'] = $this->language->get('text_invoice_no');
+		$data['text_invoice_date'] = $this->language->get('text_invoice_date');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_to'] = $this->language->get('text_to');
+		$data['text_ship_to'] = $this->language->get('text_ship_to');
+		$data['text_super_total'] = $this->language->get('text_super_total');
+		$data['text_order_total'] = $this->language->get('text_order_total');
+		$data['text_total_pallet'] = $this->language->get('text_total_pallet');
+		$data['text_total_volume'] = $this->language->get('text_total_volume');
+
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_order_id'] = $this->language->get('column_order_id');
+		$data['column_order_date'] = $this->language->get('column_order_date');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_total'] = $this->language->get('column_total');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_head_store']  = $this->language->get('column_head_store');
+		$data['column_head_wh']     = $this->language->get('column_head_wh');
+		$data['column_head_agent']  = $this->language->get('column_head_agent');
+
+		include 'controller/bar/switch.php';
+		
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		$store_info = $this->model_setting_setting->getSetting('config', 0 );
+
+		if ($store_info) {
+			$store_address = $store_info['config_address'];
+			$store_email = $store_info['config_email'];
+			$store_telephone = $store_info['config_telephone'];
+			$store_fax = $store_info['config_fax'];
+			$comment = $store_info['config_comment'];
+		} else {
+			$store_address = $this->config->get('config_address');
+			$store_email = $this->config->get('config_email');
+			$store_telephone = $this->config->get('config_telephone');
+			$store_fax = $this->config->get('config_fax');
+			$comment = $this->config->get('config_comment');
+		}
+		$store_name = $this->config->get('config_name');
+		$data['store_name']         = $store_name;
+		$data['store_address']      = nl2br($store_address);
+		$data['store_email']        = $store_email;
+		$data['store_telephone']    = $store_telephone;
+		$data['store_fax']          = $store_fax;
+		$data['store_url']          = rtrim(HTTP_CATALOG, '/');
+		
+		$this->load->model('sale/vdi_order');
+		$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+		$format = '{firstname} {lastname}' .  "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+
+		$find = array(
+			'{firstname}',
+			'{lastname}',
+			'{address_1}',
+			'{address_2}',
+			'{city}',
+			'{postcode}',
+			'{zone}',
+			//'{zone_code}',
+			'{country}'
+		);
+
+		$replace = array(
+			'firstname' => '',//$wh_info['shipping_firstname'],
+			'lastname'  => '',//$wh_info['shipping_lastname'],
+			'address_1' => $wh_info['address_1'],
+			'address_2' => $wh_info['address_2'],
+			'city'      => $wh_info['city'],
+			'postcode'  => $wh_info['postcode'],
+			'zone'      => '',
+			//'zone_code' => $wh_info['zone_code'],
+			'country'   => $wh_info['country']
+		);
+
+				$wh_address_fr = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['wh_address_fr'] = $wh_address_fr;
+				$data['wh_company']   = $wh_info['company'];
+				$data['wh_telephone'] = $wh_info['telephone'];
+				$data['wh_fax'] = $wh_info['fax'];
+				$data['wh_email'] = $wh_info['email'];
+				
+		//Get HK WH address
+		$wh_info_hk = $this->model_sale_vdi_order->getWarehouseAddressHK();
+		$replace = array(
+			'address_1' => $wh_info_hk['address_1'],
+			'address_2' => $wh_info_hk['address_2'],
+			'city'      => $wh_info_hk['city'],
+			'postcode'  => $wh_info_hk['postcode'],
+			'zone'      => '',
+			'country'   => $wh_info_hk['country']
+		);
+		$wh_address_hk = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+		$data['wh_address_hk'] = $wh_address_hk;
+		$data['wh_company_hk']   = $wh_info_hk['company'];
+		$data['wh_telephone_hk'] = $wh_info_hk['telephone'];
+		$data['wh_fax_hk'] = $wh_info_hk['fax'];
+		$data['wh_email_hk'] = $wh_info_hk['email'];
+		
+		$product_data = array();
+		$total_quantity = 0;
+		$bottle_grand_total = 0;
+		$weight_grand_total = 0.00;
+		$eur_grand_total = 0.0000;
+		$hkd_grand_total = 0.0000;
+		$hkd_grand_order_total = 0.0;
+		$eur_grand_order_total = 0.0;
+		$total_pallet = 0;
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+
+				if ($order_info['invoice_no']) {
+					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				} else {
+					$invoice_no = '';
+				}
+
+
+				$this->load->model('tool/upload');
+
+
+				$products = $this->model_sale_order->getOrderProducts($order_id);
+
+				$eur_order_total =  $this->model_sale_order->getOrderCost( $order_id );
+				$hkd_order_total =  ( $order_info['currency_code'] == 'HKD' ? $this->currency->format( $eur_order_total, 'HKD', $order_info['currency_value'] ) : $this->currency->format( $eur_order_total, 'HKD' ) );
+				$eur_grand_order_total += $eur_order_total;
+				$hkd_grand_order_total += ( $order_info['currency_code'] == 'HKD' ?  ( $eur_order_total * $order_info['currency_value'] ) : ( $eur_order_total * $this->currency->getValue('HKD') ) );
+				
+				$total_pallet +=  $this->model_sale_order->getTotalPallet( $order_id );
+				
+				$product_count = count( $products );
+				$i = 1;
+				foreach ($products as $product) {
+
+					$this->load->model('sale/vdi_order');
+					$fob = $this->model_sale_vdi_order->getFobPrice( $product['product_id'] );
+					$weight_info = array();
+					$weight_info = $this->model_sale_order->getProductWeight( $product['product_id'] );
+					$weight_info['weight'] = (float) $product['quantity'] *  $weight_info['weight'] ;
+					if( $order_info['currency_code'] == 'HKD' ) {
+						$hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']);
+						$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+						$hkd_total = $this->currency->format(  ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code']);
+						$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR', 1.000000 );
+						$hkd_grand_total +=  (float)( $product['price'] * $product['quantity'] * $order_info['currency_value'] );
+					} else {
+						$hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'HKD' );
+						$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+						$hkd_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'HKD' );
+						$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR' );
+						$hkd_grand_total += (float) ( $product['price'] * $product['quantity']  * $this->currency->getValue('HKD') );
+
+					}
+
+					$total_quantity += $product['quantity'];
+					$bottle_grand_total += ( $fob['pf'] * $product['quantity'] );
+					$weight_grand_total +=  $weight_info['weight'] ;
+					
+					$eur_grand_total += ( $product['price'] * $product['quantity'] );
+					
+					$product_data[] = array(
+						'order_id'	=> $order_id,
+						'date_added'  => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'name'     => $product['name'],
+						'product_no'   => $product['product_no'],
+						'pallet_no'    => $product['pallet_no'],
+						'product_format' => $fob['pf'],
+						'total_bottles'  => ( $fob['pf'] * $product['quantity'] ),
+						'eur_price'      => $eur_price,
+						'hkd_price'      => $hkd_price,
+						'hkd_total'      => $hkd_total,
+						'eur_total'      => $eur_total,
+						'eur_order_total' => ( $i == $product_count ? $this->currency->format( $eur_order_total, 'EUR' ) : '' ),
+						'hkd_order_total' => ( $i == $product_count ? $hkd_order_total : '' ),
+						'weight'   => $weight_info['weight'] . " " . $weight_info['unit'],
+						'quantity' => $product['quantity'],
+						'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+						'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
+					);
+					$i++;
+				}
+			}
+		}
+		
+		$data['orders'][] = array(
+				'product'            => $product_data,
+				'total_quantity'     => $total_quantity,
+				'container_id' => $order_info['container_id'],
+				'shipment_id' => $order_info['shipment_id'],
+				'bottle_grand_total' => $bottle_grand_total,
+				'weight_grand_total' => $weight_grand_total . " " . $weight_info['unit'],
+				'eur_grand_total' => $this->currency->format($eur_grand_total , 'EUR' ),
+				'hkd_grand_total' => $this->currency->format($eur_grand_total, 'HKD' ),
+				'eur_grand_order_total' => $this->currency->format( $eur_grand_order_total, 'EUR' ),
+				'hkd_grand_order_total' => $this->currency->format( $hkd_grand_order_total, 'HKD', 1.0 ),
+				'total_pallet'          => $total_pallet,
+				'total_volume'         => ( $total_quantity * 0.245 * 0.305 * 0.2 )
+		);
+		$this->response->setOutput($this->load->view('sale/container_packing.tpl', $data));
+			
+	}
+	public function packinglistpdf() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_packing');
+
+		if ($this->request->server['HTTPS'])
+		{
+			$data['base'] = HTTPS_SERVER;
+		}
+		else
+		{
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_invoice'] = $this->language->get('text_invoice');
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_invoice_no'] = $this->language->get('text_invoice_no');
+		$data['text_invoice_date'] = $this->language->get('text_invoice_date');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_to'] = $this->language->get('text_to');
+		$data['text_ship_to'] = $this->language->get('text_ship_to');
+		$data['text_super_total'] = $this->language->get('text_super_total');
+		$data['text_order_total'] = $this->language->get('text_order_total');
+		$data['text_total_pallet'] = $this->language->get('text_total_pallet');
+		$data['text_total_volume'] = $this->language->get('text_total_volume');
+
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_order_id'] = $this->language->get('column_order_id');
+		$data['column_order_date'] = $this->language->get('column_order_date');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_total'] = $this->language->get('column_total');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_head_store']  = $this->language->get('column_head_store');
+		$data['column_head_wh']     = $this->language->get('column_head_wh');
+		$data['column_head_agent']  = $this->language->get('column_head_agent');
+
+		include 'controller/bar/switch.php';
+		
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		$store_info = $this->model_setting_setting->getSetting('config', 0 );
+
+		if ($store_info) {
+			$store_address = $store_info['config_address'];
+			$store_email = $store_info['config_email'];
+			$store_telephone = $store_info['config_telephone'];
+			$store_fax = $store_info['config_fax'];
+			$comment = $store_info['config_comment'];
+		} else {
+			$store_address = $this->config->get('config_address');
+			$store_email = $this->config->get('config_email');
+			$store_telephone = $this->config->get('config_telephone');
+			$store_fax = $this->config->get('config_fax');
+			$comment = $this->config->get('config_comment');
+		}
+		$store_name = $this->config->get('config_name');
+		$data['store_name']         = $store_name;
+		$data['store_address']      = nl2br($store_address);
+		$data['store_email']        = $store_email;
+		$data['store_telephone']    = $store_telephone;
+		$data['store_fax']          = $store_fax;
+		$data['store_url']          = rtrim(HTTP_CATALOG, '/');
+		
+		$this->load->model('sale/vdi_order');
+		$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+		$format = '{firstname} {lastname}' .  "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+
+		$find = array(
+			'{firstname}',
+			'{lastname}',
+			'{address_1}',
+			'{address_2}',
+			'{city}',
+			'{postcode}',
+			'{zone}',
+			//'{zone_code}',
+			'{country}'
+		);
+
+		$replace = array(
+			'firstname' => '',//$wh_info['shipping_firstname'],
+			'lastname'  => '',//$wh_info['shipping_lastname'],
+			'address_1' => $wh_info['address_1'],
+			'address_2' => $wh_info['address_2'],
+			'city'      => $wh_info['city'],
+			'postcode'  => $wh_info['postcode'],
+			'zone'      => '',
+			//'zone_code' => $wh_info['zone_code'],
+			'country'   => $wh_info['country']
+		);
+
+				$wh_address_fr = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['wh_address_fr'] = $wh_address_fr;
+				$data['wh_company']   = $wh_info['company'];
+				$data['wh_telephone'] = $wh_info['telephone'];
+				$data['wh_fax'] = $wh_info['fax'];
+				$data['wh_email'] = $wh_info['email'];
+				
+		//Get HK WH address
+		$wh_info_hk = $this->model_sale_vdi_order->getWarehouseAddressHK();
+		$replace = array(
+			'address_1' => $wh_info_hk['address_1'],
+			'address_2' => $wh_info_hk['address_2'],
+			'city'      => $wh_info_hk['city'],
+			'postcode'  => $wh_info_hk['postcode'],
+			'zone'      => '',
+			'country'   => $wh_info_hk['country']
+		);
+		$wh_address_hk = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+		$data['wh_address_hk'] = $wh_address_hk;
+		$data['wh_company_hk']   = $wh_info_hk['company'];
+		$data['wh_telephone_hk'] = $wh_info_hk['telephone'];
+		$data['wh_fax_hk'] = $wh_info_hk['fax'];
+		$data['wh_email_hk'] = $wh_info_hk['email'];
+		
+		$product_data = array();
+		$total_quantity = 0;
+		$bottle_grand_total = 0;
+		$weight_grand_total = 0.00;
+		$eur_grand_total = 0.0000;
+		$hkd_grand_total = 0.0000;
+		$hkd_grand_order_total = 0.0;
+		$eur_grand_order_total = 0.0;
+		$total_pallet = 0;
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+
+				if ($order_info['invoice_no']) {
+					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				} else {
+					$invoice_no = '';
+				}
+
+
+				$this->load->model('tool/upload');
+
+
+				$products = $this->model_sale_order->getOrderProducts($order_id);
+
+				$eur_order_total =  $this->model_sale_order->getOrderCost( $order_id );
+				$hkd_order_total =  ( $order_info['currency_code'] == 'HKD' ? $this->currency->format( $eur_order_total, 'HKD', $order_info['currency_value'] ) : $this->currency->format( $eur_order_total, 'HKD' ) );
+				$eur_grand_order_total += $eur_order_total;
+				$hkd_grand_order_total += ( $order_info['currency_code'] == 'HKD' ?  ( $eur_order_total * $order_info['currency_value'] ) : ( $eur_order_total * $this->currency->getValue('HKD') ) );
+				
+				$total_pallet +=  $this->model_sale_order->getTotalPallet( $order_id );
+				
+				$product_count = count( $products );
+				$i = 1;
+				foreach ($products as $product) {
+
+					$this->load->model('sale/vdi_order');
+					$fob = $this->model_sale_vdi_order->getFobPrice( $product['product_id'] );
+					$weight_info = array();
+					$weight_info = $this->model_sale_order->getProductWeight( $product['product_id'] );
+					$weight_info['weight'] = (float) $product['quantity'] *  $weight_info['weight'] ;
+					if( $order_info['currency_code'] == 'HKD' ) {
+						$hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']);
+						$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+						$hkd_total = $this->currency->format(  ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code']);
+						$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR', 1.000000 );
+						$hkd_grand_total +=  (float)( $product['price'] * $product['quantity'] * $order_info['currency_value'] );
+					} else {
+						$hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'HKD' );
+						$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+						$hkd_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'HKD' );
+						$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR' );
+						$hkd_grand_total += (float) ( $product['price'] * $product['quantity']  * $this->currency->getValue('HKD') );
+
+					}
+
+					$total_quantity += $product['quantity'];
+					$bottle_grand_total += ( $fob['pf'] * $product['quantity'] );
+					$weight_grand_total +=  $weight_info['weight'] ;
+					
+					$eur_grand_total += ( $product['price'] * $product['quantity'] );
+					
+					$product_data[] = array(
+						'order_id'	=> $order_id,
+						'date_added'  => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'name'     => $product['name'],
+						'product_no'   => $product['product_no'],
+						'pallet_no'    => $product['pallet_no'],
+						'product_format' => $fob['pf'],
+						'total_bottles'  => ( $fob['pf'] * $product['quantity'] ),
+						'eur_price'      => $eur_price,
+						'hkd_price'      => $hkd_price,
+						'hkd_total'      => $hkd_total,
+						'eur_total'      => $eur_total,
+						'eur_order_total' => ( $i == $product_count ? $this->currency->format( $eur_order_total, 'EUR' ) : '' ),
+						'hkd_order_total' => ( $i == $product_count ? $hkd_order_total : '' ),
+						'weight'   => $weight_info['weight'] . " " . $weight_info['unit'],
+						'quantity' => $product['quantity'],
+						'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+						'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
+					);
+					$i++;
+				}
+			}
+		}
+		
+		$data['orders'][] = array(
+				'product'            => $product_data,
+				'total_quantity'     => $total_quantity,
+				'container_id' => $order_info['container_id'],
+				'shipment_id' => $order_info['shipment_id'],
+				'bottle_grand_total' => $bottle_grand_total,
+				'weight_grand_total' => $weight_grand_total . " " . $weight_info['unit'],
+				'eur_grand_total' => $this->currency->format($eur_grand_total , 'EUR' ),
+				'hkd_grand_total' => $this->currency->format($eur_grand_total, 'HKD' ),
+				'eur_grand_order_total' => $this->currency->format( $eur_grand_order_total, 'EUR' ),
+				'hkd_grand_order_total' => $this->currency->format( $hkd_grand_order_total, 'HKD', 1.0 ),
+				'total_pallet'          => $total_pallet,
+				'total_volume'         => ( $total_quantity * 0.245 * 0.305 * 0.2 )
+		);
+		$this->response->setOutput($this->load->view('sale/container_packing_pdf.tpl', $data));
+			
+	}
+	
+	public function packinglistxls() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_packing');
+
+		if ($this->request->server['HTTPS'])
+		{
+			$data['base'] = HTTPS_SERVER;
+		}
+		else
+		{
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_invoice'] = $this->language->get('text_invoice');
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_invoice_no'] = $this->language->get('text_invoice_no');
+		$data['text_invoice_date'] = $this->language->get('text_invoice_date');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_to'] = $this->language->get('text_to');
+		$data['text_ship_to'] = $this->language->get('text_ship_to');
+		$data['text_super_total'] = $this->language->get('text_super_total');
+		$data['text_order_total'] = $this->language->get('text_order_total');
+		$data['text_total_pallet'] = $this->language->get('text_total_pallet');
+		$data['text_total_volume'] = $this->language->get('text_total_volume');
+
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_order_id'] = $this->language->get('column_order_id');
+		$data['column_order_date'] = $this->language->get('column_order_date');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_total'] = $this->language->get('column_total');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_head_store']  = $this->language->get('column_head_store');
+		$data['column_head_wh']     = $this->language->get('column_head_wh');
+		$data['column_head_agent']  = $this->language->get('column_head_agent');
+
+		include 'controller/bar/switch.php';
+		
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		$store_info = $this->model_setting_setting->getSetting('config', 0 );
+
+		if ($store_info) {
+			$store_address = $store_info['config_address'];
+			$store_email = $store_info['config_email'];
+			$store_telephone = $store_info['config_telephone'];
+			$store_fax = $store_info['config_fax'];
+			$comment = $store_info['config_comment'];
+		} else {
+			$store_address = $this->config->get('config_address');
+			$store_email = $this->config->get('config_email');
+			$store_telephone = $this->config->get('config_telephone');
+			$store_fax = $this->config->get('config_fax');
+			$comment = $this->config->get('config_comment');
+		}
+		$store_name = $this->config->get('config_name');
+		$data['store_name']         = $store_name;
+		$data['store_address']      = nl2br($store_address);
+		$data['store_email']        = $store_email;
+		$data['store_telephone']    = $store_telephone;
+		$data['store_fax']          = $store_fax;
+		$data['store_url']          = rtrim(HTTP_CATALOG, '/');
+		
+		$this->load->model('sale/vdi_order');
+		$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+		$format = '{firstname} {lastname}' .  "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+
+		$find = array(
+			'{firstname}',
+			'{lastname}',
+			'{address_1}',
+			'{address_2}',
+			'{city}',
+			'{postcode}',
+			'{zone}',
+			//'{zone_code}',
+			'{country}'
+		);
+
+		$replace = array(
+			'firstname' => '',//$wh_info['shipping_firstname'],
+			'lastname'  => '',//$wh_info['shipping_lastname'],
+			'address_1' => $wh_info['address_1'],
+			'address_2' => $wh_info['address_2'],
+			'city'      => $wh_info['city'],
+			'postcode'  => $wh_info['postcode'],
+			'zone'      => '',
+			//'zone_code' => $wh_info['zone_code'],
+			'country'   => $wh_info['country']
+		);
+
+				$wh_address_fr = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['wh_address_fr'] = $wh_address_fr;
+				$data['wh_company']   = $wh_info['company'];
+				$data['wh_telephone'] = $wh_info['telephone'];
+				$data['wh_fax'] = $wh_info['fax'];
+				$data['wh_email'] = $wh_info['email'];
+				
+		//Get HK WH address
+		$wh_info_hk = $this->model_sale_vdi_order->getWarehouseAddressHK();
+		$replace = array(
+			'address_1' => $wh_info_hk['address_1'],
+			'address_2' => $wh_info_hk['address_2'],
+			'city'      => $wh_info_hk['city'],
+			'postcode'  => $wh_info_hk['postcode'],
+			'zone'      => '',
+			'country'   => $wh_info_hk['country']
+		);
+		$wh_address_hk = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+		$data['wh_address_hk'] = $wh_address_hk;
+		$data['wh_company_hk']   = $wh_info_hk['company'];
+		$data['wh_telephone_hk'] = $wh_info_hk['telephone'];
+		$data['wh_fax_hk'] = $wh_info_hk['fax'];
+		$data['wh_email_hk'] = $wh_info_hk['email'];
+		
+		$product_data = array();
+		$total_quantity = 0;
+		$bottle_grand_total = 0;
+		$weight_grand_total = 0.00;
+		$eur_grand_total = 0.0000;
+		$hkd_grand_total = 0.0000;
+		$hkd_grand_order_total = 0.0;
+		$eur_grand_order_total = 0.0;
+		$total_pallet = 0;
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+
+				if ($order_info['invoice_no']) {
+					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				} else {
+					$invoice_no = '';
+				}
+
+
+				$this->load->model('tool/upload');
+
+
+				$products = $this->model_sale_order->getOrderProducts($order_id);
+
+				$eur_order_total =  $this->model_sale_order->getOrderCost( $order_id );
+				$hkd_order_total =  ( $order_info['currency_code'] == 'HKD' ? $this->currency->format( $eur_order_total, 'HKD', $order_info['currency_value'] ) : $this->currency->format( $eur_order_total, 'HKD' ) );
+				$eur_grand_order_total += $eur_order_total;
+				$hkd_grand_order_total += ( $order_info['currency_code'] == 'HKD' ?  ( $eur_order_total * $order_info['currency_value'] ) : ( $eur_order_total * $this->currency->getValue('HKD') ) );
+				
+				$total_pallet +=  $this->model_sale_order->getTotalPallet( $order_id );
+				
+				$product_count = count( $products );
+				$i = 1;
+				foreach ($products as $product) {
+
+					$this->load->model('sale/vdi_order');
+					$fob = $this->model_sale_vdi_order->getFobPrice( $product['product_id'] );
+					$weight_info = array();
+					$weight_info = $this->model_sale_order->getProductWeight( $product['product_id'] );
+					$weight_info['weight'] = (float) $product['quantity'] *  $weight_info['weight'] ;
+					if( $order_info['currency_code'] == 'HKD' ) {
+						$hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']);
+						$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+						$hkd_total = $this->currency->format(  ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code']);
+						$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR', 1.000000 );
+						$hkd_grand_total +=  (float)( $product['price'] * $product['quantity'] * $order_info['currency_value'] );
+					} else {
+						$hkd_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'HKD' );
+						$eur_price = $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), 'EUR' );
+						$hkd_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'HKD' );
+						$eur_total = $this->currency->format( ( $product['price'] * $product['quantity'] ) + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), 'EUR' );
+						$hkd_grand_total += (float) ( $product['price'] * $product['quantity']  * $this->currency->getValue('HKD') );
+
+					}
+
+					$total_quantity += $product['quantity'];
+					$bottle_grand_total += ( $fob['pf'] * $product['quantity'] );
+					$weight_grand_total +=  $weight_info['weight'] ;
+					
+					$eur_grand_total += ( $product['price'] * $product['quantity'] );
+					
+					$product_data[] = array(
+						'order_id'	=> $order_id,
+						'date_added'  => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'name'     => $product['name'],
+						'product_no'   => $product['product_no'],
+						'pallet_no'    => $product['pallet_no'],
+						'product_format' => $fob['pf'],
+						'total_bottles'  => ( $fob['pf'] * $product['quantity'] ),
+						'eur_price'      => $eur_price,
+						'hkd_price'      => $hkd_price,
+						'hkd_total'      => $hkd_total,
+						'eur_total'      => $eur_total,
+						'eur_order_total' => ( $i == $product_count ? $this->currency->format( $eur_order_total, 'EUR' ) : '' ),
+						'hkd_order_total' => ( $i == $product_count ? $hkd_order_total : '' ),
+						'weight'   => $weight_info['weight'] . " " . $weight_info['unit'],
+						'quantity' => $product['quantity'],
+						'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+						'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
+					);
+					$i++;
+				}
+			}
+		}
+		
+		$data['orders'][] = array(
+				'product'            => $product_data,
+				'total_quantity'     => $total_quantity,
+				'container_id' => $order_info['container_id'],
+				'shipment_id' => $order_info['shipment_id'],
+				'bottle_grand_total' => $bottle_grand_total,
+				'weight_grand_total' => $weight_grand_total . " " . $weight_info['unit'],
+				'eur_grand_total' => $this->currency->format($eur_grand_total , 'EUR' ),
+				'hkd_grand_total' => $this->currency->format($eur_grand_total, 'HKD' ),
+				'eur_grand_order_total' => $this->currency->format( $eur_grand_order_total, 'EUR' ),
+				'hkd_grand_order_total' => $this->currency->format( $hkd_grand_order_total, 'HKD', 1.0 ),
+				'total_pallet'          => $total_pallet,
+				'total_volume'         => ( $total_quantity * 0.245 * 0.305 * 0.2 )
+		);
+		$this->response->setOutput($this->load->view('sale/container_packing_xls.tpl', $data));
+			
+	}
+	
+	public function variety_list() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_variety_list');
+
+		if ($this->request->server['HTTPS'])
+		{
+			$data['base'] = HTTPS_SERVER;
+		}
+		else
+		{
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_containerid'] = $this->language->get('text_containerid');
+		$data['text_shipmentid'] = $this->language->get('text_shipmentid');
+		$data['text_pallet_id'] = $this->language->get('text_pallet_id');
+		$data['text_product_no'] = $this->language->get('text_product_no');
+		$data['text_product_name'] = $this->language->get('text_product_name');
+		
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_super_total'] = $this->language->get('text_super_total');
+		$data['column_head_store']  = $this->language->get('column_head_store');
+		$data['column_head_wh']     = $this->language->get('column_head_wh');
+		$data['column_head_agent']  = $this->language->get('column_head_agent');
+
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_order_id'] = $this->language->get('column_order_id');
+		$data['column_order_date'] = $this->language->get('column_order_date');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_total'] = $this->language->get('column_total');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_color']          = $this->language->get('column_color');
+		$data['column_vintage']        = $this->language->get('column_vintage');
+		$data['column_grape_variety']  = $this->language->get('column_grape_variety');
+		$data['column_appellation']    = $this->language->get('column_appellation');
+		$data['column_origins']      = $this->language->get('column_origins');
+
+		include 'controller/bar/switch.php';
+		
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		$store_info = $this->model_setting_setting->getSetting('config', 0 );
+
+		if ($store_info) {
+			$store_address = $store_info['config_address'];
+			$store_email = $store_info['config_email'];
+			$store_telephone = $store_info['config_telephone'];
+			$store_fax = $store_info['config_fax'];
+			$comment = $store_info['config_comment'];
+		} else {
+			$store_address = $this->config->get('config_address');
+			$store_email = $this->config->get('config_email');
+			$store_telephone = $this->config->get('config_telephone');
+			$store_fax = $this->config->get('config_fax');
+			$comment = $this->config->get('config_comment');
+		}
+		$store_name = $this->config->get('config_name');
+		$data['store_name']         = $store_name;
+		$data['store_address']      = nl2br($store_address);
+		$data['store_email']        = $store_email;
+		$data['store_telephone']    = $store_telephone;
+		$data['store_fax']          = $store_fax;
+		$data['store_url']          = rtrim(HTTP_CATALOG, '/');
+		
+		$this->load->model('sale/vdi_order');
+		$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+		$format = '{firstname} {lastname}' .  "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+
+		$find = array(
+			'{firstname}',
+			'{lastname}',
+			'{address_1}',
+			'{address_2}',
+			'{city}',
+			'{postcode}',
+			'{zone}',
+			//'{zone_code}',
+			'{country}'
+		);
+
+		$replace = array(
+			'firstname' => '',//$wh_info['shipping_firstname'],
+			'lastname'  => '',//$wh_info['shipping_lastname'],
+			'address_1' => $wh_info['address_1'],
+			'address_2' => $wh_info['address_2'],
+			'city'      => $wh_info['city'],
+			'postcode'  => $wh_info['postcode'],
+			'zone'      => '',
+			//'zone_code' => $wh_info['zone_code'],
+			'country'   => $wh_info['country']
+		);
+
+				$wh_address_fr = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['wh_address_fr'] = $wh_address_fr;
+				$data['wh_company']   = $wh_info['company'];
+				$data['wh_telephone'] = $wh_info['telephone'];
+				$data['wh_fax'] = $wh_info['fax'];
+				$data['wh_email'] = $wh_info['email'];
+				
+		//Get HK WH address
+		$wh_info_hk = $this->model_sale_vdi_order->getWarehouseAddressHK();
+		$replace = array(
+			'address_1' => $wh_info_hk['address_1'],
+			'address_2' => $wh_info_hk['address_2'],
+			'city'      => $wh_info_hk['city'],
+			'postcode'  => $wh_info_hk['postcode'],
+			'zone'      => '',
+			'country'   => $wh_info_hk['country']
+		);
+		$wh_address_hk = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+		$data['wh_address_hk'] = $wh_address_hk;
+		$data['wh_company_hk']   = $wh_info_hk['company'];
+		$data['wh_telephone_hk'] = $wh_info_hk['telephone'];
+		$data['wh_fax_hk'] = $wh_info_hk['fax'];
+		$data['wh_email_hk'] = $wh_info_hk['email'];
+		
+		$product_data = array();
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+
+				$products = $this->model_sale_order->getOrderProducts($order_id);
+
+				foreach ($products as $product) {
+
+					$vintage = $this->model_sale_order->getVariety( $product['product_id'], 13 );
+					$color = $this->model_sale_order->getVariety( $product['product_id'], 14 );
+					$grape_variety = $this->model_sale_order->getVariety( $product['product_id'], 15 );
+					$appellation = $this->model_sale_order->getVariety( $product['product_id'], 25 );
+					$origins = $this->model_sale_order->getOrigins( $product['vendor_id'] );
+					
+					$product_data[] = array(
+						'order_id'	=> $order_id,
+						'date_added'  => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'name'     => $product['name'],
+						'product_no'   => $product['product_no'],
+						'pallet_no'    => $product['pallet_no'],
+						'vintage' => $vintage,
+						'color'   => $color,
+						'grape_variety' => $grape_variety,
+						'appellation'   => $appellation,
+						'origins'     => $origins
+					);
+				}
+
+			}
+		}
+		$data['orders'][] = array(
+				'product'            => $product_data,
+				'container_id' => $order_info['container_id'],
+				'shipment_id' => $order_info['shipment_id']
+		);
+		$this->response->setOutput($this->load->view('sale/order_variety_list.tpl', $data));
+			
+	}
+	
+	public function appendixpdf() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_variety_list');
+
+		if ($this->request->server['HTTPS'])
+		{
+			$data['base'] = HTTPS_SERVER;
+		}
+		else
+		{
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_containerid'] = $this->language->get('text_containerid');
+		$data['text_shipmentid'] = $this->language->get('text_shipmentid');
+		$data['text_pallet_id'] = $this->language->get('text_pallet_id');
+		$data['text_product_no'] = $this->language->get('text_product_no');
+		$data['text_product_name'] = $this->language->get('text_product_name');
+		
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_super_total'] = $this->language->get('text_super_total');
+		$data['column_head_store']  = $this->language->get('column_head_store');
+		$data['column_head_wh']     = $this->language->get('column_head_wh');
+		$data['column_head_agent']  = $this->language->get('column_head_agent');
+
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_order_id'] = $this->language->get('column_order_id');
+		$data['column_order_date'] = $this->language->get('column_order_date');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_total'] = $this->language->get('column_total');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_color']          = $this->language->get('column_color');
+		$data['column_vintage']        = $this->language->get('column_vintage');
+		$data['column_grape_variety']  = $this->language->get('column_grape_variety');
+		$data['column_alchogol_volume']    = $this->language->get('column_alchogol_volume');
+		$data['column_appellation']    = $this->language->get('column_appellation');
+		$data['column_origins']      = $this->language->get('column_origins');
+
+		include 'controller/bar/switch.php';
+		
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		$store_info = $this->model_setting_setting->getSetting('config', 0 );
+
+		if ($store_info) {
+			$store_address = $store_info['config_address'];
+			$store_email = $store_info['config_email'];
+			$store_telephone = $store_info['config_telephone'];
+			$store_fax = $store_info['config_fax'];
+			$comment = $store_info['config_comment'];
+		} else {
+			$store_address = $this->config->get('config_address');
+			$store_email = $this->config->get('config_email');
+			$store_telephone = $this->config->get('config_telephone');
+			$store_fax = $this->config->get('config_fax');
+			$comment = $this->config->get('config_comment');
+		}
+		$store_name = $this->config->get('config_name');
+		$data['store_name']         = $store_name;
+		$data['store_address']      = nl2br($store_address);
+		$data['store_email']        = $store_email;
+		$data['store_telephone']    = $store_telephone;
+		$data['store_fax']          = $store_fax;
+		$data['store_url']          = rtrim(HTTP_CATALOG, '/');
+		
+		$this->load->model('sale/vdi_order');
+		$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+		$format = '{firstname} {lastname}' .  "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+
+		$find = array(
+			'{firstname}',
+			'{lastname}',
+			'{address_1}',
+			'{address_2}',
+			'{city}',
+			'{postcode}',
+			'{zone}',
+			//'{zone_code}',
+			'{country}'
+		);
+
+		$replace = array(
+			'firstname' => '',//$wh_info['shipping_firstname'],
+			'lastname'  => '',//$wh_info['shipping_lastname'],
+			'address_1' => $wh_info['address_1'],
+			'address_2' => $wh_info['address_2'],
+			'city'      => $wh_info['city'],
+			'postcode'  => $wh_info['postcode'],
+			'zone'      => '',
+			//'zone_code' => $wh_info['zone_code'],
+			'country'   => $wh_info['country']
+		);
+
+				$wh_address_fr = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['wh_address_fr'] = $wh_address_fr;
+				$data['wh_company']   = $wh_info['company'];
+				$data['wh_telephone'] = $wh_info['telephone'];
+				$data['wh_fax'] = $wh_info['fax'];
+				$data['wh_email'] = $wh_info['email'];
+				
+		//Get HK WH address
+		$wh_info_hk = $this->model_sale_vdi_order->getWarehouseAddressHK();
+		$replace = array(
+			'address_1' => $wh_info_hk['address_1'],
+			'address_2' => $wh_info_hk['address_2'],
+			'city'      => $wh_info_hk['city'],
+			'postcode'  => $wh_info_hk['postcode'],
+			'zone'      => '',
+			'country'   => $wh_info_hk['country']
+		);
+		$wh_address_hk = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+		$data['wh_address_hk'] = $wh_address_hk;
+		$data['wh_company_hk']   = $wh_info_hk['company'];
+		$data['wh_telephone_hk'] = $wh_info_hk['telephone'];
+		$data['wh_fax_hk'] = $wh_info_hk['fax'];
+		$data['wh_email_hk'] = $wh_info_hk['email'];
+		
+		$product_data = array();
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+
+				$products = $this->model_sale_order->getOrderProducts($order_id);
+
+				foreach ($products as $product) {
+
+					$vintage = $this->model_sale_order->getVariety( $product['product_id'], 13 );
+					$alchogol_volume = $this->model_sale_order->getVariety( $product['product_id'], 16);
+					$color = $this->model_sale_order->getVariety( $product['product_id'], 14 );
+					$grape_variety = $this->model_sale_order->getVariety( $product['product_id'], 15 );
+					$appellation = $this->model_sale_order->getVariety( $product['product_id'], 25 );
+					$origins = $this->model_sale_order->getOrigins( $product['vendor_id'] );
+					
+					$product_data[] = array(
+						'order_id'	=> $order_id,
+						'date_added'  => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'name'     => $product['name'],
+						'product_no'   => $product['product_no'],
+						'pallet_no'    => $product['pallet_no'],
+						'alchogol_volume' => $alchogol_volume.' °',
+						'vintage' => $vintage,
+						'color'   => $color,
+						'grape_variety' => $grape_variety,
+						'appellation'   => $appellation,
+						'origins'     => $origins
+					);
+				}
+
+			}
+		}
+		$data['orders'][] = array(
+				'product'            => $product_data,
+				'container_id' => $order_info['container_id'],
+				'shipment_id' => $order_info['shipment_id']
+		);
+		$this->response->setOutput($this->load->view('sale/order_variety_list_pdf.tpl', $data));
+			
+	}
+	
+	public function appendixxls() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_variety_list');
+
+		if ($this->request->server['HTTPS'])
+		{
+			$data['base'] = HTTPS_SERVER;
+		}
+		else
+		{
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_containerid'] = $this->language->get('text_containerid');
+		$data['text_shipmentid'] = $this->language->get('text_shipmentid');
+		$data['text_pallet_id'] = $this->language->get('text_pallet_id');
+		$data['text_product_no'] = $this->language->get('text_product_no');
+		$data['text_product_name'] = $this->language->get('text_product_name');
+		
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_super_total'] = $this->language->get('text_super_total');
+		$data['column_head_store']  = $this->language->get('column_head_store');
+		$data['column_head_wh']     = $this->language->get('column_head_wh');
+		$data['column_head_agent']  = $this->language->get('column_head_agent');
+
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_order_id'] = $this->language->get('column_order_id');
+		$data['column_order_date'] = $this->language->get('column_order_date');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_total'] = $this->language->get('column_total');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_color']          = $this->language->get('column_color');
+		$data['column_vintage']        = $this->language->get('column_vintage');
+		$data['column_grape_variety']  = $this->language->get('column_grape_variety');
+		$data['column_alchogol_volume']    = $this->language->get('column_alchogol_volume');
+		$data['column_appellation']    = $this->language->get('column_appellation');
+		$data['column_origins']      = $this->language->get('column_origins');
+
+		include 'controller/bar/switch.php';
+		
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		$store_info = $this->model_setting_setting->getSetting('config', 0 );
+
+		if ($store_info) {
+			$store_address = $store_info['config_address'];
+			$store_email = $store_info['config_email'];
+			$store_telephone = $store_info['config_telephone'];
+			$store_fax = $store_info['config_fax'];
+			$comment = $store_info['config_comment'];
+		} else {
+			$store_address = $this->config->get('config_address');
+			$store_email = $this->config->get('config_email');
+			$store_telephone = $this->config->get('config_telephone');
+			$store_fax = $this->config->get('config_fax');
+			$comment = $this->config->get('config_comment');
+		}
+		$store_name = $this->config->get('config_name');
+		$data['store_name']         = $store_name;
+		$data['store_address']      = nl2br($store_address);
+		$data['store_email']        = $store_email;
+		$data['store_telephone']    = $store_telephone;
+		$data['store_fax']          = $store_fax;
+		$data['store_url']          = rtrim(HTTP_CATALOG, '/');
+		
+		$this->load->model('sale/vdi_order');
+		$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+		$format = '{firstname} {lastname}' .  "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+
+		$find = array(
+			'{firstname}',
+			'{lastname}',
+			'{address_1}',
+			'{address_2}',
+			'{city}',
+			'{postcode}',
+			'{zone}',
+			//'{zone_code}',
+			'{country}'
+		);
+
+		$replace = array(
+			'firstname' => '',//$wh_info['shipping_firstname'],
+			'lastname'  => '',//$wh_info['shipping_lastname'],
+			'address_1' => $wh_info['address_1'],
+			'address_2' => $wh_info['address_2'],
+			'city'      => $wh_info['city'],
+			'postcode'  => $wh_info['postcode'],
+			'zone'      => '',
+			//'zone_code' => $wh_info['zone_code'],
+			'country'   => $wh_info['country']
+		);
+
+				$wh_address_fr = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['wh_address_fr'] = $wh_address_fr;
+				$data['wh_company']   = $wh_info['company'];
+				$data['wh_telephone'] = $wh_info['telephone'];
+				$data['wh_fax'] = $wh_info['fax'];
+				$data['wh_email'] = $wh_info['email'];
+				
+		//Get HK WH address
+		$wh_info_hk = $this->model_sale_vdi_order->getWarehouseAddressHK();
+		$replace = array(
+			'address_1' => $wh_info_hk['address_1'],
+			'address_2' => $wh_info_hk['address_2'],
+			'city'      => $wh_info_hk['city'],
+			'postcode'  => $wh_info_hk['postcode'],
+			'zone'      => '',
+			'country'   => $wh_info_hk['country']
+		);
+		$wh_address_hk = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+		$data['wh_address_hk'] = $wh_address_hk;
+		$data['wh_company_hk']   = $wh_info_hk['company'];
+		$data['wh_telephone_hk'] = $wh_info_hk['telephone'];
+		$data['wh_fax_hk'] = $wh_info_hk['fax'];
+		$data['wh_email_hk'] = $wh_info_hk['email'];
+		
+		$product_data = array();
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+
+				$products = $this->model_sale_order->getOrderProducts($order_id);
+
+				foreach ($products as $product) {
+
+					$vintage = $this->model_sale_order->getVariety( $product['product_id'], 13 );
+					$color = $this->model_sale_order->getVariety( $product['product_id'], 14 );
+					$grape_variety = $this->model_sale_order->getVariety( $product['product_id'], 15 );
+					$appellation = $this->model_sale_order->getVariety( $product['product_id'], 25 );
+					$alchogol_volume = $this->model_sale_order->getVariety( $product['product_id'], 16);
+					$origins = $this->model_sale_order->getOrigins( $product['vendor_id'] );
+					
+					$product_data[] = array(
+						'order_id'	=> $order_id,
+						'date_added'  => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'name'     => $product['name'],
+						'product_no'   => $product['product_no'],
+						'pallet_no'    => $product['pallet_no'],
+						'vintage' => $vintage,
+						'color'   => $color,
+						'grape_variety' => $grape_variety,
+						'alchogol_volume'   => $alchogol_volume.' °',
+						'appellation'   => $appellation,
+						'origins'     => $origins
+					);
+				}
+
+			}
+		}
+		$data['orders'][] = array(
+				'product'            => $product_data,
+				'container_id' => $order_info['container_id'],
+				'shipment_id' => $order_info['shipment_id']
+		);
+		$this->response->setOutput($this->load->view('sale/order_variety_list_xls.tpl', $data));
+			
+	}
+	public function shippingpdf() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_shipping');
+
+		if ($this->request->server['HTTPS']) {
+			$data['base'] = HTTPS_SERVER;
+		} else {
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_shipping'] = $this->language->get('text_shipping');
+		$data['text_picklist'] = $this->language->get('text_picklist');
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_invoice_no'] = $this->language->get('text_invoice_no');
+		$data['text_invoice_date'] = $this->language->get('text_invoice_date');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_contact'] = $this->language->get('text_contact');
+		$data['text_from'] = $this->language->get('text_from');
+		$data['text_to'] = $this->language->get('text_to');
+		$data['text_shipping_method'] = $this->language->get('text_shipping_method');
+		$data['text_sku'] = $this->language->get('text_sku');
+		$data['text_upc'] = $this->language->get('text_upc');
+		$data['text_ean'] = $this->language->get('text_ean');
+		$data['text_jan'] = $this->language->get('text_jan');
+		$data['text_isbn'] = $this->language->get('text_isbn');
+		$data['text_mpn'] = $this->language->get('text_mpn');
+
+		$data['column_location'] = $this->language->get('column_location');
+		$data['column_reference'] = $this->language->get('column_reference');
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_model'] = $this->language->get('column_model');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_comment'] = $this->language->get('column_comment');
+
+		$this->load->model('sale/order');
+		$this->load->model('sale/vdi_order');
+
+		$this->load->model('catalog/product');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+		//GV - GENERAL
+		$data['text_total_weight'] = $this->language->get('text_total_weight');
+		$data['text_total_cases']  = $this->language->get('text_total_cases');
+		$data['text_note']         = $this->language->get('text_note');
+		$data['text_tracking_no']  = $this->language->get('text_tracking_no');
+		$data['text_carrier']      = $this->language->get('text_carrier');
+		$data['text_nof_prod']     = $this->language->get('text_nof_prod');
+		$data['text_nof_pallet']   = $this->language->get('text_nof_pallet');
+		$data['text_pal_total_prod']  = $this->language->get('text_pal_total_prod');
+		$data['text_vintage']         = $this->language->get('text_vintage');
+		$data['text_wh_contact']      = $this->language->get('text_wh_contact');
+		$data['text_store_contact']   = $this->language->get('text_store_contact');
+		$data['text_wh_info']         = $this->language->get('text_wh_info');
+		$data['column_location'] = 'Prod#';
+		$data['uom'] = $this->model_sale_vdi_order->getUOM( $this->config->get('config_weight_class_id') );
+		$data['invbar'] = $this->model_sale_vdi_order->getInvoiceBarType();
+		$data['store_email1'] = $this->config->get('config_email');
+		$data['store_telephone1'] = $this->config->get('config_telephone');
+		$data['store_fax1'] = $this->config->get('config_fax');
+		$data['mvd_sales_order_invoice_address'] = $this->config->get('mvd_sales_order_invoice_address');
+		
+		//need to be added carefully in another way
+		$data['carrier'] = '';
+		$data['tracking_no'] = '';
+		
+		foreach ($orders as $order_id) {
+			//$order_id = $orders[0];
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			$vendors = array();
+			$vendors = $this->model_sale_vdi_order->getOrderVendors($order_id);
+
+			foreach ( $vendors as $vendor ) {
+					//$vendor_id = $vendors[0]['vendor_id'];
+					$vendor_id = $vendor['vendor_id'];
+				
+				$address_data = $this->model_sale_vdi_order->getVendorAddress( $vendor_id );
+				$company = $address_data['company'];
+	
+				// Make sure there is a shipping method
+				if ($order_info && $order_info['shipping_code']) {
+					$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);
+	
+						$format = '{firstname} {lastname}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';				
+						$find = array(
+						'{firstname}',
+						'{lastname}',
+						'{address_1}',
+						'{address_2}',
+						'{city}',
+						'{postcode}',
+						'{zone}',
+						'{zone_code}',
+						'{country}'
+						);
+	
+						$replace = array(
+							'firstname' => $address_data['firstname'],
+							'lastname'  => $address_data['lastname'],
+							'address_1' => $address_data['address_1'],
+							'address_2' => $address_data['address_2'],
+							'city'      => $address_data['city'],
+							'postcode'  => $address_data['postcode'],
+							'zone'      => $address_data['zone'],
+							'zone_code' => $address_data['zone_code'],
+							'country'   => $address_data['country']
+						);
+	
+					$vendor_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				
+					$store_address = $vendor_address;
+					$store_email = $address_data['email'];
+					$store_telephone = $address_data['telephone'];
+					$store_fax = $address_data['fax'];
+					if ($order_info['invoice_no']) {
+						$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+					} else {
+						$invoice_no = '';
+					}
+					
+					$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+	
+					$find = array(
+						'{firstname}',
+						'{lastname}',
+						'{company}',
+						'{address_1}',
+						'{address_2}',
+						'{city}',
+						'{postcode}',
+						'{zone}',
+						//'{zone_code}',
+						'{country}'
+					);
+	
+					$replace = array(
+						'firstname' => '',//$wh_info['shipping_firstname'],
+						'lastname'  => '',//$wh_info['shipping_lastname'],
+						'company'   => $wh_info['company'],
+						'address_1' => $wh_info['address_1'],
+						'address_2' => $wh_info['address_2'],
+						'city'      => $wh_info['city'],
+						'postcode'  => $wh_info['postcode'],
+						'zone'      => '',
+						//'zone_code' => $wh_info['zone_code'],
+						'country'   => $wh_info['country']
+					);
+	
+					$shipping_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+					$this->load->model('tool/upload');
+	
+					$product_data = array();
+	
+					$products = $this->model_sale_vdi_order->getOrderProductsNew($order_id, $vendor_id);
+	
+					//$products = $this->model_sale_vdi_order->getOrderProductsWarehouse($order_id);
+					//GV
+					$total_weight = 0.0;
+					$total_quantity = 0;
+					$weight1 = 0.0;
+	
+					foreach ($products as $product) {
+						$product_info = $this->model_catalog_product->getProduct($product['product_id']);
+	
+						//GV
+						$fob = $this->model_sale_vdi_order->getFobPrice( $product['product_id'] );
+						if ( (int) $fob['pf'] == 6 ) {
+							$weight1 = (float) ( $product_info['weight']  ) * (float) $product['quantity'];
+						} if ( (int) $fob['pf'] == 12 ) {
+							$weight1 = (float) ( $product_info['weight'] * 2 ) * (float) $product['quantity'];
+						}
+						$total_weight += (float) $weight1;
+						$total_quantity += $product['quantity'];
+						$product_no = $this->model_sale_vdi_order->getProductNo( $order_id, $product['product_id']);
+						$product_info['location'] = $product_no; //location is replaced by product#
+						$vintage = $this->model_sale_vdi_order->getVintage( $product['product_id'] );
+						$pallet_no = $this->model_sale_vdi_order->getPalletID( $product['pallet_id'] );
+	
+						$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
+	
+						$option_data = array();
+	
+						foreach ($options as $option) {
+							if ($option['type'] != 'file') {
+								$value = $option['value'];
+							} else {
+								$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+	
+								if ($upload_info) {
+									$value = $upload_info['name'];
+								} else {
+									$value = '';
+								}
+							}
+	
+							$option_data[] = array(
+								'name'  => $option['name'],
+								'value' => $value
+							);
+						}
+	
+						$product_data[] = array(
+							'name'     => $product_info['name'],
+							'model'    => $product_info['model'],
+							'option'   => $option_data,
+							'quantity' => $product['quantity'],
+							'location' => $product_info['location'],
+							'location1' => $product_no,
+							'vintage'  => $vintage,
+							'sku'      => $product_info['sku'],
+							'upc'      => $product_info['upc'],
+							'ean'      => $product_info['ean'],
+							'jan'      => $product_info['jan'],
+							'isbn'     => $product_info['isbn'],
+							'mpn'      => $product_info['mpn'],
+							'pallet_no' => $pallet_no,
+							'weight'   => $this->weight->format( $weight1, $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'))
+						);
+					}
+	
+					//GV WAREHOUSE INFORMATION
+					$wh_product_data = array();
+	
+					$wh_products = $this->model_sale_vdi_order->getOrderProductsWarehouse($order_id);
+					//GV
+					$wh_total_weight = 0.0;
+					$wh_total_quantity = 0;
+					$wh_weight1 = 0.0;
+					
+					foreach ($wh_products as $wh_product) {
+						$wh_product_info = $this->model_catalog_product->getProduct($wh_product['product_id']);
+						//GV
+						$fob = $this->model_sale_vdi_order->getFobPrice( $wh_product['product_id'] );
+						if ( (int) $fob['pf'] == 6 ) {
+							$wh_weight1 = (float) ( $wh_product_info['weight']  ) * (float) $wh_product['quantity'];
+						} if ( (int) $fob['pf'] == 12 ) {
+							$wh_weight1 = (float) ( $wh_product_info['weight'] * 2 ) * (float) $wh_product['quantity'];
+						}
+						$wh_total_weight += (float) $wh_weight1;
+						$wh_total_quantity += $wh_product['quantity'];
+						$product_no = $this->model_sale_vdi_order->getProductNo( $order_id, $wh_product['product_id']);
+						$wh_product_info['location'] = $product_no; //location is replaced by product#
+						
+						$wh_vintage = $this->model_sale_vdi_order->getVintage( $wh_product['product_id'] );
+						$wh_pallet_no = $this->model_sale_vdi_order->getPalletID( $wh_product['pallet_id'] );
+						$pal_total_product = $this->model_sale_vdi_order->getPalletProductTotal( $wh_pallet_no );
+	
+						$wh_product_data[] = array(
+							'name'     => $wh_product_info['name'],
+							'model'    => $wh_product_info['model'],
+							'quantity' => $wh_product['quantity'],
+							'location' => $wh_product_info['location'],
+							'location1' => $wh_product_info['location'],
+							'sku'      => $wh_product_info['sku'],
+							'upc'      => $wh_product_info['upc'],
+							'ean'      => $wh_product_info['ean'],
+							'jan'      => $wh_product_info['jan'],
+							'isbn'     => $wh_product_info['isbn'],
+							'mpn'      => $wh_product_info['mpn'],
+							'pallet_no' => $wh_pallet_no,
+							'pal_total_product' => $pal_total_product,
+							'weight1'  => $wh_weight1 ,
+							'vintage'  => $wh_vintage,
+							'weight'   => $this->weight->format( $wh_weight1, $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'))
+						);
+					}
+					$admin_comment =  nl2br( $this->model_sale_vdi_order->getComment( $order_id ) );
+					$total_pallet = $this->model_sale_vdi_order->getOrderPalletTotal( $order_id );
+					$total_product = $this->model_sale_vdi_order->getOrderProductTotal( $order_id );
+
+					$data['orders'][] = array(
+						'order_id'	         => $order_id,
+						'invoice_no'         => $invoice_no,
+						'date_added'         => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'store_name'         => $order_info['store_name'],
+						'store_url'          => rtrim($order_info['store_url'], '/'),
+						'store_address'      => nl2br($store_address),
+						'store_email'        => $store_email,
+						'store_telephone'    => $store_telephone,
+						'store_fax'          => $store_fax,
+						'email'              => $order_info['email'],
+						'telephone'          => $order_info['telephone'],
+						'shipping_address'   => $shipping_address,
+						'shipping_method'    => $order_info['shipping_method'],
+						'product'            => $product_data,
+						'wh_product'         => $wh_product_data,
+						'comment'            => nl2br($comment),
+						'vendor_id'          => $vendor_id,
+						'wh_telephone'      => $wh_info['telephone'],
+						'wh_email'          => $wh_info['email'],
+						'total_quantity'   => $total_quantity,
+						'total_weight'      => $this->weight->format( $total_weight , $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point')),
+						'admin_comment'     => $admin_comment,
+						'total_pallet'      => $total_pallet,
+						'total_product'     => $total_product,
+						'company'           => $company,
+						'carrier'           => ($order_info['carrier'] ? $order_info['carrier'] : ""),
+						'tracking_no'       => ($order_info['tracking_no'] ? $order_info['tracking_no'] : "")
+
+					);
+	
+					//GV
+					/*$data['vendor_id'] = $vendor_id;
+					$data['store_email1'] = $this->config->get('config_email');
+					$data['store_telephone1'] = $this->config->get('config_telephone');
+					$data['store_fax1'] = $this->config->get('config_fax');
+					$data['wh_telephone'] = $wh_info['telephone'];
+					$data['wh_email'] = $wh_info['email'];
+	
+					$data['total_quantity'] = $total_quantity;
+					$data['total_weight'] = $this->weight->format( $total_weight , $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'));*/
+	
+				 } //end if
+			} //vendors
+		} //Orders
+		
+		$this->response->setOutput($this->load->view('sale/order_shipping_pdf.tpl', $data));
+	}
+	
+	public function shippingxls() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_shipping');
+
+		if ($this->request->server['HTTPS']) {
+			$data['base'] = HTTPS_SERVER;
+		} else {
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_shipping'] = $this->language->get('text_shipping');
+		$data['text_picklist'] = $this->language->get('text_picklist');
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_invoice_no'] = $this->language->get('text_invoice_no');
+		$data['text_invoice_date'] = $this->language->get('text_invoice_date');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_contact'] = $this->language->get('text_contact');
+		$data['text_from'] = $this->language->get('text_from');
+		$data['text_to'] = $this->language->get('text_to');
+		$data['text_shipping_method'] = $this->language->get('text_shipping_method');
+		$data['text_sku'] = $this->language->get('text_sku');
+		$data['text_upc'] = $this->language->get('text_upc');
+		$data['text_ean'] = $this->language->get('text_ean');
+		$data['text_jan'] = $this->language->get('text_jan');
+		$data['text_isbn'] = $this->language->get('text_isbn');
+		$data['text_mpn'] = $this->language->get('text_mpn');
+
+		$data['column_location'] = $this->language->get('column_location');
+		$data['column_reference'] = $this->language->get('column_reference');
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_weight'] = $this->language->get('column_weight');
+		$data['column_model'] = $this->language->get('column_model');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_comment'] = $this->language->get('column_comment');
+
+		$this->load->model('sale/order');
+		$this->load->model('sale/vdi_order');
+
+		$this->load->model('catalog/product');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+		//GV - GENERAL
+		$data['text_total_weight'] = $this->language->get('text_total_weight');
+		$data['text_total_cases']  = $this->language->get('text_total_cases');
+		$data['text_note']         = $this->language->get('text_note');
+		$data['text_tracking_no']  = $this->language->get('text_tracking_no');
+		$data['text_carrier']      = $this->language->get('text_carrier');
+		$data['text_nof_prod']     = $this->language->get('text_nof_prod');
+		$data['text_nof_pallet']   = $this->language->get('text_nof_pallet');
+		$data['text_pal_total_prod']  = $this->language->get('text_pal_total_prod');
+		$data['text_vintage']         = $this->language->get('text_vintage');
+		$data['text_wh_contact']      = $this->language->get('text_wh_contact');
+		$data['text_store_contact']   = $this->language->get('text_store_contact');
+		$data['text_wh_info']         = $this->language->get('text_wh_info');
+		$data['column_location'] = 'Prod#';
+		$data['uom'] = $this->model_sale_vdi_order->getUOM( $this->config->get('config_weight_class_id') );
+		$data['invbar'] = $this->model_sale_vdi_order->getInvoiceBarType();
+		$data['store_email1'] = $this->config->get('config_email');
+		$data['store_telephone1'] = $this->config->get('config_telephone');
+		$data['store_fax1'] = $this->config->get('config_fax');
+		$data['mvd_sales_order_invoice_address'] = $this->config->get('mvd_sales_order_invoice_address');
+		
+		//need to be added carefully in another way
+		$data['carrier'] = '';
+		$data['tracking_no'] = '';
+		
+		foreach ($orders as $order_id) {
+			//$order_id = $orders[0];
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			$vendors = array();
+			$vendors = $this->model_sale_vdi_order->getOrderVendors($order_id);
+
+			foreach ( $vendors as $vendor ) {
+					//$vendor_id = $vendors[0]['vendor_id'];
+					$vendor_id = $vendor['vendor_id'];
+				
+				$address_data = $this->model_sale_vdi_order->getVendorAddress( $vendor_id );
+				$company = $address_data['company'];
+	
+				// Make sure there is a shipping method
+				if ($order_info && $order_info['shipping_code']) {
+					$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);
+	
+						$format = '{firstname} {lastname}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';				
+						$find = array(
+						'{firstname}',
+						'{lastname}',
+						'{address_1}',
+						'{address_2}',
+						'{city}',
+						'{postcode}',
+						'{zone}',
+						'{zone_code}',
+						'{country}'
+						);
+	
+						$replace = array(
+							'firstname' => $address_data['firstname'],
+							'lastname'  => $address_data['lastname'],
+							'address_1' => $address_data['address_1'],
+							'address_2' => $address_data['address_2'],
+							'city'      => $address_data['city'],
+							'postcode'  => $address_data['postcode'],
+							'zone'      => $address_data['zone'],
+							'zone_code' => $address_data['zone_code'],
+							'country'   => $address_data['country']
+						);
+	
+					$vendor_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				
+					$store_address = $vendor_address;
+					$store_email = $address_data['email'];
+					$store_telephone = $address_data['telephone'];
+					$store_fax = $address_data['fax'];
+					if ($order_info['invoice_no']) {
+						$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+					} else {
+						$invoice_no = '';
+					}
+					
+					$wh_info = $this->model_sale_vdi_order->getWarehouseAddress();
+					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+	
+					$find = array(
+						'{firstname}',
+						'{lastname}',
+						'{company}',
+						'{address_1}',
+						'{address_2}',
+						'{city}',
+						'{postcode}',
+						'{zone}',
+						//'{zone_code}',
+						'{country}'
+					);
+	
+					$replace = array(
+						'firstname' => '',//$wh_info['shipping_firstname'],
+						'lastname'  => '',//$wh_info['shipping_lastname'],
+						'company'   => $wh_info['company'],
+						'address_1' => $wh_info['address_1'],
+						'address_2' => $wh_info['address_2'],
+						'city'      => $wh_info['city'],
+						'postcode'  => $wh_info['postcode'],
+						'zone'      => '',
+						//'zone_code' => $wh_info['zone_code'],
+						'country'   => $wh_info['country']
+					);
+	
+					$shipping_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+					$this->load->model('tool/upload');
+	
+					$product_data = array();
+	
+					$products = $this->model_sale_vdi_order->getOrderProductsNew($order_id, $vendor_id);
+	
+					//$products = $this->model_sale_vdi_order->getOrderProductsWarehouse($order_id);
+					//GV
+					$total_weight = 0.0;
+					$total_quantity = 0;
+					$weight1 = 0.0;
+	
+					foreach ($products as $product) {
+						$product_info = $this->model_catalog_product->getProduct($product['product_id']);
+	
+						//GV
+						$fob = $this->model_sale_vdi_order->getFobPrice( $product['product_id'] );
+						if ( (int) $fob['pf'] == 6 ) {
+							$weight1 = (float) ( $product_info['weight']  ) * (float) $product['quantity'];
+						} if ( (int) $fob['pf'] == 12 ) {
+							$weight1 = (float) ( $product_info['weight'] * 2 ) * (float) $product['quantity'];
+						}
+						$total_weight += (float) $weight1;
+						$total_quantity += $product['quantity'];
+						$product_no = $this->model_sale_vdi_order->getProductNo( $order_id, $product['product_id']);
+						$product_info['location'] = $product_no; //location is replaced by product#
+						$vintage = $this->model_sale_vdi_order->getVintage( $product['product_id'] );
+						$pallet_no = $this->model_sale_vdi_order->getPalletID( $product['pallet_id'] );
+	
+						$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
+	
+						$option_data = array();
+	
+						foreach ($options as $option) {
+							if ($option['type'] != 'file') {
+								$value = $option['value'];
+							} else {
+								$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+	
+								if ($upload_info) {
+									$value = $upload_info['name'];
+								} else {
+									$value = '';
+								}
+							}
+	
+							$option_data[] = array(
+								'name'  => $option['name'],
+								'value' => $value
+							);
+						}
+	
+						$product_data[] = array(
+							'name'     => $product_info['name'],
+							'model'    => $product_info['model'],
+							'option'   => $option_data,
+							'quantity' => $product['quantity'],
+							'location' => $product_info['location'],
+							'location1' => $product_no,
+							'vintage'  => $vintage,
+							'sku'      => $product_info['sku'],
+							'upc'      => $product_info['upc'],
+							'ean'      => $product_info['ean'],
+							'jan'      => $product_info['jan'],
+							'isbn'     => $product_info['isbn'],
+							'mpn'      => $product_info['mpn'],
+							'pallet_no' => $pallet_no,
+							'weight'   => $this->weight->format( $weight1, $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'))
+						);
+					}
+	
+					//GV WAREHOUSE INFORMATION
+					$wh_product_data = array();
+	
+					$wh_products = $this->model_sale_vdi_order->getOrderProductsWarehouse($order_id);
+					//GV
+					$wh_total_weight = 0.0;
+					$wh_total_quantity = 0;
+					$wh_weight1 = 0.0;
+					
+					foreach ($wh_products as $wh_product) {
+						$wh_product_info = $this->model_catalog_product->getProduct($wh_product['product_id']);
+						//GV
+						$fob = $this->model_sale_vdi_order->getFobPrice( $wh_product['product_id'] );
+						if ( (int) $fob['pf'] == 6 ) {
+							$wh_weight1 = (float) ( $wh_product_info['weight']  ) * (float) $wh_product['quantity'];
+						} if ( (int) $fob['pf'] == 12 ) {
+							$wh_weight1 = (float) ( $wh_product_info['weight'] * 2 ) * (float) $wh_product['quantity'];
+						}
+						$wh_total_weight += (float) $wh_weight1;
+						$wh_total_quantity += $wh_product['quantity'];
+						$product_no = $this->model_sale_vdi_order->getProductNo( $order_id, $wh_product['product_id']);
+						$wh_product_info['location'] = $product_no; //location is replaced by product#
+						
+						$wh_vintage = $this->model_sale_vdi_order->getVintage( $wh_product['product_id'] );
+						$wh_pallet_no = $this->model_sale_vdi_order->getPalletID( $wh_product['pallet_id'] );
+						$pal_total_product = $this->model_sale_vdi_order->getPalletProductTotal( $wh_pallet_no );
+	
+						$wh_product_data[] = array(
+							'name'     => $wh_product_info['name'],
+							'model'    => $wh_product_info['model'],
+							'quantity' => $wh_product['quantity'],
+							'location' => $wh_product_info['location'],
+							'location1' => $wh_product_info['location'],
+							'sku'      => $wh_product_info['sku'],
+							'upc'      => $wh_product_info['upc'],
+							'ean'      => $wh_product_info['ean'],
+							'jan'      => $wh_product_info['jan'],
+							'isbn'     => $wh_product_info['isbn'],
+							'mpn'      => $wh_product_info['mpn'],
+							'pallet_no' => $wh_pallet_no,
+							'pal_total_product' => $pal_total_product,
+							'weight1'  => $wh_weight1 ,
+							'vintage'  => $wh_vintage,
+							'weight'   => $this->weight->format( $wh_weight1, $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'))
+						);
+					}
+					$admin_comment =  nl2br( $this->model_sale_vdi_order->getComment( $order_id ) );
+					$total_pallet = $this->model_sale_vdi_order->getOrderPalletTotal( $order_id );
+					$total_product = $this->model_sale_vdi_order->getOrderProductTotal( $order_id );
+
+					$data['orders'][] = array(
+						'order_id'	         => $order_id,
+						'invoice_no'         => $invoice_no,
+						'date_added'         => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
+						'store_name'         => $order_info['store_name'],
+						'store_url'          => rtrim($order_info['store_url'], '/'),
+						'store_address'      => nl2br($store_address),
+						'store_email'        => $store_email,
+						'store_telephone'    => $store_telephone,
+						'store_fax'          => $store_fax,
+						'email'              => $order_info['email'],
+						'telephone'          => $order_info['telephone'],
+						'shipping_address'   => $shipping_address,
+						'shipping_method'    => $order_info['shipping_method'],
+						'product'            => $product_data,
+						'wh_product'         => $wh_product_data,
+						'comment'            => nl2br($comment),
+						'vendor_id'          => $vendor_id,
+						'wh_telephone'      => $wh_info['telephone'],
+						'wh_email'          => $wh_info['email'],
+						'total_quantity'   => $total_quantity,
+						'total_weight'      => $this->weight->format( $total_weight , $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point')),
+						'admin_comment'     => $admin_comment,
+						'total_pallet'      => $total_pallet,
+						'total_product'     => $total_product,
+						'company'           => $company,
+						'carrier'           => ($order_info['carrier'] ? $order_info['carrier'] : ""),
+						'tracking_no'       => ($order_info['tracking_no'] ? $order_info['tracking_no'] : "")
+
+					);
+	
+					//GV
+					/*$data['vendor_id'] = $vendor_id;
+					$data['store_email1'] = $this->config->get('config_email');
+					$data['store_telephone1'] = $this->config->get('config_telephone');
+					$data['store_fax1'] = $this->config->get('config_fax');
+					$data['wh_telephone'] = $wh_info['telephone'];
+					$data['wh_email'] = $wh_info['email'];
+	
+					$data['total_quantity'] = $total_quantity;
+					$data['total_weight'] = $this->weight->format( $total_weight , $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'));*/
+	
+				 } //end if
+			} //vendors
+		} //Orders
+		
+		$this->response->setOutput($this->load->view('sale/order_shipping_xls.tpl', $data));
+	}
+
+]]></add>
+		</operation>
+
+	</file>
+	<file name="admin/model/sale/order.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[
+			public function getTotalEmailsByProductsOrdered($products) {
+			]]></search>
+			<add><![CDATA[
+	//GV
+	public function getProductWeight($product_id) {
+		
+		$sql = "SELECT p.`weight`, wd.`unit` FROM `oc_product` p ";
+		$sql .= " JOIN oc_weight_class_description wd ON wd.weight_class_id = p.weight_class_id AND wd.language_id = 1 ";
+		$sql .= " WHERE p.`product_id` = '" . (int) $product_id . "'  LIMIT 1 ";
+		$query = $this->db->query( $sql );
+
+		$weight_info = array();
+		if ( $query->num_rows ) {
+			$weight_info = $query->row;
+		}
+		return $weight_info;
+	}
+	public function getVariety( $product_id, $code ) {	
+			$query = $this->db->query("SELECT  `text` FROM " . DB_PREFIX . "product_attribute pa  WHERE  pa.product_id= '" . (int)$product_id . "' AND pa.attribute_id = '" . (int) $code . "' AND language_id = 1" );
+			$text = '';
+			if ( $query->num_rows ) {
+				$text = $query->row['text'];
+			}
+			return $text;
+	}
+	public function getOrigins( $vendor_id ) {	
+			$query = $this->db->query("SELECT  c.`name` FROM " . DB_PREFIX . "vendors v LEFT JOIN  ". DB_PREFIX ."country c ON  c.country_id = v.country_id WHERE  v.vendor_id= '" . (int)$vendor_id . "' " );
+			$country = '';
+			if ( $query->num_rows ) {
+				$country = $query->row['name'];
+			}
+			return $country;
+	}
+	public function getOrderCost( $order_id ) {	
+			$query = $this->db->query("SELECT  `value` FROM " . DB_PREFIX . "order_total ot  WHERE  ot.order_id= '" . (int)$order_id . "' AND  `code` = 'total' " );
+			$amount = 0.0;
+			if ( $query->num_rows ) {
+				$amount = $query->row['value'];
+			}
+			return $amount;
+	}
+	public function getTotalPallet( $order_id ) {
+			$query = $this->db->query("SELECT  COUNT(*) AS `total` FROM " . DB_PREFIX . "pallet p  WHERE  p.order_id= '" . (int)$order_id . "' " );
+			$total = 0;
+			if ( $query->num_rows ) {
+				$total = $query->row['total'];
+			}
+			return $total;
+	}
+	//END]]></add>
+		</operation>
+		
+	</file>	
+
+	<file name="admin/model/sale/vdi_order.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[
+			public function getTotalVendorProductsNew($data = array()) {
+			]]></search>
+			<add><![CDATA[
+	//GV
+	public function getWarehouseAddressHK() {	
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "warehouse` WHERE wh_id = 2");
+	
+		if ($query->row) {
+			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$query->row['country_id'] . "'");
+
+			if ($country_query->num_rows) {
+				$country = $country_query->row['name'];
+				$iso_code_2 = $country_query->row['iso_code_2'];
+				$iso_code_3 = $country_query->row['iso_code_3'];
+				$address_format = $country_query->row['address_format'];
+			} else {
+				$country = '';
+				$iso_code_2 = '';
+				$iso_code_3 = '';
+				$address_format = '';
+			}
+
+			return array(
+				'company'		 => $query->row['company'],
+				'email'			 => $query->row['email'],
+				'firstname'      => $query->row['firstname'],
+				'lastname'       => $query->row['lastname'],
+				'address_1'      => $query->row['address_1'],
+				'address_2'      => $query->row['address_2'],
+				'postcode'       => $query->row['postcode'],
+				'city'           => $query->row['city'],
+				'telephone'		 => $query->row['telephone'],
+				'email'		 	 => $query->row['email'],
+				'fax'		 	 => $query->row['fax'],
+				'country_id'     => $query->row['country_id'],
+				'country'        => $country,
+				'iso_code_2'     => $iso_code_2,
+				'iso_code_3'     => $iso_code_3,
+				'address_format' => $address_format
+			);
+		}
+	}
+	//END]]></add>
+		</operation>
+		
+	</file>	
+</modification>

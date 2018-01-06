@@ -1,0 +1,1 @@
+<div><label><?php echo $entry_color; ?></label> -  <?php echo $setting['color']; ?></div>

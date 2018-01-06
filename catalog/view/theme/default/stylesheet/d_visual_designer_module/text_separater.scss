@@ -1,0 +1,37 @@
+.vd-text-separater-container{
+    width:100%;
+    > div{
+        &.vd-text-separater-align-left{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        &.vd-text-separater-align-center{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &.vd-text-separater-align-right{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        > .vd-text-separater{
+            float:left;
+        }
+        > h2.vd-separater-title{
+            float:left;
+            margin: 0px;
+        }
+    }
+}
+.vd-separater-left{
+    margin-right:auto;
+}
+.vd-separater-center{
+    margin-left:auto;
+    margin-right:auto;
+}
+.vd-separater-right{
+    margin-left:auto;
+}

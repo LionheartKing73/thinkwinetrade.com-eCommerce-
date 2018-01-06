@@ -1,0 +1,2061 @@
+<modification>
+  <id>Pallet Worksheet</id>
+  <version>1.1</version>
+  <vqmver>2.5.1</vqmver>
+  <author>tomzu</author>
+	<email>toms@buu.lv</email>
+	<website>http://www.ocdev.xyz</website>
+
+  <file name="admin/language/english/common/menu.php">
+    <operation error="log">
+      <search position="after" ><![CDATA[
+$_['text_order']                       = 'Orders';
+      ]]></search>
+      <add><![CDATA[
+$_['text_pallet']                      = 'Pallets';
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/common/cart.tpl">
+    <operation error="log">
+      <search position="replace" offset="500"><![CDATA[
+<div id="cart" class="btn-group btn-block">
+      ]]></search>
+      <add><![CDATA[
+     <a onclick="$('#loader-container').show();" href="<?php echo $pallet_worksheet; ?>" class="cartlink pull-right">
+    <div class="text-cart"><?php echo $text_pallet_worksheet; ?></div>
+    <div class="price-cart">
+        <button type="button" class="btn btn-inverse btn-block">
+
+               <?php
+     if(isset($palletsqty) && $palletsqty >0) {
+        echo '<span class="badge" id="frontballoon">'.$palletsqty.'</span>';
+    } else {
+        echo '<span class="badge" id="frontballoon">0</span>';
+        }?>
+
+        <span id="grandtotal" >
+        <?php echo (isset($grandtotal) && $grandtotal != '') ? ' ' . $grandtotal : '0,00' ?>
+        </span></button>
+    </div>
+</a>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/common/header.tpl">
+    <operation error="log">
+      <search position="after"><![CDATA[
+<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+      ]]></search>
+      <add><![CDATA[
+<script src="catalog/view/javascript/worksheet.js" type="text/javascript"></script>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+/stylesheet/stylesheet.css" rel="stylesheet">
+      ]]></search>
+      <add><![CDATA[
+<link href="catalog/view/theme/default/stylesheet/worksheet.css" rel="stylesheet">
+      ]]></add>
+    </operation>
+
+      <operation error="log">
+          <search position="replace"><![CDATA[
+<div class="col-sm-3 header-logo">
+      ]]></search>
+          <add><![CDATA[
+<div class="col-sm-3">
+      ]]></add>
+      </operation>
+
+      <operation error="log">
+          <search position="replace"><![CDATA[
+<div class="col-sm-3 "> <div style=" margin-left: 10px;   margin-top: 12px;"><img src="/image/catalog/button47.png" class="img-responsive" /></div></div>
+      ]]></search>
+          <add><![CDATA[
+
+      ]]></add>
+      </operation>
+
+  </file>
+
+  <file name="catalog/view/theme/*/template/account/order_info.tpl">
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><?php echo $column_name; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $column_pallet_no; ?></td>
+      ]]></add>
+    </operation>
+    <operation error="log">
+      <search position="replace" index="1" offset="2"><![CDATA[
+              <?php if ($products) { ?>
+      ]]></search>
+      <add><![CDATA[]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><?php echo $product['name']; ?>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $product['pallet_no']; ?></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" offset="3"><![CDATA[
+<td class="text-right" style="white-space: nowrap;"><?php if ($product['reorder']) { ?>
+      ]]></search>
+      <add><![CDATA[]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" offset="5"><![CDATA[
+<td colspan="3"></td>
+      ]]></search>
+      <add><![CDATA[
+<td colspan="6" class="text-right"><b><?php echo $total['title']; ?></b></td>
+              <td class="text-right"><?php echo $total['text']; ?></td>
+      ]]></add>
+    </operation>
+  </file>
+
+
+  <file name="catalog/model/checkout/order.php">
+    <operation error="log">
+      <search position="after" index="2"><![CDATA[
+$order_product_id = $this->db->getLastId();
+      ]]></search>
+      <add><![CDATA[
+$getVenId = $this->db->query("SELECT vs.vendor_id AS vendor_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "vendor v ON (p.product_id = v.vproduct_id) LEFT JOIN " . DB_PREFIX . "vendors vs ON (v.vendor = vs.vendor_id) WHERE p.product_id = '" . (int)$product['product_id'] . "'");
+        $getVenIds[] = array ('vendor_id' => $getVenId->row['vendor_id']);
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/model/account/order.php">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+      ]]></search>
+      <add><![CDATA[
+$query = $this->db->query("SELECT *, pp.quantity AS quantity, pp.total AS total, (SELECT pallet_no FROM " . DB_PREFIX . "pallet p WHERE p.pallet_id = pp.pallet_id) AS pallet_no FROM " . DB_PREFIX . "pallet_product pp LEFT JOIN " . DB_PREFIX . "order_product op USING (product_id, order_id) where op.order_id= '" . (int)$order_id . "' ORDER BY pallet_no");
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/language/english/english.php">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$_['button_cart']           = 'Add to Cart';
+      ]]></search>
+      <add><![CDATA[
+$_['button_cart']           = 'Add to Pallet';
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/language/english/common/cart.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$_['text_recurring'] = 'Payment Profile';
+      ]]></search>
+      <add><![CDATA[
+$_['text_pallet_worksheet'] = 'My Pallet Worksheet';
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/language/english/account/order.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$_['column_order_id']       = 'Order ID';
+      ]]></search>
+      <add><![CDATA[
+$_['column_pallet_no']      = 'Pallet No';
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/product/product.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['points'] = $product_info['points'];
+      ]]></search>
+      <add><![CDATA[
+$data['text_triangle'] = $this->language->get('text_triangle');
+$data['text_popup_title'] = $this->language->get('text_popup_title');
+$data['text_popup_qty'] = $this->language->get('text_popup_qty');
+$data['button_addtopallet'] = $this->language->get('button_addtopallet');
+$data['text_popup_details'] = $this->language->get('text_popup_details');
+$data['text_popup_column_sellers'] = $this->language->get('text_popup_column_sellers');
+$data['text_popup_column_name'] = $this->language->get('text_popup_column_name');
+$data['text_popup_column_qty'] = $this->language->get('text_popup_column_qty');
+$data['text_popup_column_price_per_bottle'] = $this->language->get('text_popup_column_price_per_bottle');
+$data['text_popup_column_price'] = $this->language->get('text_popup_column_price');
+$data['text_popup_column_total'] = $this->language->get('text_popup_column_total');
+$data['text_pallet_worksheet'] = $this->language->get('text_pallet_worksheet');
+$data['text_vendor_rating_tooltip'] = $this->language->get('text_vendor_rating_tooltip');
+$this->load->model('pallet/worksheet');
+
+      $vendor = $this->model_pallet_worksheet->getVendorName($data['product_id']);
+      $data['vendor'] = $vendor;
+
+      $vendor_id = $this->model_pallet_worksheet->getVendor($data['product_id']);
+        $qry="SELECT * FROM  " . DB_PREFIX . "vendors WHERE " . DB_PREFIX . "vendors.vendor_id  = '" . (int)$this->db->escape($vendor_id) . "'";
+        $query = $this->db->query($qry);
+          $this->load->model('tool/image');
+          if(isset($query->row['vendor_image']))
+	  {if (is_file(DIR_IMAGE . $query->row['vendor_image']))
+            $data['image_vendor'] = $this->model_tool_image->resize($query->row['vendor_image'], 45, 45);
+          }
+          else
+               $data['image_vendor'] = $this->model_tool_image->resize('no_image.png', 45, 45);
+
+      //$data['vendor_in_pallet'] = $this->controller_pallet_worksheet->getVendorInPallet($vendor_id);
+      $data['vendor_in_pallet'] = $this->load->controller('pallet/worksheet/getVendorInPallet', $vendor_id);
+       $data['vendor_rating'] = $this->model_pallet_worksheet->getTotalRatingsVendorsByVendorId($vendor_id);
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/product/category.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['text_limit'] = $this->language->get('text_limit');
+      ]]></search>
+      <add><![CDATA[
+$data['text_triangle'] = $this->language->get('text_triangle');
+$data['text_popup_title'] = $this->language->get('text_popup_title');
+$data['text_popup_qty'] = $this->language->get('text_popup_qty');
+$data['button_addtopallet'] = $this->language->get('button_addtopallet');
+$data['text_popup_details'] = $this->language->get('text_popup_details');
+$data['text_popup_column_sellers'] = $this->language->get('text_popup_column_sellers');
+$data['text_popup_column_name'] = $this->language->get('text_popup_column_name');
+$data['text_popup_column_qty'] = $this->language->get('text_popup_column_qty');
+$data['text_popup_column_price_per_bottle'] = $this->language->get('text_popup_column_price_per_bottle');
+$data['text_popup_column_price'] = $this->language->get('text_popup_column_price');
+$data['text_popup_column_total'] = $this->language->get('text_popup_column_total');
+$data['text_pallet_worksheet'] = $this->language->get('text_pallet_worksheet');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$results = $this->model_catalog_product->getProducts($filter_data);
+      ]]></search>
+      <add><![CDATA[
+$this->load->model('pallet/worksheet');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+$vendor = $this->model_pallet_worksheet->getVendorName($result['product_id']);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+'vendor'      => $vendor,
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/module/featured.php">
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+$this->load->model('pallet/worksheet');
+$vendor = $this->model_pallet_worksheet->getVendorName($product_id);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+'vendor'      => $vendor,
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/module/latest.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$results = $this->model_catalog_product->getProducts($filter_data);
+      ]]></search>
+      <add><![CDATA[
+$this->load->model('pallet/worksheet');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+$vendor = $this->model_pallet_worksheet->getVendorName($result['product_id']);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+'vendor'      => $vendor,
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/product/search.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$results = $this->model_catalog_product->getProducts($filter_data);
+      ]]></search>
+      <add><![CDATA[
+$this->load->model('pallet/worksheet');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+$vendor = $this->model_pallet_worksheet->getVendorName($result['product_id']);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+'vendor'      => $vendor,
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/module/bestseller.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$results = $this->model_catalog_product->getBestSellerProducts($setting['limit']);
+      ]]></search>
+      <add><![CDATA[
+$this->load->model('pallet/worksheet');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+$vendor = $this->model_pallet_worksheet->getVendorName($result['product_id']);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3"><![CDATA[
+$data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+'vendor'      => $vendor,
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/common/header.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['mytemplate'] = $this->config->get('config_template');
+      ]]></search>
+      <add><![CDATA[
+$data['text_triangle'] = $this->language->get('text_triangle');
+$data['text_popup_title'] = $this->language->get('text_popup_title');
+$data['text_popup_qty'] = $this->language->get('text_popup_qty');
+$data['button_addtopallet'] = $this->language->get('button_addtopallet');
+$data['text_popup_details'] = $this->language->get('text_popup_details');
+$data['text_popup_column_sellers'] = $this->language->get('text_popup_column_sellers');
+$data['text_popup_column_name'] = $this->language->get('text_popup_column_name');
+$data['text_popup_column_qty'] = $this->language->get('text_popup_column_qty');
+$data['text_popup_column_price_per_bottle'] = $this->language->get('text_popup_column_price_per_bottle');
+$data['text_popup_column_price'] = $this->language->get('text_popup_column_price');
+$data['text_popup_column_total'] = $this->language->get('text_popup_column_total');
+$data['text_pallet_worksheet'] = $this->language->get('text_pallet_worksheet');
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/common/cart.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['text_cart'] = $this->language->get('text_cart');
+      ]]></search>
+      <add><![CDATA[
+$data['text_pallet_worksheet'] = $this->language->get('text_pallet_worksheet');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
+      ]]></search>
+      <add><![CDATA[
+$data['pallet_worksheet'] = $this->url->link('pallet/worksheet', '', 'SSL');
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/checkout/success.php">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$data['continue'] = $this->url->link('common/home');
+      ]]></search>
+      <add><![CDATA[
+$data['continue'] = $this->url->link('account/order');
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/api/shipping.php">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$quote = $this->{'model_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
+      ]]></search>
+      <add><![CDATA[
+$quote = $this->{'model_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address'], $order_id);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$results = $this->model_extension_extension->getExtensions('shipping');
+      ]]></search>
+      <add><![CDATA[
+if(isset($this->request->get['order_id'])) {
+          $order_id = $this->request->get['order_id'];
+        } else {
+          $order_id = NULL;
+        }
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/account/order.php">
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['column_name'] = $this->language->get('column_name');
+      ]]></search>
+      <add><![CDATA[
+$data['column_pallet_no'] = $this->language->get('column_pallet_no');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+'name'     => $product['name'],
+      ]]></search>
+      <add><![CDATA[
+'pallet_no'     => $product['pallet_no'],
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/view/template/sale/vdi_order_shipping.tpl">
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td><b><?php echo $column_location; ?></b></td>
+      ]]></search>
+      <add><![CDATA[
+<td><b><?php echo $column_pallet_no; ?></b></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td><?php echo $product['location']; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td><?php echo $product['pallet_no']; ?></td>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/view/template/sale/vdi_order_info.tpl">
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><?php echo $column_product; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $column_pallet_no; ?></td>
+<td class="text-left"><?php echo $column_product_no; ?></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $product['pallet_no']; ?></td>
+<td class="text-left"><?php echo $product['product_no']; ?></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><a href="<?php echo $voucher['href']; ?>"><?php echo $voucher['description']; ?></a></td>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<td colspan="6" class="text-right">
+      ]]></search>
+      <add><![CDATA[
+<td colspan="7" class="text-right">
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/view/template/sale/order_shipping.tpl">
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td><b><?php echo $column_location; ?></b></td>
+      ]]></search>
+      <add><![CDATA[
+<td><b><?php echo $column_pallet_no; ?></b></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td><?php echo $product['location']; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td><?php echo $product['pallet_no']; ?></td>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/view/template/sale/order_list.tpl">
+    <operation error="log">
+      <search position="after" offset="1"><![CDATA[
+                <input type="text" name="filter_customer" value="<?php echo $filter_customer; ?>" placeholder="<?php echo $entry_customer; ?>" id="input-customer" class="form-control" />
+      ]]></search>
+      <add><![CDATA[
+<div class="form-group">
+                <label class="control-label" for="input-pallet-id"><?php echo $entry_pallet_id; ?></label>
+                <input type="text" name="filter_pallet_id" value="<?php echo $filter_pallet_id; ?>" placeholder="<?php echo $entry_pallet_id; ?>" id="input-pallet-id" class="form-control" />
+              </div>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3"><![CDATA[
+                    <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left">
+                    <?php echo $column_pallets; ?>
+                    </td>
+                  <td class="text-right">
+                    <?php echo $column_noofpallets.': '.$total_products_pallets; ?>
+                    </td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<td class="text-left"><?php echo $order['status']; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $order['status']; if($order['order_status_payement']!=0) {?>
+<div style="font-size: 16px; font-weight: bold; color: rgb(102, 164, 0);">PAID</div>
+<?php }; ?> <?php echo ($order['order_status_id'] == 2 ? "<i class=\"fa fa-money text-success\"></i>" : ""); ?>
+<?php if($order['order_status_id']==20 && $order['verified_product']==1) echo '<div style=""><span class="label label-success tab-label" style="padding:4px 5px"><i>OK</i></span></div>'; ?>
+</td>
+<td class="text-left"><small>
+                    <?php foreach ($order['pallets'] as $pallet) { ?>
+                      <?php echo $pallet['pallet_no']; ?><?php if ($order['print_dots'] > 0) { ?> <i class="fa fa-circle <?php echo ($pallet['vendor_confirmed'] ? "text-success" : "text-warning"); ?>"></i><?php } ?><br>
+                    <?php } ?>
+                  </small></td>
+                  <td class="text-right"><?php echo $order['noofpallets']; ?></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<td class="text-center" colspan="8"><?php echo $text_no_results; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-center" colspan="10"><?php echo $text_no_results; ?></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before" offset="4"><![CDATA[
+var filter_order_status = $('select[name=\'filter_order_status\']').val();
+      ]]></search>
+      <add><![CDATA[
+var filter_pallet_id = $('input[name=\'filter_pallet_id\']').val();
+
+  if (filter_pallet_id) {
+    url += '&filter_pallet_id=' + encodeURIComponent(filter_pallet_id);
+  }
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/view/template/sale/order_info.tpl">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<h3 class="panel-title"><i class="fa fa-list"></i> <?php echo $heading_title; ?></h3>
+      ]]></search>
+      <add><![CDATA[
+<h3 class="panel-title"><i class="fa fa-list"></i> <?php echo $heading_title; ?> #<?php echo $order_id; ?></h3>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<a href="<?php echo $invoice; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_invoice_print; ?>" class="btn btn-info"><i class="fa fa-print"></i></a>
+      ]]></search>
+      <add><![CDATA[
+        <a href="<?php echo $invoice; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_invoice_print; ?>" class="btn btn-info"><i class="fa fa-print"></i></a> <a href="<?php echo $pdf; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_pdf; ?>" class="btn btn-warning"><i class="fa fa-file-pdf-o"></i></a>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before" offset="1"><![CDATA[
+<td><?php echo $text_invoice_no; ?></td>
+      ]]></search>
+      <add><![CDATA[
+        <tr>
+<td><?php echo $text_worksheet_id; ?></td>
+                <td>#<?php echo $worksheet_id; ?></td>
+              </tr>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><?php echo $column_product; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $column_pallet_no; ?></td>
+<td class="text-left"><?php echo $column_product_no; ?></td>
+      ]]></add>
+    </operation>
+
+<operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><?php echo $column_model; ?></td>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $column_vendor; ?></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" index="4"><![CDATA[<?php } ?></td>]]></search>
+      <add><![CDATA[
+<?php } ?> <?php echo ($order_shipped ? '<button class="btn ' . ($product['documents_received'] ? 'alert-success" data-toggle="tooltip" data-original-title="'. $product['documents_received_date'] .'"' : 'alert-warning" onclick="confirmDocumentsReceived(this, '. $product['product_id'] .','. $product['pallet_id'] .');"') . '><i class="fa fa-files-o"></i></button>' : ''); ?></td>]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+<td class="text-left"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+      ]]></search>
+      <add><![CDATA[
+<td class="text-left"><?php echo $product['pallet_no']; ?><?php if ($print_dots > 0) { ?> <i class="fa fa-circle <?php echo ($product['vendor_confirmed'] ? "text-success" : "text-warning"); ?>"></i><?php } ?></td>
+<td class="text-left"><?php echo $product['product_no']; ?> <?php echo ($order_shipped ? '<button class="btn ' . ($product['product_received'] ? 'alert-success" data-toggle="tooltip" data-original-title="'. $product['product_received_date'] .'"' : 'alert-warning" onclick="confirmProductReceived(this, '. $product['product_id'] .','. $product['pallet_id'] .');"') . '><i class="fa fa-truck"></i></button>' : ''); ?></td>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<td colspan="4" class="text-right"><?php echo $total['title']; ?>:</td>
+      ]]></search>
+      <add><![CDATA[
+<td colspan="7" class="text-right"><?php echo $total['title']; ?>:</td>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/view/template/sale/order_form.tpl">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<h3 class="panel-title"><i class="fa fa-pencil"></i> <?php echo $text_form; ?></h3>
+      ]]></search>
+      <add><![CDATA[
+<h3 class="panel-title"><i class="fa fa-pencil"></i> <?php echo $text_form; ?> #<?php echo $order_id; ?></h3>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" offset="152"><![CDATA[
+<div class="tab-pane" id="tab-cart">
+      ]]></search>
+      <add><![CDATA[
+<div class="tab-pane" id="tab-cart">
+
+              <ul class="nav nav-tabs">
+                <?php foreach ($pallets as $pallet) { ?>
+                  <li id="link-tab-<?php echo $pallet['tab'];?>" <?php if($pallet['tab'] == 1) { ?>class="active"<?php } ?>><a href="#tab-<?php echo $pallet['tab'];?>" data-toggle="tab">#<?php echo $pallet['tab'];?> | <span class="label label-success pallet-tab-label"><?php echo $pallet['size'];?></a></li>
+                <?php } ?>
+              </ul>
+
+              <div class="tab-content">
+
+                <?php foreach ($pallets as $pallet) { ?>
+
+                <div class="tab-pane <?php if($pallet['tab'] == '1') { ?>active<?php } ?>" id="tab-<?php echo $pallet['tab'];?>">
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <td class="text-left"><?php echo $column_product; ?></td>
+                          <td class="text-right"><?php echo $column_quantity; ?></td>
+                          <td class="text-right">Fob Price/Bottle</td>
+                          <td class="text-right">TWT Price/Bottle</td>
+                          <td class="text-right"><?php echo $column_price; ?></td>
+                          <td class="text-right"><?php echo $column_total; ?></td>
+                          <td></td>
+                        </tr>
+                      </thead>
+                      <tbody id="cart-<?php echo $pallet['tab'];?>">
+                        <?php if (isset($pallet['products']) || $order_vouchers) { ?>
+                        <?php $product_row = 0; ?>
+                        <?php foreach ($pallet['products'] as $order_product) { ?>
+                        <tr>
+                          <td class="text-left"><?php echo $order_product['name']; ?><br />
+                            <input type="hidden" name="product[<?php echo $product_row; ?>][product_id]" value="<?php echo $order_product['product_id']; ?>" />
+                            <?php foreach ($order_product['option'] as $option) { ?>
+                            - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
+                            <?php if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'image') { ?>
+                            <input type="hidden" name="product[<?php echo $product_row; ?>][option][<?php echo $option['product_option_id']; ?>]" value="<?php echo $option['product_option_value_id']; ?>" />
+                            <?php } ?>
+                            <?php if ($option['type'] == 'checkbox') { ?>
+                            <input type="hidden" name="product[<?php echo $product_row; ?>][option][<?php echo $option['product_option_id']; ?>][]" value="<?php echo $option['product_option_value_id']; ?>" />
+                            <?php } ?>
+                            <?php if ($option['type'] == 'text' || $option['type'] == 'textarea' || $option['type'] == 'file' || $option['type'] == 'date' || $option['type'] == 'datetime' || $option['type'] == 'time') { ?>
+                            <input type="hidden" name="product[<?php echo $product_row; ?>][option][<?php echo $option['product_option_id']; ?>]" value="<?php echo $option['value']; ?>" />
+                            <?php } ?>
+                            <?php } ?></td>
+                          <td class="text-right"><?php echo $order_product['quantity']; ?>
+                          <input type="hidden" name="product[<?php echo $product_row; ?>][quantity]" value="<?php echo $order_product['quantity']; ?>" /></td>
+                          <td class="text-right"><?php echo $order_product['fob_price']; ?></td>
+                          <td class="text-right"><?php echo $order_product['sp_price']; ?></td>
+                          <td class="text-right"><?php echo $order_product['price']; ?></td>
+                          <td class="text-right"><?php echo $order_product['total']; ?></td>
+                          <td class="text-center" style="width: 3px;"><button type="button" onclick="worksheet.removeproduct(<?php echo $pallet['tab']; ?>, <?php echo $order_product['product_id']; ?>, <?php echo $pallet['id']; ?>, <?php echo $order_id; ?>);" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button></td>
+                        </tr>
+                        <?php $product_row++; ?>
+                        <?php } ?>
+                        <?php $voucher_row = 0; ?>
+                        <?php foreach ($order_vouchers as $order_voucher) { ?>
+                        <tr>
+                          <td class="text-left"><?php echo $order_voucher['description']; ?>
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][voucher_id]" value="<?php echo $order_voucher['voucher_id']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][description]" value="<?php echo $order_voucher['description']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][code]" value="<?php echo $order_voucher['code']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][from_name]" value="<?php echo $order_voucher['from_name']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][from_email]" value="<?php echo $order_voucher['from_email']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][to_name]" value="<?php echo $order_voucher['to_name']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][to_email]" value="<?php echo $order_voucher['to_email']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][voucher_theme_id]" value="<?php echo $order_voucher['voucher_theme_id']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][message]" value="<?php echo $order_voucher['message']; ?>" />
+                            <input type="hidden" name="voucher[<?php echo $voucher_row; ?>][amount]" value="<?php echo $order_voucher['amount']; ?>" /></td>
+                          <td class="text-left"></td>
+                          <td class="text-right">1</td>
+                          <td class="text-right"></td>
+                          <td class="text-right"></td>
+                          <td class="text-center"></td>
+                        </tr>
+                        <?php $voucher_row++; ?>
+                        <?php } ?>
+                        <?php } else { ?>
+                        <tr>
+                          <td class="text-center" colspan="7"><?php echo $text_no_results; ?></td>
+                        </tr>
+                      </tbody>
+                      <?php } ?>
+                    </table>
+                  </div>
+
+                  <div id="tab-product">
+                    <fieldset>
+                      <legend><?php echo $text_product; ?></legend>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-product"><?php echo $entry_product; ?></label>
+                        <div class="col-sm-10">
+                          <input type="text" name="product" value="" id="input-product" class="input-product form-control" />
+                          <input type="hidden" class="input-product" id="p<?php echo $pallet['id']; ?>-product_id" name="product_id" value="" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_quantity; ?></label>
+                        <div class="col-sm-10">
+                          <input type="number" id="p<?php echo $pallet['id']; ?>-quantity" name="quantity" value="1" id="input-quantity" class="input-product form-control" />
+                        </div>
+                      </div>
+                      <div id="option"></div>
+                    </fieldset>
+                    <div class="text-right">
+                      <button type="button" onclick="worksheet.addproduct(<?php echo $pallet['tab']; ?>, <?php echo $pallet['id']; ?>, <?php echo $order_id; ?>);" id="button-product-add-new" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?php echo $button_product_add; ?></button>
+                      <div class="btn-group"><button type="button" id="button-pallet-add" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle"></i> Add Pallet <span class="caret"></span></button><p class="dropdown-menu pallet-button-dropdown"><?php foreach($pallet_sizes as $pallet_size) { ?><a href="javascript:void(0)" onclick="worksheet.addpallet(<?php echo $worksheet_id; ?>, <?php echo $customer_id; ?>, <?php echo $order_id; ?>, <?php echo $pallet_size; ?>);"><?php echo $pallet_size; ?></a><br><?php } ?></p></div>
+                      <button type="button" onclick="worksheet.removepallet(<?php echo $pallet['tab']; ?>, <?php echo $pallet['id']; ?>, <?php echo $order_id; ?>);" id="button-pallet-remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i> <?php echo $button_pallet_remove; ?></button>
+                      <button type="button" onclick="worksheet.refreshpallet(<?php echo $pallet['tab']; ?>, <?php echo $pallet['id']; ?>, <?php echo $order_id; ?>);" id="button-pallet-refresh" data-toggle="tooltip" data-original-title="Refresh <?php echo $pallet['tab']; ?>/<?php echo $pallet['id']; ?>" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+
+                <?php } ?>
+
+                <div id="no-pallets-menu" class="text-right"<?php if($pallets) { ?> style="display:none;" <?php } ?>>
+                  <div class="btn-group"><button type="button" id="button-pallet-add" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle"></i> Add Pallet <span class="caret"></span></button><p class="dropdown-menu pallet-button-dropdown"><?php foreach($pallet_sizes as $pallet_size) { ?><a href="javascript:void(0)" onclick="worksheet.addpallet(<?php echo $worksheet_id; ?>, <?php echo $customer_id; ?>, <?php echo $order_id; ?>, <?php echo $pallet_size; ?>);"><?php echo $pallet_size; ?></a><br><?php } ?></p></div>
+                </div>
+
+              </div>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="2"><![CDATA[
+$('#order a[data-toggle=\'tab\']').on('click', function(e) {
+      ]]></search>
+      <add><![CDATA[
+var worksheet = {
+  'refreshpallet': function(pallet_tab, pallet_id, order_id) {
+    console.log("refreshpallet");
+
+    var cart = "#cart-" + pallet_tab;
+
+    $.ajax({
+      url: 'index.php?route=pallet/worksheet/products&token=<?php echo $token; ?>',
+      type: 'post',
+      data: 'pallet_id=' + pallet_id + '&order_id=' + order_id,
+      dataType: 'json',
+      success: function(json) {
+        $('.alert-danger, .text-danger').remove();
+
+        html = '';
+
+        if (json['products']) {
+          for (i = 0; i < json['products'].length; i++) {
+            product = json['products'][i];
+
+            html += '<tr>';
+            html += '  <td class="text-left">' + product['name'] + '<br />';
+            html += '  <input type="hidden" name="product[' + i + '][product_id]" value="' + product['product_id'] + '" />';
+
+            if (product['option']) {
+              for (j = 0; j < product['option'].length; j++) {
+                option = product['option'][j];
+
+                html += '  - <small>' + option['name'] + ': ' + option['value'] + '</small><br />';
+
+                if (option['type'] == 'select' || option['type'] == 'radio' || option['type'] == 'image') {
+                  html += '<input type="hidden" name="product[' + i + '][option][' + option['product_option_id'] + ']" value="' + option['product_option_value_id'] + '" />';
+                }
+
+                if (option['type'] == 'checkbox') {
+                  html += '<input type="hidden" name="product[' + i + '][option][' + option['product_option_id'] + '][]" value="' + option['product_option_value_id'] + '" />';
+                }
+
+                if (option['type'] == 'text' || option['type'] == 'textarea' || option['type'] == 'file' || option['type'] == 'date' || option['type'] == 'datetime' || option['type'] == 'time') {
+                  html += '<input type="hidden" name="product[' + i + '][option][' + option['product_option_id'] + ']" value="' + option['value'] + '" />';
+                }
+              }
+            }
+
+            html += '</td>';
+            html += '  <td class="text-right">' + product['quantity'] + '<input type="hidden" name="product[' + i + '][quantity]" value="' + product['quantity'] + '" /></td>';
+            html += '  <td class="text-right">' + product['fob_price'] + '</td>';
+            html += '  <td class="text-right">' + product['sp_price'] + '</td>';
+            html += '  <td class="text-right">' + product['price'] + '</td>';
+            html += '  <td class="text-right">' + product['total'] + '</td>';
+            html += '  <td class="text-center" style="width: 3px;"><button type="button" onclick="worksheet.removeproduct(' + pallet_tab + ', ' + product['onclick'] + ');" data-toggle="tooltip" title="<?php echo $button_remove; ?>" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+            html += '</tr>';
+
+          }
+        }
+
+        var shipping = true;
+
+        if (!shipping) {
+          $('select[name=\'shipping_method\'] option').removeAttr('selected');
+          $('select[name=\'shipping_method\']').prop('disabled', true);
+          $('#button-shipping-method').prop('disabled', true);
+        } else {
+          $('select[name=\'shipping_method\']').prop('disabled', false);
+          $('#button-shipping-method').prop('disabled', false);
+        }
+
+        if (json['products'] == '') {
+          html += '<tr>';
+          html += '  <td colspan="7" class="text-center"><?php echo $text_no_results; ?></td>';
+          html += '</tr>';
+        }
+
+        $(cart).html(html);
+
+      }
+    });
+
+  },
+
+  'addproduct': function(pallet_tab, pallet_id, order_id) {
+    var product_id = $("#p" + pallet_id + "-product_id").val();
+    var quantity = $("#p" + pallet_id + "-quantity").val();
+
+    $.ajax({
+      url: 'index.php?route=pallet/worksheet/addproduct&token=<?php echo $token; ?>',
+      type: 'post',
+      data: 'product_id=' + product_id + '&pallet_id=' + pallet_id + '&order_id=' + order_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
+      dataType: 'json',
+      success: function(json) {
+        $('.input-product').val('');
+        worksheet.refreshpallet(pallet_tab, pallet_id, order_id);
+      }
+    });
+  },
+  'removeproduct': function(pallet_tab, product_id, pallet_id, order_id) {
+    $.ajax({
+      url: 'index.php?route=pallet/worksheet/removeproduct&token=<?php echo $token; ?>',
+      type: 'post',
+      data: 'product_id=' + product_id + '&pallet_id=' + pallet_id + '&order_id=' + order_id,
+      dataType: 'json',
+      success: function(json) {
+        worksheet.refreshpallet(pallet_tab, pallet_id, order_id);
+      }
+    });
+  },
+  'addpallet': function(worksheet_id, customer_id, order_id, pallet_size) {
+    console.log("addpallet");
+    $.ajax({
+      url: 'index.php?route=pallet/worksheet/addpallet&token=<?php echo $token; ?>',
+      type: 'post',
+      data: 'worksheet_id=' + worksheet_id + '&customer_id=' + customer_id + '&order_id=' + order_id + '&pallet_size=' + pallet_size,
+      dataType: 'json',
+      success: function(json) {
+        pallet_id = json['pallet_id'];
+        newtab = json['newtab'];
+        pallet_size = json['pallet_size'];
+
+        $("#no-pallets-menu").hide();
+
+        $("#tab-cart").find('.nav-tabs').append('<li><a href="#tab-' + newtab + '" data-toggle="tab">#' + newtab + ' | <span class="label label-success pallet-tab-label">' + pallet_size + '</span></a></li>');
+
+        html = '';
+
+        html += '<div class="tab-pane" id="tab-' + newtab + '">';
+        html += '          <div class="table-responsive">';
+        html += '            <table class="table table-bordered">';
+        html += '              <thead>';
+        html += '                <tr>';
+        html += '                  <td class="text-left"><?php echo $column_product; ?></td>';
+        html += '                  <td class="text-right"><?php echo $column_quantity; ?></td>';
+        html += '                  <td class="text-right">Fob Price/Bottle</td>';
+        html += '                  <td class="text-right">TWT Price/Bottle</td>';
+        html += '                  <td class="text-right"><?php echo $column_price; ?></td>';
+        html += '                  <td class="text-right"><?php echo $column_total; ?></td>';
+        html += '                  <td></td>';
+        html += '                </tr>';
+        html += '              </thead>';
+        html += '              <tbody id="cart-' + newtab + '">';
+        html += '                <tr>';
+        html += '                  <td class="text-center" colspan="7"><?php echo $text_no_results; ?></td>';
+        html += '                </tr>';
+        html += '              </tbody>';
+        html += '            </table>';
+        html += '          </div>';
+
+        html += '<div id="tab-product">';
+        html += '            <fieldset>';
+        html += '              <legend><?php echo $text_product; ?></legend>';
+        html += '              <div class="form-group">';
+        html += '                <label class="col-sm-2 control-label" for="input-product"><?php echo $entry_product; ?></label>';
+        html += '                <div class="col-sm-10">';
+        html += '                  <input type="text" name="product" value="" id="input-product" class="input-product form-control" />';
+        html += '                  <input type="hidden" class="input-product" id="p' + pallet_id + '-product_id" name="product_id" value="" />';
+        html += '                </div>';
+        html += '              </div>';
+        html += '              <div class="form-group">';
+        html += '                <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_quantity; ?></label>';
+        html += '                <div class="col-sm-10">';
+        html += '                  <input type="number" id="p' + pallet_id + '-quantity" name="quantity" value="1" id="input-quantity" class="input-product form-control" />';
+        html += '                </div>';
+        html += '              </div>';
+        html += '              <div id="option"></div>';
+        html += '            </fieldset>';
+        html += '            <div class="text-right">';
+        html += '              <button type="button" onclick="worksheet.addproduct(' + newtab + ', ' + pallet_id + ', <?php echo $order_id; ?>);" id="button-product-add-new" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?php echo $button_product_add; ?></button>';
+        html += '              <div class="btn-group"><button type="button" id="button-pallet-add" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle"></i> Add Pallet <span class="caret"></span></button><p class="dropdown-menu pallet-button-dropdown"><?php foreach($pallet_sizes as $pallet_size) { ?><a href="javascript:void(0)" onclick="worksheet.addpallet(<?php echo $worksheet_id; ?>, <?php echo $customer_id; ?>, <?php echo $order_id; ?>, <?php echo $pallet_size; ?>);"><?php echo $pallet_size; ?></a><br><?php } ?></p></div>';
+        html += '              <button type="button" onclick="worksheet.removepallet(' + newtab + ', <?php echo $pallet['id']; ?>, <?php echo $order_id; ?>);" id="button-pallet-remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i> <?php echo $button_pallet_remove; ?></button>';
+        html += '              <button type="button" onclick="worksheet.refreshpallet(' + newtab + ', ' + pallet_id + ', <?php echo $order_id; ?>);" id="button-pallet-refresh" data-toggle="tooltip" data-original-title="Refresh" class="btn btn-primary"><i class="fa fa-refresh"></i></button>';
+        html += '            </div>';
+        html += '          </div>';
+
+        html += '</div>';
+
+        $("#tab-cart").find('.tab-content').append(html);
+        $('#tab-cart').find('li a').last().trigger('click');
+      }
+    });
+  },
+  'removepallet': function(pallet_tab, pallet_id, order_id) {
+  console.log("removepallet");
+    $.ajax({
+      url: 'index.php?route=pallet/worksheet/destroypallet&token=<?php echo $token; ?>',
+      type: 'post',
+      data: 'pallet_id=' + pallet_id + '&order_id=' + order_id,
+      dataType: 'json',
+      success: function(json) {
+        $('#link-tab-' + pallet_tab).remove();
+        $('#tab-' + pallet_tab).remove();
+        $('#tab-cart').find('li a').last().trigger('click');
+
+        console.log("li_size:" + $("#tab-cart").find('.nav-tabs li').size());
+
+        if($("#tab-cart").find('.nav-tabs li').size() < 1) {
+          $("#no-pallets-menu").show();
+        }
+      }
+    });
+  }
+}
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$('#tab-product input[name=\'product\']').autocomplete({
+      ]]></search>
+      <add><![CDATA[
+$('#tab-cart').delegate('input[name=\'product\']', 'focusin', function() {
+  $(this).autocomplete({
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before" offset="1"><![CDATA[
+$('#button-product-add').on('click', function() {
+      ]]></search>
+      <add><![CDATA[
+});
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" offset="29"><![CDATA[
+$('#tab-cart').delegate('.btn-danger', 'click', function() {
+      ]]></search>
+      <add><![CDATA[]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" offset="3"><![CDATA[
+$('#button-cart').on('click', function() {
+      ]]></search>
+      <add><![CDATA[
+$('#button-cart').on('click', function() {
+
+  $.ajax({
+    url: 'index.php?route=pallet/worksheet/validate&token=<?php echo $token; ?>&api=api/cart/add&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
+    type: 'post',
+    data: 'worksheet_id=<?php echo $worksheet_id; ?>&order_id=<?php echo $order_id; ?>',
+    dataType: 'json',
+    success: function(json) {
+      $('.alert, .text-danger').remove();
+
+      $('a[href=\'#tab-payment\']').tab('show');
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+	
+  });
+
+});
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+url: 'index.php?route=sale/order/api&token=<?php echo $token; ?>&api=api/shipping/methods&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
+      ]]></search>
+      <add><![CDATA[
+url: 'index.php?route=sale/order/api&token=<?php echo $token; ?>&api=api/shipping/methods&store_id=' + $('select[name=\'store_id\'] option:selected').val() + '&order_id=<?php echo $order_id; ?>',
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" index="2"><![CDATA[
+        $('a[href=\'#tab-total\']').tab('show');
+      ]]></search>
+      <add><![CDATA[
+$('#button-shipping-method').trigger('click');
+        $('#button-payment-method').trigger('click');
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/model/sale/vdi_order.php">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "' AND vendor_id = '" . (int)$this->user->getVP() . "'");
+      ]]></search>
+      <add><![CDATA[
+$query = $this->db->query("SELECT *, pp.quantity AS quantity, pp.total AS total, (SELECT pallet_no FROM " . DB_PREFIX . "pallet p WHERE p.pallet_id = pp.pallet_id) AS pallet_no, pp.product_no FROM " . DB_PREFIX . "pallet_product pp LEFT JOIN " . DB_PREFIX . "order_product op USING (product_id, order_id) where op.order_id= '" . (int)$order_id . "' AND op.vendor_id = '" . (int)$this->user->getVP() . "' ORDER BY product_no");
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/model/sale/order.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+return array(
+      ]]></search>
+      <add><![CDATA[
+'worksheet_id'            => $worksheet_id,
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+return array(
+      ]]></search>
+      <add><![CDATA[
+$this->load->model('pallet/worksheet');
+      $worksheet_id = $this->model_pallet_worksheet->getWorksheetByOrderId($order_id);
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+      ]]></search>
+      <add><![CDATA[
+$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT COUNT(p.pallet_id) FROM " . DB_PREFIX . "pallet p WHERE p.order_id = o.order_id) AS noofpallets, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.shipping_code, o.order_status_id, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+if (!empty($data['filter_date_added'])) {
+      ]]></search>
+      <add><![CDATA[
+if (!empty($data['filter_pallet_id'])) {
+      $sql .= " AND order_id IN (SELECT order_id FROM " . DB_PREFIX . "pallet WHERE pallet_no LIKE '%" . $this->db->escape($data['filter_pallet_id']) . "%' GROUP BY order_id)";
+    }
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[$query = $this->db->query("SELECT a.*, b.sku, b.location FROM " . DB_PREFIX . "order_product a LEFT JOIN " . DB_PREFIX . "product b ON a.product_id = b.product_id WHERE order_id = '" . (int)$order_id . "'");]]></search>
+      <add><![CDATA[
+$query = $this->db->query("SELECT p.sku, p.location, op.*, pp.quantity AS quantity, pp.total AS total, pp.vendor_confirmed as vendor_confirmed,  (SELECT pallet_no FROM " . DB_PREFIX . "pallet p WHERE p.pallet_id = pp.pallet_id) AS pallet_no, pp.product_no, pp.documents_received, pp.product_received, pp.documents_received_date, pp.product_received_date, pp.pallet_id FROM " . DB_PREFIX . "pallet_product pp LEFT JOIN " . DB_PREFIX . "order_product op USING (product_id, order_id) LEFT JOIN " . DB_PREFIX . "product p ON (op.product_id=p.product_id) where op.order_id= '" . (int)$order_id . "' ORDER BY product_no");
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/language/english/english.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$_['button_shipping_print']         = 'Print Shipping List';
+      ]]></search>
+      <add><![CDATA[
+$_['button_pdf']                    = 'Download PDF';
+$_['button_pallet_remove']          = 'Remove Pallet';
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/language/english/sale/vdi_order.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$_['column_weight']                           = 'Product weight';
+      ]]></search>
+      <add><![CDATA[
+$_['column_pallet_no']                        = 'Pallet ID';
+$_['column_product_no']                        = 'Product No';
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/language/english/sale/order.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$_['heading_title']                           = 'Orders';
+      ]]></search>
+      <add><![CDATA[
+
+// Worksheet
+$_['text_worksheet_id']                       = 'Worksheet ID:';
+$_['column_pallet_id']                        = 'Pallet ID';
+$_['column_pallet_no']                        = 'Pallet No';
+$_['column_noofpallets']                      = 'NoP';
+$_['column_pallets']                          = 'Pallets';
+$_['column_vendor']                          = 'Vendor';
+$_['entry_pallet_id']                         = 'Pallet ID';
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/language/french/sale/vdi_order.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$_['heading_title'] = 'Mes Commandes';
+      ]]></search>
+      <add><![CDATA[
+// Worksheet
+$_['text_worksheet_id']                       = 'Worksheet ID:';
+$_['column_pallet_id']                        = 'Pallet ID';
+$_['column_pallet_no']                         = 'Pallet No';
+$_['column_noofpallets']                      = 'NoP';
+$_['column_pallets']                          = 'Pallets';
+$_['column_vendor']                          = 'Vendor';
+$_['entry_pallet_id']                         = 'Pallet ID';
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/controller/sale/vdi_order.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+'product_id'       => $product['product_id'],
+      ]]></search>
+      <add><![CDATA[
+'pallet_no'        => $product['pallet_no'],
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" index="1,3"><![CDATA[
+    $data['column_quantity'] = $this->language->get('column_quantity');
+      ]]></search>
+      <add><![CDATA[
+$data['column_pallet_no'] = $this->language->get('column_pallet_no')."ds";
+$data['column_product_no'] = $this->language->get('column_product_no')."ds";
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+'name'     => $product_info['name'],
+      ]]></search>
+      <add><![CDATA[
+'pallet_no' => $product['pallet_no'],
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/controller/common/menu.php">
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['text_order'] = $this->language->get('text_order');
+      ]]></search>
+      <add><![CDATA[
+$data['text_pallet'] = $this->language->get('text_pallet');
+      ]]></add>
+    </operation>
+    <operation error="log">
+      <search position="after"><![CDATA[
+    $data['order'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'], 'SSL');
+      ]]></search>
+      <add><![CDATA[
+    $data['pallet'] = $this->url->link('sale/pallet', 'token=' . $this->session->data['token'], 'SSL');
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="admin/controller/sale/order.php">
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['order_id'] = 0;
+      ]]></search>
+      <add><![CDATA[
+		$this->load->model('pallet/worksheet');
+		$this->model_pallet_worksheet->destroyWorksheetByCustomerId(0);
+		$worksheet_id = $this->model_pallet_worksheet->addBlankWorksheet();
+		$this->model_pallet_worksheet->addPallet($worksheet_id, 0, 0);
+		$palletIds = $this->model_pallet_worksheet->getPallets($worksheet_id);
+
+		$data['products'] = array();
+
+		for($p = 0; $p < count($palletIds); $p++) {
+			$pallet_id = $palletIds[$p];
+
+			$palletId = array();
+
+			$products = $this->model_pallet_worksheet->getOrderProductsByPalletId($pallet_id);
+
+
+			if(isset($products)) {
+				foreach ($products as $product) {
+				  $palletId['products'][] = array(
+					'pallet_id'  => $product['pallet_id'],
+					'product_id' => $product['product_id'],
+					'name'       => $product['name'],
+					'model'      => $product['model'],
+					//'option'     => $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']),
+					'option'     => array(),
+					'quantity'   => $product['quantity'],
+					'price'      => $this->currency->format($product['price'], $product['currency_code']),
+					'total'      => $this->currency->format($product['total'], $product['currency_code']),
+					'reward'     => '',
+					'shipping'   => 1
+				  );
+				}
+			} else {
+				$palletId['products'][] = array();
+			}
+		}
+
+		$palletId['tab'] = 1;
+		$palletId['id'] = $pallet_id;
+		$data['pallets'][] = $palletId;
+		$data['worksheet_id'] = $worksheet_id;
+
+      ]]></add>
+    </operation>
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['order_id'] = $this->request->get['order_id'];
+      ]]></search>
+      <add><![CDATA[
+$data['worksheet_id'] = $order_info['worksheet_id'];
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['tab_total'] = $this->language->get('tab_total');
+      ]]></search>
+      <add><![CDATA[
+$data['button_pallet_remove'] = $this->language->get('button_pallet_remove');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$filter_data = array(
+      ]]></search>
+      <add><![CDATA[
+      'filter_pallet_id'     => $filter_pallet_id,
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after" offset="3" index="3"><![CDATA[
+            $this->session->data['cookie'] = $response['cookie'];
+      ]]></search>
+      <add><![CDATA[
+          $this->load->model('pallet/worksheet');
+          $this->model_pallet_worksheet->destroyWorksheetByOrderId($this->request->get['order_id']);
+      ]]></add>
+    </operation>
+
+    <operation error="skip">
+      <search position="replace" offset="14" index="1"><![CDATA[
+      $products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
+      ]]></search>
+      <add><![CDATA[
+
+      $this->load->model('catalog/vendor');
+
+      $worksheet_id = $data['worksheet_id'];
+
+      $this->load->model('pallet/worksheet');
+
+      if ($this->model_pallet_worksheet->hasPallets($worksheet_id)) {
+        $palletIds = $this->model_pallet_worksheet->getPallets($worksheet_id);
+
+        $data['products'] = array();
+
+        for($p = 0; $p < count($palletIds); $p++) {
+          $pallet_id = $palletIds[$p];
+
+          $palletId = array();
+
+          $products = $this->model_pallet_worksheet->getOrderProductsByPalletId($pallet_id);
+
+          if(isset($products)) {
+            foreach ($products as $product) {
+
+             $fob_price = $this->model_sale_order->getFobPrices($this->request->get['order_id'], $product['product_id']);
+             $sp_price = $fob_price['fob_bottle_full_price'];
+
+             foreach($this->config->get('fob_margins') as $margin) {
+                          if($margin['fob'] == 1) {
+                                eval('$sp_price = '."$sp_price + ($fob_price[fob_bottle_full_price] $margin[sign] $margin[value])".';');
+                              } else {
+                                eval('$sp_price = '."$sp_price $margin[sign] $margin[value]".';');
+                              }
+           }
+
+
+           $sp_unit_price = $sp_price;
+           $sp_price *= $fob_price['fob_case'];
+
+           $fob_unit_price = $this->currency->format($fob_price['fob_bottle'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']);
+
+           $price = $this->currency->format($product['price'], $product['currency_code']);
+           $price_total = $this->currency->format($product['total'], $product['currency_code']);
+
+           if ($fob_price['fob_bottle'] != $fob_price['fob_bottle_full_price']){
+
+
+                    $price =  '<del>'.
+                                    $this->currency->format($sp_price + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']).
+                              '</del><br />
+                                <font color="#cc0000">'.$price.'</font>';
+                    $sp_unit_price =  '<del>'.
+                                     $this->currency->format($sp_unit_price + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code']).
+                              '</del><br />
+                                <font color="#cc0000">'. $this->currency->format($product['price']/$fob_price['fob_case']+ ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']).'</font>';
+
+                    $price_total = '<del>'.
+                                   $this->currency->format($sp_price*$product['quantity']+ ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']).
+                                   '</del><br />
+                                    <font color="#cc0000">'.$price_total.'</font>';
+                   $fob_unit_price = '<del>'.
+                                   $this->currency->format($fob_price['fob_bottle_full_price']+ ($this->config->get('config_tax') ? $product['tax']  : 0), $order_info['currency_code'], $order_info['currency_value']).
+                                   '</del><br />
+                                    <font color="#cc0000">'.$fob_unit_price.'</font>';
+              }
+			  else{
+			  		  $sp_unit_price = $this->currency->format($sp_unit_price+ ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']);
+			  }
+
+
+              $palletId['products'][] = array(
+                'pallet_id'  => $product['pallet_id'],
+                'product_id' => $product['product_id'],
+                'name'       => $product['name'],
+                'model'      => $product['model'],
+                //'option'     => $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']),
+                'option'     => array(),
+                'quantity'   => $product['quantity'],
+                'price'      => $price,
+                'total'      => $price_total,
+                'sp_price'   => $sp_unit_price,
+                'fob_price'  => $fob_unit_price,
+                'reward'     => '',
+                'shipping'   => 1
+              );
+            }
+          } else {
+            $palletId['products'][] = array();
+          }
+
+          $palletId['tab'] = $p + 1;
+          $palletId['id'] = $pallet_id;
+          $palletId['size'] = $this->model_pallet_worksheet->getPalletSize($pallet_id);
+          $data['pallets'][] = $palletId;
+        }
+      }
+      $data['pallet_sizes'] = explode(",", $this->config->get('pallets_limit_p'));
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['filter_customer'] = $filter_customer;
+      ]]></search>
+      <add><![CDATA[
+$data['filter_pallet_id'] = $filter_pallet_id;
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before" offset="2" index="2,3,4"><![CDATA[
+      $url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
+      ]]></search>
+      <add><![CDATA[
+if (isset($this->request->get['filter_pallet_id'])) {
+      $url .= '&filter_pallet_id=' . $this->request->get['filter_pallet_id'];
+    }
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['button_view'] = $this->language->get('button_view');
+      ]]></search>
+      <add><![CDATA[
+    $data['column_noofpallets'] = $this->language->get('column_noofpallets');
+    $data['column_pallets'] = $this->language->get('column_pallets');
+    $data['entry_pallet_id'] = $this->language->get('entry_pallet_id');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[$results = $this->model_sale_order->getOrders($filter_data);]]></search>
+      <add><![CDATA[$this->load->model('pallet/worksheet');]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before" offset="1"><![CDATA[$result['order_id'],]]></search>
+      <add><![CDATA[if($result['order_status_id'] == 19) {
+          $pallets_ids = $this->model_pallet_worksheet->getConfirmedPalletsIds($result['order_id']);
+$print_dots = 1;
+        } elseif ($result['order_status_id'] == 3) {
+          $pallets_ids = $this->model_pallet_worksheet->getShippedPalletsIds($result['order_id']);
+$print_dots = 1;
+        } else {
+          $pallets_ids = $this->model_pallet_worksheet->getPalletsIds($result['order_id']);
+$print_dots = 0;
+        }]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[$result['order_id'],]]></search>
+      <add><![CDATA['pallets'       => $pallets_ids,
+        'noofpallets'   => $result['noofpallets'],
+        'order_status_payement'   => $this->model_sale_order->getPayementStatus($result['order_id']),
+'print_dots'   => $print_dots,]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before" offset="1"><![CDATA[
+        $filter_order_status = $this->request->get['filter_order_status'];
+      ]]></search>
+      <add><![CDATA[
+if (isset($this->request->get['filter_pallet_id'])) {
+      $filter_pallet_id = $this->request->get['filter_pallet_id'];
+    } else {
+      $filter_pallet_id = null;
+    }
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['tab_action'] = $this->language->get('tab_action');
+      ]]></search>
+      <add><![CDATA[
+$data['text_worksheet_id'] = $this->language->get('text_worksheet_id');
+      $data['column_pallet_no'] = $this->language->get('column_pallet_no');
+      $data['column_vendor'] = $this->language->get('column_vendor');
+      $data['button_pdf'] = $this->language->get('button_pdf');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+$data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+      ]]></search>
+      <add><![CDATA[
+$data['pdf'] = $this->url->link('pallet/worksheet/pdf', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[$data['orders'][] = array(]]></search>
+      <add><![CDATA[if(!isset($comment)) { $comment = ''; }]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+$data['column_location'] = $this->language->get('column_location');
+      ]]></search>
+      <add><![CDATA[
+$data['column_pallet_no'] = $this->language->get('column_pallet_no');
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="before"><![CDATA[
+'location' => $product_info['location'],
+      ]]></search>
+      <add><![CDATA[
+'pallet_no' => $product['pallet_no'],
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+    'product_id'       => $product['product_id'],
+      ]]></search>
+      <add><![CDATA[
+    'pallet_no'        => $product['pallet_no'],
+'vendor_confirmed'        => $product['vendor_confirmed'],
+      ]]></add>
+    </operation>
+  </file>
+
+	<file path="catalog/view/theme/*/template/products/" name="product.tpl,category.tpl">
+    <operation error="log">
+      <search position="after"><![CDATA[
+<?php echo $header; ?>
+      ]]></search>
+      <add><![CDATA[
+<!-- Modal1 -->
+<div class="modal fade" id="addToPallet" tabindex="-1" role="dialog" aria-labelledby="addToPalletLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	<div class="row">
+	<div class="col-sm-9">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addToPalletLabel"><?php echo $text_popup_title; ?></h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="product_id" value="" class="product_id">
+        <div class="form-group">
+          <label><?php echo $text_popup_qty; ?>:</label>
+          <div class="input-group">
+            <input type="number" name="quantity" value="" id="input-quantity" class="form-control product_qty" autocomplete="off" autofocus>
+            <span class="input-group-addon pallet-popup-button"><a href="#" onclick="worksheet.add(); return false;"><i class="fa fa-shopping-cart"></i> <?php echo $button_addtopallet; ?></a></span>
+          </div>
+        </div>
+        <div class="row text-center"><h4><?php echo $text_popup_details; ?></h4></div>
+        <table class="table table-bordered table-responsive">
+          <thead>
+            <tr>
+              <th><?php echo $text_popup_column_sellers; ?></th>
+              <th><?php echo $text_popup_column_name; ?></th>
+              <th><?php echo $text_popup_column_qty; ?></th>
+              <th class="text-right"><?php echo $text_popup_column_total; ?></th>
+            </tr>
+          </thead>
+          <tbody id="modal_body">
+            <tr>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-xs-10">
+            <i class="fa fa-exclamation-triangle" style="color:orange" data-toggle="tooltip" title="<?php echo $text_triangle; ?>"></i><br>
+            <a href="index.php?route=pallet/worksheet" title="<?php echo $text_pallet_worksheet; ?>"><i class="fa fa-table"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $text_pallet_worksheet; ?></span></a>
+          </div>
+          <div class="col-xs-2" id="pallet_total">
+          </div>
+        </div>
+      </div>
+	   </div>
+	   <div class="col-sm-3">
+	  
+	    </div>
+	   
+	   </div>
+	  
+    </div>
+  </div>
+</div>
+<!-- Modal End -->
+      ]]></add>
+    </operation>
+  </file>
+
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+    <operation error="log">
+      <search position="after"><![CDATA[
+</header>
+      ]]></search>
+      <add><![CDATA[
+<!-- Modal -->
+<div class="modal fade" id="addToPallet" tabindex="-1" role="dialog" aria-labelledby="addToPalletLabel" aria-hidden="true" onClick="$('.iScrollIndicator').height(71)">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addToPalletLabel"></h4>
+      </div>
+<div class="row" style="margin-left: 0px; margin-right: 0px;">	
+	<div class="col-sm-8">      
+      <div class="modal-body">
+        <input type="hidden" name="product_id" value="" class="product_id">
+        <div class="form-group">
+          <label id="text_pallet_size"></label>
+          <div id="modal_pallet_size">
+          </div>
+        </div>
+        <div class="form-group" id="modal_addtopallet">
+          <label><?php echo $text_popup_qty; ?>:</label>
+          <div class="input-group">
+            <input type="number" name="quantity" value="" id="input-quantity" class="form-control product_qty" autocomplete="off" autofocus>
+            <span class="input-group-addon pallet-popup-button"><a href="#" onclick="worksheet.add(); return false;"><img src="./image/demo-img/pallet.png" class="pallet-icon"> <?php echo $button_addtopallet; ?></a></span>
+          </div>
+        </div>        
+        <table class="table table-bordered table-responsive">
+          <thead>
+            <tr>				
+              <th><?php echo $text_popup_column_sellers; ?></th>
+              <th><?php echo $text_popup_column_name; ?></th>
+              <th><?php echo $text_popup_column_qty; ?></th>
+              <th class="text-right label_column"><?php echo $text_popup_column_price_per_bottle; ?></th>
+              <th class="text-right"><?php echo $text_popup_column_price; ?></th>
+              <th class="text-right"><?php echo $text_popup_column_total; ?></th>
+            </tr>
+          </thead>
+          <tbody id="modal_body">
+            <tr>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+              <td class="modal_data">-</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-xs-4">
+            <i class="fa fa-exclamation-triangle" style="color:orange" data-toggle="tooltip" title="<?php echo $text_triangle; ?>"></i><br>
+
+            <span class="badge" style="background-color: #EC1F6B;left: 40px;top: -4px;z-index: 1;" id="palletsqty"><?php echo (isset($palletsqty) && $palletsqty >0) ? $palletsqty : ''?></span>
+          </div>
+
+
+        </div>
+
+
+
+
+
+        <table width="100%" border="0" padding="5">
+        <tr style="top-margin: 5px">
+		 <td id="modal_valid" style="text-align: right">
+
+        </td>
+		
+		
+        <td>
+        <a style="margin-left: 20px" class="btn btn-primary" href="index.php?route=pallet/worksheet" title="<?php echo $text_pallet_worksheet; ?>" >
+        <i class="fa fa-table"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $text_pallet_worksheet; ?></span></a>
+        </td>
+       
+        </tr>
+        </table>
+
+      </div>
+	  
+	  
+	   </div> 
+	   <div class="col-sm-4" id="pat-sidebar">
+	  <h4> Frequently Asked Question</h4>
+	  <p> <?php echo $text_popup_details; ?> </p>	 
+	  <div id="rightpbarid" class="show-progress"> </div>
+	  
+	  <div id="rightchekbutton" > </div>
+	   </div>
+	  </div> 
+	  
+	  
+	  
+    </div>
+  </div>
+</div>
+<!-- Modal End -->
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/product/category.tpl">
+    <operation error="log">
+      <search position="after" index="2"><![CDATA[
+</h4>
+      ]]></search>
+      <add><![CDATA[
+<p><b><?php echo $product['vendor']; ?></b></p>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[<button type="button" title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><span><?php echo $button_cart; ?></span></button>
+      ]]></search>
+      <add><![CDATA[<button type="button" class="addtocart button-pallet" onclick="worksheet.addtopallet(this, '<?php echo $product['product_id']; ?>');" data-loading-text="Loading..."><span><?php echo $button_cart; ?></span></button>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/module/featured.tpl">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<button type="button" title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+      ]]></search>
+      <add><![CDATA[
+<button type="button" class="addtocart button-pallet" onclick="worksheet.addtopallet(this, '<?php echo $product['product_id']; ?>');" data-loading-text="Loading..."><span><?php echo $button_cart; ?></span></button>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+</h4>
+      ]]></search>
+      <add><![CDATA[
+<p><b><?php echo $product['vendor']; ?></b></p>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/module/latest.tpl">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+      ]]></search>
+      <add><![CDATA[
+<button type="button" class="addtocart button-pallet" onclick="worksheet.addtopallet(this, '<?php echo $product['product_id']; ?>');" data-loading-text="Loading..."><span><?php echo $button_cart; ?></span></button>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+</h4>
+      ]]></search>
+      <add><![CDATA[
+<p><b><?php echo $product['vendor']; ?></b></p>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/product/search.tpl">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<button type="button"  title="<?php echo $button_cart; ?>" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><span><?php echo $button_cart; ?></span></button>
+      ]]></search>
+      <add><![CDATA[
+<button type="button" class="addtocart button-pallet" onclick="worksheet.addtopallet(this, '<?php echo $product['product_id']; ?>');" data-loading-text="Loading..."><span><?php echo $button_cart; ?></span></button>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+</h4>
+      ]]></search>
+      <add><![CDATA[
+<p><b><?php echo $product['vendor']; ?></b></p>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/*/template/module/bestseller.tpl">
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<button type="button" class="addtocart" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+      ]]></search>
+      <add><![CDATA[
+<button type="button" class="addtocart button-pallet" onclick="worksheet.addtopallet(this, '<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="after"><![CDATA[
+</h4>
+      ]]></search>
+      <add><![CDATA[
+<p><b><?php echo $product['vendor']; ?></b></p>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/product.tpl">
+    <operation error="log">
+      <search position="after"><![CDATA[
+      <h3 class="product-title"><?php echo $heading_title; ?></h3>
+      ]]></search>
+      <add><![CDATA[
+<p><img class="navbar-profile-avatar img-circle" style="margin: 0px 5px; border: 1px solid rgb(204, 204, 204);" src="<?php echo $image_vendor; ?>"><b><?php echo $vendor; ?></b> <span style="color:#EC1F6B;margin-left:5px;"><img style="margin-right:10px; width:7%;" src="image/thropy.png" data-toggle="tooltip" data-html="true" data-original-title="<?php echo $text_vendor_rating_tooltip; ?>"><?php echo $vendor_rating;?></span> <?php if(isset($vendor_in_pallet)) { ?><br><span class="this-vendor-in-pallet"><label class="label <?php echo ($vendor_in_pallet['vendorLimitNotMet'] ? "label-danger" : "label-success"); ?>"><?php echo $vendor_in_pallet['qty']; ?></label></span><?php } ?></p>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" offset="2"><![CDATA[
+<label class="control-label" for="input-quantity"><?php echo $entry_qty; ?>:</label>
+      ]]></search>
+      <add><![CDATA[]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+<button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" title="<?php echo $button_cart; ?>" class="addtocart" ><span><?php echo $button_cart; ?></span></button> <span>&nbsp;&nbsp;- OR -&nbsp;&nbsp;</span>
+      ]]></search>
+      <add><![CDATA[
+<button type="button" id="button-pallet" onclick="worksheet.addtopallet(this, '<?php echo $product_id; ?>'); return false;" data-loading-text="<?php echo $text_loading; ?>" class="addtocart btn btn-lg btn-block button-pallet"><?php echo $button_cart; ?></button>
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+url: 'index.php?route=checkout/cart/add',
+      ]]></search>
+      <add><![CDATA[
+url: 'index.php?route=pallet/worksheet/add',
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace" offset="3"><![CDATA[
+        if (json['error']['recurring']) {
+      ]]></search>
+      <add><![CDATA[
+else if (json['error']['popup']) {
+          $('.breadcrumb').after('<div class="alert alert-danger">' + json['error']['popup'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+          $('html, body').animate({ scrollTop: 0 }, 'slow');
+        }
+      ]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$('#cart > button').html('<i class="fa fa-shopping-cart"></i> ' + json['total']);
+      ]]></search>
+      <add><![CDATA[]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[
+$('#cart > ul').load('index.php?route=common/cart/info ul li');
+      ]]></search>
+      <add><![CDATA[]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/controller/api/order.php">
+    <operation error="skip">
+      <search position="before" index="2"><![CDATA[
+            $order_data['products'][] = array(
+      ]]></search>
+      <add><![CDATA[
+            $get_vendor_id = $this->db->query("SELECT v.vendor AS vendor, cm.commission_type AS commission_type, cm.commission AS commission, cm.commission_name as commission_name FROM `" . DB_PREFIX . "vendor` v LEFT JOIN `" . DB_PREFIX . "vendors` vds ON (v.vendor = vds.vendor_id) LEFT JOIN `" . DB_PREFIX . "commission` cm ON (vds.commission_id = cm.commission_id) WHERE v.vproduct_id = '" . (int)$product['product_id'] . "'");
+            if (isset($get_vendor_id->row['vendor'])) {
+              switch ($get_vendor_id->row['commission_type']) {
+                case '0':
+                $commission = (float)$product['total']*((float)$get_vendor_id->row['commission']/100);
+                $vendor_id = $get_vendor_id->row['vendor'];
+                $vendor_total = (float)$product['total']*(1-((float)$get_vendor_id->row['commission'])/100);
+                //$vendor_tax = $this->tax->getTax($vendor_total, $product['tax_class_id']);
+                //$store_tax = $this->tax->getTax($product['total']-$vendor_total, $product['tax_class_id']);
+                $vendor_tax = '0';
+                $store_tax = '0';
+                $title = '(' . $get_vendor_id->row['commission'] . '%' . ') ' . $this->language->get('text_commission');
+                break;
+
+                case '1':
+                $commission = (float)$get_vendor_id->row['commission'];
+                $vendor_id = $get_vendor_id->row['vendor'];
+                $vendor_total = (float)($product['total']-($get_vendor_id->row['commission']));
+                //$vendor_tax = $this->tax->getTax($vendor_total, $product['tax_class_id']);
+                //$store_tax = $this->tax->getTax($product['total']-$vendor_total, $product['tax_class_id']);
+                $vendor_tax = '0';
+                $store_tax = '0';
+                $title = '(' . $this->currency->format($get_vendor_id->row['commission'],$this->config->get('config_currency')) . ') ' . $this->language->get('text_commission');
+                break;
+
+                case '2':
+                $comrate = explode(':',$get_vendor_id->row['commission']);
+                $commission = ((float)$product['total']*((float)$comrate[0]/100))+(float)$comrate[1];
+                $vendor_id = $get_vendor_id->row['vendor'];
+                $vendor_total = (float)$product['total']-$commission;
+                //$vendor_tax = $this->tax->getTax($vendor_total, $product['tax_class_id']);
+                //$store_tax = $this->tax->getTax($product['total']-$vendor_total, $product['tax_class_id']);
+                $vendor_tax = '0';
+                $store_tax = '0';
+                $title = '(' . $comrate[0] . '% + ' . $this->currency->format($comrate[1],$this->config->get('config_currency')) . ') ' . $this->language->get('text_commission');
+                break;
+
+                case '3':
+                $comrate = explode(':',$get_vendor_id->row['commission']);
+                $commission = ((float)$product['total']+(float)$comrate[0])*((float)$comrate[1]/100);
+                $vendor_id = $get_vendor_id->row['vendor'];
+                $vendor_total = (float)$product['total']-$commission;
+                //$vendor_tax = $this->tax->getTax($vendor_total, $product['tax_class_id']);
+                //$store_tax = $this->tax->getTax($product['total']-$vendor_total, $product['tax_class_id']);
+                $vendor_tax = '0';
+                $store_tax = '0';
+                $title = '(' . $this->currency->format($comrate[0],$this->config->get('config_currency')) . ' + ' . $comrate[1] . '%' . ') ' . $this->language->get('text_commission');
+                break;
+
+                default:
+                $commission = '0';
+                $vendor_id = $get_vendor_id->row['vendor'];
+                $vendor_total = (float)$product['total'];
+                //$vendor_tax = $this->tax->getTax($vendor_total, $product['tax_class_id']);
+                //$store_tax = '0';
+                $vendor_tax = '0';
+                $store_tax = '0';
+                $title = $get_vendor_id->row['commission_name'] . '(' . $this->currency->format($get_vendor_id->row['commission'],$this->config->get('config_currency')) . ') ' . $this->language->get('text_commission');
+              }
+            } else {
+              $commission = '0';
+              $vendor_id = '0';
+              $vendor_total = '0';
+              $vendor_tax = '0';
+              $store_tax = '0';
+              $title = '';
+            }
+
+            if (!$this->config->get('tax_status')) {
+              $vendor_tax = '0';
+              $store_tax = '0';
+            }
+
+      ]]></add>
+    </operation>
+
+    <operation error="skip">
+      <search position="after" index="2"><![CDATA[
+        'quantity'   => $product['quantity'],
+      ]]></search>
+      <add><![CDATA[
+              'commission'  => $commission,
+              'vendor_id'   => $vendor_id,
+              'vendor_total' => $vendor_total,
+              'store_tax'   => $store_tax,
+              'vendor_tax'  => $vendor_tax,
+              'title'     => $title,
+      ]]></add>
+    </operation>
+  </file>
+
+  <file name="catalog/view/theme/default/template/payment/*.tpl">
+    <operation error="log">
+      <search position="replace" offset="1"><![CDATA[<div class="pull-right">]]></search>
+      <add><![CDATA[<div class="pull-right"><button id="button-confirm" class="btn btn-primary"><?php echo $button_confirm; ?></button>]]></add>
+    </operation>
+
+    <operation error="log">
+      <search position="replace"><![CDATA[$('#button-confirm').button('loading');]]></search>
+      <add><![CDATA[$("#button-confirm").html('<i class="fa fa-spinner fa-spin"></i> <?php echo $button_confirm; ?>');]]></add>
+    </operation>
+  </file>
+<file name="admin/view/template/common/vdi_header.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[class="label label-danger pull-right"><?php echo $po_confirm_total; ?></span><?php echo $text_po_confirm; ?>]]></search>
+			<add><![CDATA[</a></li><li><a href="<?php echo $po_shipping; ?>"><span class="label label-danger pull-right"><?php echo $po_shiping_total; ?></span><?= $commande_expediter  ; ?>]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,33 @@
+<p><strong>THINKWINETRADE.COM COMMENTAIRES - LISTE DE COLISAGE - PACKING LIST</strong></p>
+<table>
+<tbody>
+<tr>
+<td><em><span style="color: #0000ff;">A l'attention de nos fournisseurs/partenaires = ce document d'accompagnement&nbsp;toute exp&eacute;dition vers entrep&ocirc;t collecte. Ce document accompagne les colis/produits suivant/list&eacute;s&nbsp;. Ce document peut &ecirc;tre exig&eacute; par les authorit&eacute;s douani&egrave;res.</span></em>
+<p><strong><span style="text-decoration: underline;">Ce document s'&eacute;tabli en 2 partie</span></strong><br />[1]&nbsp;Packing List - liste les produits<br />[2] Copy Entrepot - R&eacute;ception colis par Entrepot (REGROUPAGE)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Quantit&eacute; par palette avec Thinwinetrade.com est de 50 cartons (format 6 bouteilles) ou 300 bouteilles.</p>
+<p>Poid de la palette est &eacute;gale &agrave; 7.8 kg x 50 cartons = 390kg<br />Poid 1 carton = 7.8 kg</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;<strong>L'&eacute;quipe Thinwinetrade.com</strong></p>
+<p>sales@thinkwinetrade.com</p>
+<p>[EXPEDITEUR]<br />Date, signature et tampon de l'entreprise</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</td>
+<td>
+<p><strong>[PALLET ID]</strong> = Identification unique de la palette --&gt; PALL-[ID Client]-[Initiales]-[jjmmyyyy]-[Unique Identifier][N&deg; de la Palette dans la Commande]<br />ex: PALL-37-KL-25102015-321-1</p>
+<p>Si la commande contient plusieurs palettes la s&eacute;rie peut s'exprimer ainsi:<br />ex: <br />PALL-37-KL-25102015-321-1<br />PALL-37-KL-25102015-321-2<br />PALL-37-KL-25102015-321-3<br />PALL-37-KL-25102015-321-x</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>[PROD#]</strong> = Prod number, est le num&eacute;ro d'identification de la r&eacute;f&eacute;rence produit dans la palette. Un PROD# peut comprendre plusieurs cartons mais seront identique.<br />ex: <br />PALL-37-KL-25102015-321-1 peut contenir plusieurs PROD#, ex: 2 r&eacute;f&eacute;rences de vins (25 cartons Margaux 2001 et 25 cartons Margaux 2002) <br />cela s'exprime ainsi = PROD-321-1-1 &amp; PROD-321-1-2 --&gt; PROD - [Unique Identifier]-[Num&eacute;ro de la Palette dans la Commande]-[Num&eacute;ro de PROD# dans la Palette]</p>
+<p>Le PROD# permet d'identifier quels colis vont sur quelle palette et servent donc &agrave; respecter la commande du client.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>

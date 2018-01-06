@@ -1,0 +1,328 @@
+html,body {
+	margin:0;
+	padding:0;
+	background:#bbb;
+}
+
+a {
+	color:#000;
+
+	&:hover {
+		color:lighten(#000, 20%);
+	}
+}
+
+@media print {
+	html {
+		background:#fff;
+	}       
+}
+
+html {
+	font-size:(100 * 11/16)+%;
+	font-family:$font1;
+}
+
+body {
+	font-size:1em;
+}
+
+.mb66 {
+	margin-bottom:66px;
+}
+
+*, *:before, *:after {
+	box-sizing:border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.invoice-container {
+	padding:133px 77px 75px;
+	width:100%;
+	max-width:960px;
+	margin:0 auto;
+	background:#fff;
+
+	.heading {
+		margin:-50px 0;
+		padding:0 0;
+
+		img {
+			max-height:144px;
+			width:auto;
+			float:left;
+			margin:0 48px 0 0;
+		}
+
+		font-size:(87.5/30)+em;
+		text-transform:uppercase;
+		font-family:$font2;
+		font-weight:300;
+		color:#000;
+		line-height:144px;
+		height:144px;
+	}
+
+	// <p class="brief">
+	//     <div class="inner">
+	//         <img src="./barcode.png" alt="Barcode" width="145" height="51" />
+	//         <h2>Protject # 708</h2>
+	//         <hr />
+	//         Quisque mollis, sem id laoreet pretium...
+	//     </div><!-- inner -->
+	// </p><!-- brief -->
+	.brief {
+		margin:0 0 51px;
+		padding:0 0 0 68%;
+		text-align:right;
+
+		img {
+			width:auto;
+			max-height:50px;
+		}
+		h2 {
+			line-height:20px;
+			font-size:1.65em;
+			color:#2b2e31;
+			margin:0;
+			text-transform:uppercase;
+			padding:8px 0;
+		}
+		hr {
+			height:2px;
+			margin:0 0 12px;
+			padding:0;
+			background:#bdbfbf;
+			border:none;
+		}
+
+		p {
+			font-size:(29/30)+em;
+			color:#2b2e31;
+			line-height:15px;
+			margin:0;
+			font-weight:600;
+		}
+	}
+
+	.invoice-address {
+		width:22.6%;
+		float:left;
+
+		h2 {
+			margin:1px 0 22px !important;
+		}
+
+		p {
+			line-height:19px;
+			margin:0;
+			font-size:(29/30)+em;
+			color:#2b2e31;
+			font-weight:600;
+
+			&+p {
+				margin-top:13px;
+			}
+		}
+		.name {
+			font-size:(33/30)+em;
+		}
+
+		.second {
+			h2 {
+				border:none;
+				height:auto;
+				line-height:30px;
+				margin:22px 0 20px !important;
+			}
+		}
+	}
+
+	// COMMON BETWEEN TWO COLLUMNS
+	.invoice-items th,
+	.invoice-address h2 {
+		margin:0;
+		height:74px;
+		line-height:72px;
+		color:#000;
+		text-transform:uppercase;
+		border-bottom:2px solid #bdbfbf;
+		font-size:(35/30)+em;
+		font-weight:400;
+		padding:0;
+		text-align:left;
+		font-family:$font2;
+	}
+	
+	.invoice-items {
+		width:77.4%;
+		float:left;
+
+		td {
+			line-height:43px;
+			height:65px;
+			padding:10px 0;
+			font-size:(33.33/30)+em;
+			color:#2b2e31;
+			font-weight:500;
+			border-bottom:2px solid #d8dad9;
+		}
+
+		td,th {
+			text-align:left;
+		}
+	}
+
+	.subtotal {
+		border-top:1px solid #d2d2d3;
+		position:relative;
+		margin:0 0 24px 22.6%;
+		height:73px;
+		line-height:70px;
+
+		&:before {
+			content:" ";
+			display:block;
+			background:#abaeaf;
+			height:2px;
+		}
+
+		h2,span {
+			display:inline-block;
+			font-size:(37.5/30)+em;
+			color:#000;
+			font-family:$font2;
+			font-weight:500;
+			margin:0;
+			text-transform:uppercase;
+		}
+		span {
+			float:right;
+		}
+		h2 {
+			float:left;
+		}
+	}
+
+	// <div class="payment-info cf">
+	//     <div class="left">
+	//         <h2>Payment Method</h2>
+	//         <p>Quisque mollis, ...</p>
+	//     </div>
+	//     <ul class="right">
+	//        <li>
+	//            Tax:VAT 12%:
+	//            <span class="amount">&dollar;650.00</span>
+	//        </li> 
+	//        <li>
+	//            Discount 3%:
+	//            <span class="amount">-&dollar;30.00</span>
+	//        </li> 
+	//        <li class="highlight">
+	//            Payable
+	//            <span class="amount">&dollar;620.00</span>
+	//        </li> 
+	//     </ul>
+	// </div>
+	.payment-info {
+		margin:0 0 86px 22.6%;
+		padding:16px 0 0;
+		border-top:2px solid #dedfdf;
+
+		.left,.right {
+			width:41.5%;
+		}
+		.left {
+			float:left;
+
+			h2 {
+				line-height:40px;
+				height:40px;
+				font-family:$font2;
+				font-size:(37.5/30)+em;
+				margin:0 0 10px;
+			}
+			p {
+				color:#919495;
+				margin:0;
+				line-height:15px;
+				font-size:(29/30)+em;
+			}
+		}
+		.right {
+			float:right;
+			list-style:none;
+			padding:0;
+			margin:0;
+
+			li {
+				line-height:44px;
+				font-family:$font2;
+				color:#2b2e31;
+				font-size:(33.33/30)+em;
+
+				&.highlight {
+					text-transform:uppercase;
+					color:#2a9dd7;
+					font-weight:bold;
+				}
+
+				&+li {
+					padding-top:2px;
+					border-top:2px solid #d8dad9;
+				}
+
+				.amount {
+					float:right;
+				}
+			}
+		}
+	}
+
+	.signature {
+		margin:0 0 62px 68%;
+		text-align:right;
+
+		.persona {
+			line-height:20px;
+			height:40px;
+			text-align:left;
+			font-size:(37.5/30)+em;
+			font-family:$font2;
+			font-weight:500;
+
+			.name {
+				color:#24272a;
+			}
+			.title {
+				color:#606465;
+				font-weight:300;
+				font-style:italic;
+			}
+		}
+
+		img {
+			height:32px;
+			width:auto;
+			float:right;
+			margin:4px 0;
+		}
+	}
+
+	footer.footer {
+		p {
+			display:inline-block;
+			line-height:18px;
+			font-size:(29/30)+em;
+			color:#2b2e31;
+			margin:0;
+			font-weight:600;
+			vertical-align:top;
+
+			&+p {
+				margin-left:45px;
+			}
+		}
+	}
+}

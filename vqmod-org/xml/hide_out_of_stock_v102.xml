@@ -1,0 +1,21 @@
+<modification>
+	<id>Hide Out-of-Stock Products (when a product quantity becomes "0")</id>
+	<version>1.0.2</version>
+	<vqmver>2.3.0</vqmver>
+	<author>sengratt (inkratas04@yahoo.com)</author>
+	<file name="catalog/model/catalog/product.php">
+		<operation error="skip" info="getLatestProducts() and getPopularProducts()">
+			<search position="replace"><![CDATA[$query = $this->db->query("SELECT p.product_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p.status = '1']]></search><add><![CDATA[$query = $this->db->query("SELECT p.product_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p.quantity > '0' AND p.status = '1']]></add>
+		</operation>
+		<operation error="skip" info="getTotalProducts() and getProducts()">
+			<search position="replace"><![CDATA[(p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1']]></search><add><![CDATA[(p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.quantity > '0' AND p.status = '1']]></add>
+		</operation>
+		<operation error="skip" info="getTotalProducts()">
+			<search position="replace"><![CDATA[$sql = "SELECT COUNT(DISTINCT p.product_id) AS total";]]></search><add><![CDATA[$sql = "SELECT COUNT(DISTINCT p.product_id) AS total, quantity";]]></add>
+		</operation>
+		<operation error="skip" info="getProductRelated()">
+			<search position="replace"><![CDATA[(int)$product_id . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");]]></search>
+			<add><![CDATA[(int)$product_id . "' AND p.quantity > '0' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");]]></add>
+		</operation>
+	</file>
+</modification>

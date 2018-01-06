@@ -1,0 +1,324 @@
+<modification>
+    <id>Add Container Shipment ID</id>
+    <version>1.0</version>
+    <vqmver>2.5.1</vqmver>
+    <author>Guru Venkat</author>
+	<email>gvkv2010@gmail.com</email>
+	<website>http://thinkwinetrade.com</website>
+	 
+	<!--Edit Product page-->
+	<file name="admin/language/english/sale/order.php">
+		<operation error="skip">
+			<search position="bottom"  >
+			<![CDATA[]]>
+			</search>
+			<add><![CDATA[
+//GV
+$_['text_containerid']            = 'Container ID';
+$_['text_shipmentid']            = 'Shipment ID';
+$_['text_link_save']            = 'Save';
+$_['text_link_edit']            = 'Edit';
+//END]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/french/sale/order.php">
+		<operation error="skip">
+			<search position="replace"  >
+			<![CDATA[?>
+]]>
+			</search>
+			<add><![CDATA[
+//GV
+$_['text_containerid']            = 'Container ID';
+$_['text_shipmentid']            = 'Shipment ID';
+$_['text_link_save']            = 'Save';
+$_['text_link_edit']            = 'Edit';
+//END
+?>]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/sale/order.php">
+		<operation error="skip">
+			<search position="after" offset="1" >
+			<![CDATA[$data['column_action'] = $this->language->get('column_action');
+]]>
+			</search>
+			<add><![CDATA[
+                  $data['text_container_id'] = $this->language->get('text_containerid');
+                  $data['text_shipment_id'] = $this->language->get('text_shipmentid');
+                  $data['text_link_save'] = $this->language->get('text_link_save');
+                  $data['text_link_edit'] = $this->language->get('text_link_edit');
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before" offset="1" >
+			<![CDATA['total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
+]]>
+			</search>
+			<add><![CDATA[
+                  'container_id'         => $this->model_sale_order->getContainerID( $result['order_id'] ),
+                  'shipment_id'         => $this->model_sale_order->getShipmentID( $result['order_id'] ),
+]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="before"  >
+			<![CDATA[		$data['filter_date_modified'] = $filter_date_modified;
+]]>
+			</search>
+			<add><![CDATA[
+                  $data['filter_container_id'] = $filter_container_id;
+                  $data['filter_shipment_id']  = $filter_shipment_id;
+]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="before" >
+			<![CDATA[if (isset($this->request->get['filter_date_modified'])) {
+]]>
+			</search>
+			<add><![CDATA[
+		if (isset($this->request->get['filter_container_id'])) {
+			$filter_container_id = $this->request->get['filter_container_id'];
+		} else {
+			$filter_container_id = null;
+		}
+		if (isset($this->request->get['filter_shipment_id'])) {
+			$filter_shipment_id = $this->request->get['filter_shipment_id'];
+		} else {
+			$filter_shipment_id = null;
+		}
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before" >
+			<![CDATA['filter_date_modified' => $filter_date_modified,
+]]>
+			</search>
+			<add><![CDATA[
+			'filter_container_id' => $filter_container_id,
+			'filter_shipment_id' => $filter_shipment_id,
+]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="before"><![CDATA[
+		public function confirmDocumentsReceived() {
+			]]></search>
+			<add><![CDATA[
+	//GV
+	public function updateContainerID() {
+		$json = array();
+
+		$this->load->model('sale/order');
+
+		if (isset($this->request->get['order_id']) && isset($this->request->get['cont_id']) ) {
+		    $this->db->query("UPDATE `" . DB_PREFIX . "order` SET container_id = '" . $this->request->get['cont_id'] . "' WHERE order_id = '" . $this->request->get['order_id'] . "'");
+			$json['success'] = "OK.";
+		} else {
+			$json['error'] = "Something failed.";
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+	public function updateShipmentID() {
+		$json = array();
+
+		$this->load->model('sale/order');
+
+		if (isset($this->request->get['order_id']) && isset($this->request->get['ship_id']) ) {
+		    $this->db->query("UPDATE `" . DB_PREFIX . "order` SET shipment_id = '" . $this->request->get['ship_id'] . "' WHERE order_id = '" . $this->request->get['order_id'] . "'");
+			$json['success'] = "OK.";
+		} else {
+			$json['error'] = "Something failed.";
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+	//END]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/sale/order.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[if (!empty($data['filter_date_modified'])) {
+			]]></search>
+			<add><![CDATA[
+	//GV
+		if (!empty($data['filter_container_id'])) {
+			$sql .= " AND container_id like '%" . $this->db->escape($data['filter_container_id']) . "%' ";
+		}
+		if (!empty($data['filter_shipment_id'])) {
+			$sql .= " AND shipment_id like '%" . $this->db->escape($data['filter_shipment_id']) . "%' ";
+		}
+	//END]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="before"><![CDATA[
+			public function getTotalEmailsByProductsOrdered($products) {
+			]]></search>
+			<add><![CDATA[
+	//GV
+	public function getContainerID($order_id) {
+		$query = $this->db->query("SELECT container_id FROM " . DB_PREFIX . "order WHERE order_id = '" . (int)$order_id . "'  ");
+		$container_id = '';
+		if ( $query->num_rows ) {
+			$container_id = $query->row['container_id'];
+		}
+		return $container_id;
+	}
+	public function getShipmentID($order_id) {
+		$query = $this->db->query("SELECT shipment_id FROM " . DB_PREFIX . "order WHERE order_id = '" . (int)$order_id . "'  ");
+		$shipment_id = '';
+		if ( $query->num_rows ) {
+			$shipment_id = $query->row['shipment_id'];
+		}
+		return $shipment_id;
+	}
+         public function getPayementStatus($id_order) {  
+          $no = strlen(strval($id_order));
+      
+          $sql= "SELECT count(o. payment_id) as total
+FROM `oc_vendor_payment` o
+WHERE (
+o.payment_info Like '%;s:8:\"order_id\";s:".$no.":\"$id_order\";%'
+)
+AND o.payment_status = '5'";
+		$query = $this->db->query($sql);
+		return $query->row['total'];
+	} 
+	//END]]></add>
+		</operation>
+		
+	</file>
+	<file name="admin/view/template/sale/order_list.tpl">
+		<operation error="skip">
+			<search position="before" offset="1" >
+			<![CDATA[<td class="text-right"><?php if ($sort == 'o.total') { ?>
+]]>
+			</search>
+			<add><![CDATA[
+                  <td class="text-left"><?php echo $text_container_id; ?></td>
+                  <td class="text-left"><?php echo $text_shipment_id; ?></td>
+]]></add>
+		</operation>
+		
+		<operation error="skip">
+		    <search position="before" >
+			<![CDATA[<button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-search"></i> <?php echo $button_filter; ?></button>
+]]>
+			</search>
+			<add><![CDATA[
+                  <div class="form-group">
+                  <label class="control-label" for="filter_shipment_id">Shipment ID</label>
+                  <input name="filter_shipment_id" value="<?php echo $filter_shipment_id;?>" placeholder="Shipment ID" id="filter_shipment_id" class="form-control" type="text">
+                  </div>
+]]></add>
+		</operation>
+
+		<operation error="skip">
+		    <search position="after" offset="2" >
+			<![CDATA[<input type="text" name="filter_total" value="<?php echo $filter_total; ?>" placeholder="<?php echo $entry_total; ?>" id="input-total" class="form-control" />]]>
+			</search>
+			<add><![CDATA[
+                  <div class="form-group">
+                  <label class="control-label" for="filter_container_id">Container ID</label>
+                  <input name="filter_container_id" value="<?php echo $filter_container_id;?>" placeholder="Container ID" id="filter_container_id" class="form-control" type="text">
+                  </div>
+]]></add>
+		</operation>
+		
+		<operation error="skip">
+			<search position="before" >
+			<![CDATA[<td class="text-right"><?php echo $order['total']; ?></td>
+]]>
+			</search>
+			<add><![CDATA[
+                  <td class="text-left"><?php echo $order['container_id']; ?>
+				  <br><input type="text" name="<?php echo $order['order_id']; ?>_cid" id="<?php echo $order['order_id']; ?>_cid" style="display:none" />
+				  <br><a id="edit_<?php echo $order['order_id']; ?>" href="javascript:;" onclick="update_containerID('<?php echo $order['order_id']; ?>')" ><?php echo $text_link_edit; ?></a>
+				  &nbsp;<a id="save_<?php echo $order['order_id']; ?>" href="javascript:;" onclick="save_containerID('<?php echo $order['order_id']; ?>')" style="display:none;" ><?php echo $text_link_save; ?></a>
+				  </td>
+                  <td class="text-left"><?php echo $order['shipment_id']; ?>
+				  <br><input type="text" name="<?php echo $order['order_id']; ?>_sid" id="<?php echo $order['order_id']; ?>_sid" style="display:none" />
+				  <br><a id="edit1_<?php echo $order['order_id']; ?>" href="javascript:;" onclick="update_ShipmentID('<?php echo $order['order_id']; ?>')" ><?php echo $text_link_edit; ?></a>
+				  &nbsp;<a id="save1_<?php echo $order['order_id']; ?>" href="javascript:;" onclick="save_ShipmentID('<?php echo $order['order_id']; ?>')" style="display:none;" ><?php echo $text_link_save; ?></a>
+				  </td>
+]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after" offset="2" >
+			<![CDATA[url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
+]]>
+			</search>
+			<add><![CDATA[
+	var filter_container_id = $('input[name=\'filter_container_id\']').val();
+	
+	if (filter_container_id) {
+		url += '&filter_container_id=' + encodeURIComponent(filter_container_id);
+	}
+	
+	var filter_shipment_id = $('input[name=\'filter_shipment_id\']').val();
+	
+	if (filter_shipment_id) {
+		url += '&filter_shipment_id=' + encodeURIComponent(filter_shipment_id);
+	}
+]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="bottom" offset="1" >
+			<![CDATA[<?php echo $footer; ?>]]>
+			</search>
+			<add><![CDATA[
+<script type="text/javascript"><!--
+//GV
+function update_containerID( order_id ) {
+
+	var order = order_id + '_cid';
+	$( '#' + order ).show();
+	$( '#save_' + order_id ).show();
+	$( '#edit_' + order_id ).hide();
+}
+function save_containerID( order_id ) {
+	var cont_id =  $( '#' + order_id + '_cid' ).val() ;
+		$.ajax({
+			url: 'index.php?route=sale/order/updateContainerID&token=<?php echo $token; ?>&order_id=' +  encodeURIComponent(order_id) +'&cont_id=' +encodeURIComponent(cont_id),
+			dataType: 'json',			
+			success: function(json) {
+			   if ( json.hasOwnProperty('success') ) {
+				   $( "#button-filter" ).trigger( "click" );
+			   }
+			}
+		});
+
+}
+function update_ShipmentID( order_id ) {
+
+	var order = order_id + '_sid';
+	$( '#' + order ).show();
+	$( '#save1_' + order_id ).show();
+	$( '#edit1_' + order_id ).hide();
+}
+function save_ShipmentID( order_id ) {
+	var ship_id =  $( '#' + order_id + '_sid' ).val() ;
+		$.ajax({
+			url: 'index.php?route=sale/order/updateShipmentID&token=<?php echo $token; ?>&order_id=' +  encodeURIComponent(order_id) +'&ship_id=' +encodeURIComponent(ship_id),
+			dataType: 'json',			
+			success: function(json) {
+			   if ( json.hasOwnProperty('success') ) {
+				   $( "#button-filter" ).trigger( "click" );
+			   }
+			}
+		});
+
+}
+//END
+//--></script> 
+]]></add>
+		</operation>
+
+	</file>
+</modification>

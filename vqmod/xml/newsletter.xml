@@ -1,0 +1,30 @@
+<modification>
+	<id><![CDATA[newsletter]]></id>
+	<version><![CDATA[5.1]]></version>
+	<vqmver><![CDATA[2.1.0]]></vqmver>
+	<author><![CDATA[info@kodecube.com]]></author>
+		<file name="admin/controller/common/menu.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['home']]]></search>
+			<add><![CDATA[$data['text_newssubscribe'] = $this->language->get('text_newssubscribe');
+		$data['newssubscribe'] = $this->url->link('sale/newssubscribers', 'token=' . $this->session->data['token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/*/common/menu.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$_['text_affiliate']]]></search>
+			<add><![CDATA[$_['text_newssubscribe']     = 'Newsletter Subscribers';
+		]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/menu.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[ <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>]]></search>
+			<add><![CDATA[<li><a href="<?php echo $newssubscribe; ?>"><?php echo $text_newssubscribe; ?></a></li>
+			
+			]]></add>
+		</operation>
+	</file>
+	
+</modification>

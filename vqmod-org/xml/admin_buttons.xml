@@ -1,0 +1,232 @@
+<modification>
+    <id>Admin shortcut buttons</id>
+    <version>2.0</version>
+    <vqmver>2.5.1</vqmver>
+    <author><![CDATA[----]]></author>
+
+    <file name="admin/controller/*/*.php">
+        <operation>
+            <search position="after"><![CDATA[
+            $data['footer'] = $this->load->controller('common/footer');
+				]]></search>
+            <add><![CDATA[
+            $data['brcr'] = $this->load->controller('common/brcr');
+				]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/catalog/" name="*.tpl">
+        <operation>
+            <search position="after" offset="3"><![CDATA[
+<?php foreach ($breadcrumbs as $breadcrumb) { ?>
+            ]]></search>
+            <add><![CDATA[
+<?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/sale/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+<?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="system/modification/admin/view/template/common/dashboard.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+<?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/design/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/error/" name="*.tpl">
+        <operation>
+            <search position="after" offset="3"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/extension/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/feed/" name="*.tpl">
+        <operation>
+            <search position="after" offset="3"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/localisation/" name="*.tpl">
+        <operation>
+            <search position="after" offset="3"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/marketing/" name="*.tpl">
+        <operation>
+            <search position="after" offset="3"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/module/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/openbay/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/payment/" name="worldpay.tpl">
+        <operation>
+            <search position="after" offset="1"><![CDATA[
+                    <h1><i class="fa fa-credit-card"></i> <?php echo $heading_title; ?></h1>
+            ]]></search>
+            <add><![CDATA[
+            <div class="container-fluid">
+            <?php echo $brcr ?>
+            </div>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/payment/" name="a*.tpl,b*.tpl,c*.tpl,d*.tpl,f*.tpl,g*.tpl,k*.tpl,l*.tpl,m*.tpl,n*.tpl,m*.tpl,p*.tpl,r*.tpl,s*.tpl,t*.tpl,we*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/report/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+<?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/setting/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/shipping/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/tool/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/total/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/user/" name="*.tpl">
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+                    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+            <?php echo $brcr ?>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/language/english/sale/order.php">
+        <operation>
+            <search position="after"><![CDATA[
+$_['text_invoice_date']                       = 'Invoice Date:';
+            ]]></search>
+            <add><![CDATA[
+$_['text_invoice_no_comm']                    = 'Commercial invoice No.:';
+            ]]></add>
+        </operation>
+    </file>
+</modification>
+

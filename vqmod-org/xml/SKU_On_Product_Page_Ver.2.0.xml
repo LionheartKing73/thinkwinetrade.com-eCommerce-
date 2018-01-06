@@ -1,0 +1,34 @@
+<modification>         
+	<id>SKU Style No On Product Page</id>         
+    <version>2.0</version>         
+    <vqmver>2.5.1</vqmver>         
+    <author><![CDATA[<a onClick="window.open('http://www.edesigniz.com');" title="EDesigniz Team">EDesigniz Team</a>]]></author>
+    <file name="catalog/controller/product/product.php">                 
+    	<operation>                         
+				<search position="after"><![CDATA[                        
+				$data['model'] = $product_info['model'];                         
+				]]></search>                         
+				<add><![CDATA[                         
+				$data['sku'] = $product_info['sku'];                         
+				]]></add>                 
+		</operation>
+		<operation>                         
+				<search position="after"><![CDATA[                        
+				$data['text_model'] = $this->language->get('text_model');                         
+				]]></search>                         
+				<add><![CDATA[                         
+				$data['text_sku'] = $this->language->get('text_sku');                         
+				]]></add>                 
+		</operation>         
+	</file>         
+    <file name="catalog/view/theme/*/template/product/product.tpl">                 
+    	<operation>                         
+        <search position="before"><![CDATA[                        
+            <?php if ($reward) { ?>                         
+            ]]></search>                         
+            <add><![CDATA[                         
+            <span>SKU: </span> <?php echo $sku; ?><br />                         
+            ]]></add>                 
+	</operation>         
+	</file>
+</modification>
